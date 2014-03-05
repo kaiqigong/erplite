@@ -12,10 +12,5 @@ padding-top: 14px;
 	background-size: cover;
 	}
 	#progressbar{
-		margin-bottom: 0px;
-position: fixed;
-height: 20px;
-width: 100%;
-z-index: 1;
-background-color: rgba(255,255,255,0.5);
+		margin-bottom: 0px !important;
 		}
