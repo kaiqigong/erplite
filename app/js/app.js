@@ -1,6 +1,7 @@
 var erpApp = angular.module('erpApp', [
   'ngRoute',
-  'erpControllers'
+  'erpControllers',
+  'erpFilters'
 ]);
  
 erpApp.config(['$routeProvider',
