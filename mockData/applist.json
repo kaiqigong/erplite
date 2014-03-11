@@ -1,4 +1,10 @@
 [{
+"name":"Contacts",
+"iconurl":"./img/128px/layers_128px.png",
+"link":"#/contact",
+"messages":1
+},
+{
 "name":"Stock",
 "iconurl":"./img/128px/bag_128px.png",
 "link":"#",

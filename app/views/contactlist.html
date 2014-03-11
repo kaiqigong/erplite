@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="row">
+		<div class="titlebar-item col-xs-8">
+			<a href="{{backUrl}}" >back</a>
+			<img ng-src="{{icon}}"/>
+			<label>{{title}}</label>
+		</div>
+		<div class="col-xs-8">
+		</div>
+	</div>
+	<div ng-repeat="item in items">
+	<img class="circle" ng-src="{{item.iconurl}}" />
+	<label>{{item.name}}</label>,&nbsp;
+	<label>{{item.title}}</label>&nbsp;at&nbsp;
+	<label>{{item.company}}</label>,&nbsp;
+	<label>phone: {{item.phone}}</label>,&nbsp;
+	<label>email: {{item.email}}</label>,&nbsp;
+	</div>
+
+</div>

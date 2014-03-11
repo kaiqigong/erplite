@@ -11,6 +11,10 @@ erpApp.config(['$routeProvider',
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
       }).
+      when('/contact', {
+        templateUrl: 'views/contactlist.html',
+        controller: 'ContactCtrl'
+      }).
       otherwise({
         redirectTo: '/home'
       });
