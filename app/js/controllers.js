@@ -18,4 +18,11 @@ erpControllers.controller('HomeCtrl', ['$scope', '$http',
     });  
   }]);
   
+  erpControllers.controller('ContactDetailCtrl', ['$scope', '$http','$routeParams',
+  function ($scope, $http,$routeParams) {
+    $scope.title=$routeParams.id;
+    $scope.backUrl="#/contact";
+  }]);
+  
+  
  

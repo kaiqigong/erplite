@@ -1,0 +1,30 @@
+<div class="content">
+<div class="titlebar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8">
+                    	<h2>
+				<a href="{{backUrl}}">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				<span class="glyphicon glyphicon-user"></span>
+				<span>{{title}}</span>
+				</h2>
+
+                </div>
+                <div class="col-xs-4">
+                    	<h2><a id="save" class="pull-right"><span class="glyphicon glyphicon-floppy-save"></span></a></h2>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#save').tooltip({
+        placement: "left",
+        html: true,
+        title: "<h3>保存</h3>",
+        container: "body"
+    });
+</script>

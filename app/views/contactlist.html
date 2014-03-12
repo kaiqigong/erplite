@@ -1,20 +1,75 @@
-<div class="container">
-	<div class="row">
-		<div class="titlebar-item col-xs-8">
-			<a href="{{backUrl}}" >back</a>
-			<img ng-src="{{icon}}"/>
-			<label>{{title}}</label>
-		</div>
-		<div class="col-xs-8">
-		</div>
-	</div>
-	<div ng-repeat="item in items">
-	<img class="circle" ng-src="{{item.iconurl}}" />
-	<label>{{item.name}}</label>,&nbsp;
-	<label>{{item.title}}</label>&nbsp;at&nbsp;
-	<label>{{item.company}}</label>,&nbsp;
-	<label>phone: {{item.phone}}</label>,&nbsp;
-	<label>email: {{item.email}}</label>,&nbsp;
-	</div>
+<div class="content">
+    <div class="titlebar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8">
+                    	<h2>
+				<a href="{{backUrl}}">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				<span class="glyphicon glyphicon-user"></span>
+				<span>{{title}}</span>
+				</h2>
 
+                </div>
+                <div class="col-xs-4">
+                    	<h2><a id="add" class="pull-right"><span class="glyphicon glyphicon-plus"></span></a></h2>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toolbar">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-xs-4">
+	                	<div class="input-group">
+							  <span class="input-group-addon">关键词</span>
+							  <input type="text" class="form-control" ng-model="query" placeholder="查询">
+							</div>
+	            </div>
+	            <div class="col-xs-4">
+	                	<button type="button" class="btn btn-primary">高级查询&nbsp;<span class="caret"></span></button>
+	            </div>
+	            <div class="col-xs-4">
+	                	<a id="export" class="icon-btn pull-right"><span class="glyphicon glyphicon-cloud-download"></span></a>
+	            </div>
+	        </div>
+	    </div>
+    </div>
+    
+   
+    <div class="container">
+    <div class="list-group">
+    
+    <div ng-repeat="item in items | filter:query">
+		  <a href="#/contact/{{item.id}}" class="list-group-item">
+		    <img class="circle avator-small" ng-src="{{item.iconurl}}" />
+		        <label>{{item.name}}</label>,&nbsp;
+		        <label>{{item.title}}</label>&nbsp;at&nbsp;
+		        <label>{{item.company}}</label>,&nbsp;
+		        <label>phone: {{item.phone}}</label>,&nbsp;
+		        <label>email: {{item.email}}</label>,&nbsp;
+		  </a>
+		  </div>
+		  
+		</div>
+    </div>    
+  
+    
 </div>
+<script>
+    $('#add').tooltip({
+        placement: "left",
+        html: true,
+        title: "<h3>新增</h3>",
+        container: "body"
+    });
+    $('#export').tooltip({
+        placement: "left",
+        html: true,
+        title: "<h3>导出</h3>",
+        container: "body"
+    });
+</script>
