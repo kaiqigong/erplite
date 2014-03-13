@@ -13,15 +13,17 @@ erpControllers.controller('HomeCtrl', ['$scope', '$http',
     $scope.title="联系人";
     $scope.icon="./img/128px/layers_128px.png";
     $scope.backUrl="#/home";
+    $scope.currentPage = 1;
   	 $http.get('../mockData/contacts.json').success(function(data) {
       $scope.items = data;
-    });  
+    });
   }]);
   
   erpControllers.controller('ContactDetailCtrl', ['$scope', '$http','$routeParams',
   function ($scope, $http,$routeParams) {
     $scope.title=$routeParams.id;
     $scope.backUrl="#/contact";
+    
   }]);
   
   

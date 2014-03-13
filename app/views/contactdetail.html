@@ -10,16 +10,74 @@
 				<span class="glyphicon glyphicon-user"></span>
 				<span>{{title}}</span>
 				</h2>
-
                 </div>
                 <div class="col-xs-4">
                     	<h2><a id="save" class="pull-right"><span class="glyphicon glyphicon-floppy-save"></span></a></h2>
-
                 </div>
             </div>
         </div>
     </div>
+
+
+    <div class="toolbar">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-xs-6">
+	            <a id="" class="icon-btn" title="上一条记录"><span class="glyphicon glyphicon-arrow-left"></span></a>
+	            <a id="" class="icon-btn" title="下一条记录"><span class="glyphicon glyphicon-arrow-right"></span></a>
+	            
+	            </div>
+	            <div class="col-xs-6">
+	            <a id="" class="icon-btn pull-right" title="打印"><span class="glyphicon glyphicon-print"></span></a>
+	            </div>
+	        </div>
+	    </div>
+    </div>
+    <div class="container">
+    <div class="panel panel-info">
+  <div class="panel-heading">
+    个人信息
+  </div>
+  <div class="panel-body">
+
+  <form class="form-horizontal" role="form">
+  <div class="form-group col-xs-12 col-md-6"><img ng-src="{{info.avator}}" ></div>
+  <div class="form-group col-xs-12 col-md-6">
+    <label for="fullname" class="col-sm-2 control-label">姓名</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="fullname" placeholder="姓名" value="{{info.name}}">
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-md-6">
+    <label for="phone" class="col-sm-2 control-label">电话</label></label>
+    <div class="col-sm-10">
+      <input type="phone" class="form-control" id="phone" placeholder="电话" value="{{info.phone}}">
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-md-6">
+    <label for="cellphone" class="col-sm-2 control-label">手机</label></label>
+    <div class="col-sm-10">
+      <input type="phone" class="form-control" id="cellphone" placeholder="手机" value="{{info.mobile}}">
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-md-6">
+    <label for="cellphone" class="col-sm-2 control-label">Email</label></label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="cellphone" placeholder="Email" value="{{info.email}}">
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-md-6">
+    <label for="address" class="col-sm-2 control-label">地址</label></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="address" placeholder="地址" value="{{info.address}}">
+    </div>
+  </div>
+  </form>
+
+  </div>
 </div>
+    </div>
+    </div>
 <script>
     $('#save').tooltip({
         placement: "left",

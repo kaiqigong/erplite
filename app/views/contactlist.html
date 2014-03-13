@@ -23,16 +23,16 @@
     <div class="toolbar">
 	    <div class="container">
 	        <div class="row">
-	            <div class="col-xs-4">
+	            <div class="col-xs-6">
 	                	<div class="input-group">
 							  <span class="input-group-addon">关键词</span>
 							  <input type="text" class="form-control" ng-model="query" placeholder="查询">
 							</div>
 	            </div>
-	            <div class="col-xs-4">
+	            <div class="col-xs-3">
 	                	<button type="button" class="btn btn-primary">高级查询&nbsp;<span class="caret"></span></button>
 	            </div>
-	            <div class="col-xs-4">
+	            <div class="col-xs-3">
 	                	<a id="export" class="icon-btn pull-right"><span class="glyphicon glyphicon-cloud-download"></span></a>
 	            </div>
 	        </div>
@@ -43,7 +43,7 @@
     <div class="container">
     <div class="list-group">
     
-    <div ng-repeat="item in items | filter:query">
+    <div ng-repeat="item in items | filter:query" class="col-xs-12 col-sm-12 col-md-6">
 		  <a href="#/contact/{{item.id}}" class="list-group-item">
 		    <img class="circle avator-small" ng-src="{{item.iconurl}}" />
 		        <label>{{item.name}}</label>,&nbsp;
@@ -56,7 +56,16 @@
 		  
 		</div>
     </div>    
-  
+    <!-- side pager -->
+  <div class="sidepager">
+  <a class="icon-btn">
+	<span class="glyphicon glyphicon-chevron-up"></span>
+	</a>
+	<label>{{currentPage}}</label>
+	<a class="icon-btn">
+	<span class="glyphicon glyphicon-chevron-down"></span>
+	</a>
+  </div>
     
 </div>
 <script>
