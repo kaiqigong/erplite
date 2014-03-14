@@ -21,9 +21,12 @@ erpControllers.controller('HomeCtrl', ['$scope', '$http',
   
   erpControllers.controller('ContactDetailCtrl', ['$scope', '$http','$routeParams',
   function ($scope, $http,$routeParams) {
-    $scope.title=$routeParams.id;
     $scope.backUrl="#/contact";
-    
+    $scope.contact=null;
+    $http.get('../mockData/contact' + $routeParams.id +'.json').success(function(data) {
+      $scope.contact = data;
+      $scope.title = data.name;
+    });
   }]);
   
   

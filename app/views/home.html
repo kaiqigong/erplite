@@ -3,7 +3,7 @@
 <div class="row">
 
 <div ng-repeat="app in apps"  class="case-wrapper">
-	<div class="circle" style="display:{{ app.messages | messagedisplay }};">
+	<div class="circle" style="display:{{ app.messages | zero2display }};">
 		<span class="circle-text">{{app.messages}}</span>
 	</div>
 	<a href="{{app.link}}" >
