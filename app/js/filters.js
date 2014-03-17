@@ -4,6 +4,11 @@ erpFilters.filter('zero2display', function() {
   return function(input) {
     return (input==0) ? 'none' : 'visible';
   };});
+ 
+erpFilters.filter('boolean2display', function() {
+  return function(input) {
+    return input ? 'visible' : 'none';
+  };});
   
 erpFilters.filter('type2class', function() {
   return function(input) {
