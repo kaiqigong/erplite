@@ -62,14 +62,12 @@
  erpControllers.controller('LoginCtrl', ['$scope', '$http',
 
  function ($scope, $http) {
-
-
+		$scope.rememberMe = false;
  }]);
  
  erpControllers.controller('404Ctrl', ['$scope', '$http',
 
  function ($scope, $http) {
-
 
  }]);
  

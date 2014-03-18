@@ -7,3 +7,9 @@ Use Bootstrap for responsive design.
 
 Use REST api for backend.
 
+Run Client Demo with mock data:
+
+cd erplite
+node scripts/web-server.js
+
+open localhost:8000/app/index.html
