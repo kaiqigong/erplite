@@ -1,5 +1,6 @@
 var erpApp = angular.module('erpApp', [
     'ngRoute',
+    'erpAnimations',
     'erpDirectives',
     'erpControllers',
     'erpFilters']);
