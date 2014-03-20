@@ -63,6 +63,16 @@
 
  function ($scope, $http) {
 		$scope.rememberMe = false;
+		$scope.login = function(){
+			var loginParam = {
+				username:$scope.username,
+				password:$scope.password,
+				rememberMe:$scope.rememberMe
+				};
+				console.log(loginParam);
+				// $http.post('/someUrl',loginParam).success()
+				// add token to cookie. Need a security service in which can get and set the token.
+			}
  }]);
  
  erpControllers.controller('404Ctrl', ['$scope', '$http',
