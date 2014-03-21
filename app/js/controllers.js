@@ -1,4 +1,4 @@
- var erpControllers = angular.module('erpControllers', []);
+ var erpControllers = angular.module('erpControllers', ['erpServices']);
 
  erpControllers.controller('HomeCtrl', ['$scope', '$http', '$location', '$rootScope',
 
@@ -59,19 +59,22 @@
      });
  }]);
 
- erpControllers.controller('LoginCtrl', ['$scope', '$http',
+ erpControllers.controller('LoginCtrl', ['$scope', '$http','security',
 
- function ($scope, $http) {
+ function ($scope, $http,security) {
 		$scope.rememberMe = false;
+		
 		$scope.login = function(){
+
 			var loginParam = {
 				username:$scope.username,
 				password:$scope.password,
 				rememberMe:$scope.rememberMe
 				};
-				console.log(loginParam);
 				// $http.post('/someUrl',loginParam).success()
+				security.saveCookie();
 				// add token to cookie. Need a security service in which can get and set the token.
+				
 			}
  }]);
  

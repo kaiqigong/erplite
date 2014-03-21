@@ -3,6 +3,7 @@ var erpApp = angular.module('erpApp', [
     'erpAnimations',
     'erpDirectives',
     'erpControllers',
+    'erpServices',
     'erpFilters']);
 
 erpApp.config(['$routeProvider',
