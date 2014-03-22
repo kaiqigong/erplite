@@ -1,9 +1,20 @@
+
 #header {
     margin:0;
 }
 a:hover{
 text-decoration: none !important;	
+cursor: pointer;
 	}
+img.beforeLoaded {
+    opacity:0;
+    transition:opacity 1s;
+}
+
+img.afterLoaded {
+    transition:opacity 1s;
+}
+
 #page-desktop {
 	position: fixed;
     left: 0px;

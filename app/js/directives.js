@@ -38,3 +38,16 @@ erpDirectives.directive('erpIcheck', function ($document) {
         }
     };
 });
+
+erpDirectives.directive('erpImgLoading', function ($document) {
+    return {
+        restrict: 'A',
+        link: function ($scope, $element, $attrs) {
+            $($element).addClass("beforeLoaded");
+            $($element).on('load', function (event) {
+               $($element).removeClass("beforeLoaded");
+               $($element).addClass("afterLoaded");
+            });
+        }
+    };
+});
