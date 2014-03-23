@@ -68,7 +68,7 @@
 
 			var loginParam = {
 				username:$scope.username,
-				password:$scope.password,
+				password:$scope.password,    // security.encrypt($scope.password)
 				rememberMe:$scope.rememberMe
 				};
 				// $http.post('/someUrl',loginParam).success()

@@ -45,8 +45,8 @@ erpDirectives.directive('erpImgLoading', function ($document) {
         link: function ($scope, $element, $attrs) {
             $($element).addClass("beforeLoaded");
             $($element).on('load', function (event) {
-               $($element).removeClass("beforeLoaded");
-               $($element).addClass("afterLoaded");
+                $($element).removeClass("beforeLoaded");
+                $($element).addClass("afterLoaded");
             });
         }
     };

@@ -60,7 +60,7 @@
 
     $.fn.progressbar.defaults = {
         status: "success",
-        showAnimation: true,
+        showAnimation: true
     };
 
     $.fn.progressbar.Constructor = ProgressBar;
