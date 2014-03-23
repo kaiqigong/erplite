@@ -41,23 +41,39 @@
      });
  }]);
 
- erpControllers.controller('ContactDetailCtrl', ['$scope', '$http', '$routeParams',
+erpControllers.controller('ContactDetailCtrl', ['$scope', '$http', '$routeParams',
 
- function ($scope, $http, $routeParams) {
-     $scope.backUrl = "#/contact";
-     $scope.contact = null;
-     $http.get('../mockData/contact' + $routeParams.id + '.json').success(function (data, status) {
-         $scope.contact = data;
-         $scope.title = data.name;
-     }).
-     error(function (data, status) {
-         if (status == "404") {
-             $scope.error = "404 not found";
-         } else {
-             $scope.error = "Error Code: " + status + ", Message: " + data;
-         }
-     });
- }]);
+function ($scope, $http, $routeParams) {
+    $scope.backUrl = "#/contact";
+    $scope.contact = null;
+    $scope.newLink = {
+        type: "Supplier",
+        name: ""
+    };
+    $scope.changeType = function (type) {
+        $scope.newLink.type = type;
+    }
+    $scope.add = function () {
+        $scope.newLink.lastModifiedTime = new Date();
+        console.log($scope.newLink.lastModifiedTime);
+        $scope.contact.links.push($scope.newLink);
+        // $http.post('/someUrl',$scope.newLink).success()
+        $scope.newLink = {type: "Supplier",
+        name: ""};
+    }
+    $http.get('../mockData/contact' + $routeParams.id + '.json').success(function (data, status) {
+        $scope.contact = data;
+        $scope.title = data.name;
+    }).
+    error(function (data, status) {
+        if (status == "404") {
+            $scope.error = "404 not found";
+        } else {
+            $scope.error = "Error Code: " + status + ", Message: " + data;
+        }
+    });
+
+}]);
 
  erpControllers.controller('LoginCtrl', ['$scope', '$http','security',
 
