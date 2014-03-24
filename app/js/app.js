@@ -18,6 +18,10 @@ function ($routeProvider) {
         templateUrl: 'views/contactlist.html',
         controller: 'ContactCtrl'
     }).
+    when('/contact/new', {
+        templateUrl: 'views/contactdetail.html',
+        controller: 'NewContactCtrl'
+    }).
     when('/contact/:id', {
         templateUrl: 'views/contactdetail.html',
         controller: 'ContactDetailCtrl'

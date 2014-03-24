@@ -12,14 +12,14 @@
 				</h2>
                 </div>
                 <div class="col-xs-4">
-                    	<h2><a id="save" class="pull-right"><span class="glyphicon glyphicon-floppy-save"></span></a></h2>
+                    	<h2><a ng-click="save()" title="保存" class="pull-right"><span class="glyphicon glyphicon-floppy-save"></span></a></h2>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <div class="toolbar">
+    <div class="toolbar" ng-show="showToolbar">
 	    <div class="container">
 	        <div class="row">
 	            <div class="col-xs-6">
@@ -47,31 +47,31 @@
   <div class="form-group col-xs-12 col-md-6">
     <label for="fullname" class="col-sm-2 control-label">姓名</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="fullname" placeholder="姓名" value="{{contact.info.fullname}}">
+      <input type="text" class="form-control" id="fullname" placeholder="姓名" ng-model="contact.info.fullname">
     </div>
   </div>
   <div class="form-group col-xs-12 col-md-6">
     <label for="phone" class="col-sm-2 control-label">电话</label></label>
     <div class="col-sm-10">
-      <input type="phone" class="form-control" id="phone" placeholder="电话" value="{{contact.info.phone}}">
+      <input type="phone" class="form-control" id="phone" placeholder="电话" ng-model="contact.info.phone">
     </div>
   </div>
   <div class="form-group col-xs-12 col-md-6">
     <label for="cellphone" class="col-sm-2 control-label">手机</label></label>
     <div class="col-sm-10">
-      <input type="phone" class="form-control" id="cellphone" placeholder="手机" value="{{contact.info.mobile}}">
+      <input type="phone" class="form-control" id="cellphone" placeholder="手机" ng-model="contact.info.mobile">
     </div>
   </div>
   <div class="form-group col-xs-12 col-md-6">
     <label for="cellphone" class="col-sm-2 control-label">Email</label></label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="cellphone" placeholder="Email" value="{{contact.info.email}}">
+      <input type="email" class="form-control" id="cellphone" placeholder="Email" ng-model="contact.info.email">
     </div>
   </div>
   <div class="form-group col-xs-12 col-md-6">
     <label for="address" class="col-sm-2 control-label">地址</label></label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="address" placeholder="地址" value="{{contact.info.address}}">
+      <input type="text" class="form-control" id="address" placeholder="地址" ng-model="contact.info.address">
     </div>
   </div>
   </form>
@@ -85,7 +85,7 @@
     <div class="container">
     <div class="panel panel-info">
   <div class="panel-heading">
-    链接<a class="icon-btn pull-right" ng-click="refreshLinks()"><span class="glyphicon glyphicon-refresh"></span></a>
+    链接<a ng-show="showRefresh" class="icon-btn pull-right" ng-click="refreshLinks()"><span class="glyphicon glyphicon-refresh"></span></a>
   </div>
   <div class="panel-body">
   <div class="row">
@@ -164,11 +164,3 @@
   </div>
   
     </div>
-<script>
-    $('#save').tooltip({
-        placement: "left",
-        html: true,
-        title: "<h3>保存</h3>",
-        container: "body"
-    });
-</script>
