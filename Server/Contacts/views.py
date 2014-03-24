@@ -2,8 +2,9 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from Contacts.models import Contacts
-from Contacts.serializers import ContactsSerializer
+from Contacts.models import Contacts, ContactTag, ContactData, ContactLink
+from Contacts.serializers import ContactsSerializer, ContactTagSerializer, ContactDataSerializer, ContactLinkSerializer
+from rest_framework import generics
 
 @api_view(['GET', 'POST'])
 def contact_list(request, format=None):
@@ -39,3 +40,17 @@ def contact_detail(request, pk, format=None):
 	elif request.method == 'DELETE':
 		Contacts.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ContactTagList(generics.ListCreateAPIView):
+	queryset = ContactTag.objects.all()
+	serializer_class = ContactTagSerializer
+	def pre_save(self, obj):
+		obj.contact = Contacts.name
+
+class ContactTagDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = ContactTag.objects.all()
+	serializer_class = ContactTagSerializer
+	def pre_save(self, obj):
+		obj.contact = Contacts.name
+
