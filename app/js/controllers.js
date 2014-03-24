@@ -72,6 +72,12 @@ function ($scope, $http, $routeParams) {
             $scope.error = "Error Code: " + status + ", Message: " + data;
         }
     });
+    
+    $scope.refreshLinks = function () {
+        $http.get('../mockData/links.json').success(function (data, status) {
+        $scope.contact.links = data;
+    });
+}
 
 }]);
 
