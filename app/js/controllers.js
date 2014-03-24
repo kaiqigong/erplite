@@ -76,6 +76,15 @@ function ($scope, $http, $routeParams) {
     $scope.refreshLinks = function () {
         $http.get('../mockData/links.json').success(function (data, status) {
         $scope.contact.links = data;
+        setTimeout(function () {
+            $("#progressbar").progressbar("start");
+        }, 100);
+        setTimeout(function () {
+            $("#progressbar").progressbar("almost");
+        }, 500);
+        setTimeout(function () {
+            $("#progressbar").progressbar("finish");
+        }, 1000);
     });
 }
 
