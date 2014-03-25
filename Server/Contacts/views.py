@@ -45,12 +45,12 @@ def contact_detail(request, pk, format=None):
 class ContactTagList(generics.ListCreateAPIView):
 	queryset = ContactTag.objects.all()
 	serializer_class = ContactTagSerializer
-	def pre_save(self, obj):
-		obj.contact = Contacts.name
+	# def pre_save(self, obj):
+	# 	obj.contact = Contacts.
 
 class ContactTagDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = ContactTag.objects.all()
 	serializer_class = ContactTagSerializer
-	def pre_save(self, obj):
-		obj.contact = Contacts.name
+	# def pre_save(self, obj):
+	# 	obj.contact = name
 

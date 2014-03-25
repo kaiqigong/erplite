@@ -11,15 +11,18 @@ class Contacts(models.Model):
 	modifiedBy = models.CharField(max_length=100)
 
 class ContactTag(models.Model):
-	contact = models.ForeignKey('Contacts')
+	contact = models.ForeignKey('Contacts', related_name='tags')
 	tag = models.CharField(max_length=100)
 	createdDate = models.DateField(auto_now_add=True)
 	createdBy = models.CharField(max_length=100)
 	modifiedDate = models.DateField(auto_now=True)
 	modifiedBy = models.CharField(max_length=100)
 
+	def __unicode__(self):
+		return '%s' % (self.tag)
+
 class ContactData(models.Model):
-	contact = models.ForeignKey('Contacts')
+	contact = models.ForeignKey('Contacts', related_name='data')
 	key = models.TextField()
 	value = models.TextField()
 	createdDate = models.DateField(auto_now_add=True)
@@ -28,7 +31,7 @@ class ContactData(models.Model):
 	modifiedBy = models.CharField(max_length=100)
 
 class ContactLink(models.Model):
-	contact = models.ForeignKey('Contacts')
+	contact = models.ForeignKey('Contacts', related_name='links')
 	entityType = models.TextField()
 	entity = models.ForeignKey('Entity')
 	createdDate = models.DateField(auto_now_add=True)
