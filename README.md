@@ -15,7 +15,7 @@ node scripts/web-server.js
 open localhost:8000/app/index.html
 
 Start django server:</br>
-
+=======
 create database in mysql </br>
 
 change mysql configs in Server/Server/settings.py</br>
