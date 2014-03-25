@@ -19,9 +19,8 @@ Start django server:</br>
 create database in mysql </br>
 
 change mysql configs in Server/Server/settings.py</br>
-
-cd erplite/Server</br>
-python manage.py syncdb</br>
-
-python manage.py runserver 0.0.0.0:8001</br>
-
+```
+cd erplite/Server
+python manage.py syncdb
+python manage.py runserver 0.0.0.0:8001
+```
