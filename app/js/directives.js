@@ -17,7 +17,7 @@ erpDirectives.directive('erpIcheck', function ($document) {
                 return;
             }
             //using iCheck
-            $($element).iCheck({
+            $element.iCheck({
                 labelHover: false,
                 cursor: true,
                 checkboxClass: 'icheckbox_flat-blue',
@@ -43,10 +43,10 @@ erpDirectives.directive('erpImgLoading', function ($document) {
     return {
         restrict: 'A',
         link: function ($scope, $element, $attrs) {
-            $($element).addClass("beforeLoaded");
-            $($element).on('load', function (event) {
-                $($element).removeClass("beforeLoaded");
-                $($element).addClass("afterLoaded");
+            $element.addClass("beforeLoaded");
+            $element.on('load', function (event) {
+                $element.removeClass("beforeLoaded");
+                $element.addClass("afterLoaded");
             });
         }
     };

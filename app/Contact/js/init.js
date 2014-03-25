@@ -1,0 +1,1 @@
+var contactModule = angular.module('contactModule', ['erpFilters']);

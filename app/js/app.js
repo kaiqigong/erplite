@@ -6,6 +6,8 @@ var erpApp = angular.module('erpApp', [
     'erpServices',
     'erpFilters']);
 
+erpApp.constant('apiHost', 'http://127.0.0.1:8001');
+
 erpApp.config(['$routeProvider',
 
 function ($routeProvider) {
