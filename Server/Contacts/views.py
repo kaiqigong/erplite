@@ -6,40 +6,48 @@ from Contacts.models import Contacts, ContactTag, ContactData, ContactLink
 from Contacts.serializers import ContactsSerializer, ContactTagSerializer, ContactDataSerializer, ContactLinkSerializer
 from rest_framework import generics
 
-@api_view(['GET', 'POST'])
-def contact_list(request, format=None):
-	if request.method == 'GET':
-		contacts = Contacts.objects.all()
-		serializer = ContactsSerializer(contacts, many=True)
-		return Response(serializer.data)
-	elif request.method == 'POST':
-		serializer = ContactsSerializer(data=request.DATA)
-		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# @api_view(['GET', 'POST'])
+# def contact_list(request, format=None):
+# 	if request.method == 'GET':
+# 		contacts = Contacts.objects.all()
+# 		serializer = ContactsSerializer(contacts, many=True)
+# 		return Response(serializer.data)
+# 	elif request.method == 'POST':
+# 		serializer = ContactsSerializer(data=request.DATA)
+# 		if serializer.is_valid():
+# 			serializer.save()
+# 			return Response(serializer.data, status=status.HTTP_201_CREATED)
+# 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def contact_detail(request, pk, format=None):
-	try:
-		contacts = Contacts.objects.get(pk=pk)
-	except Contacts.DoesNotExist:
-		return Response(status=status.HTTP_404_NOT_FOUND)
+# @api_view(['GET', 'PUT', 'DELETE'])
+# def contact_detail(request, pk, format=None):
+# 	try:
+# 		contacts = Contacts.objects.get(pk=pk)
+# 	except Contacts.DoesNotExist:
+# 		return Response(status=status.HTTP_404_NOT_FOUND)
 
-	if request.method == 'GET':
-		serializer = ContactsSerializer(contacts)
-		return Response(serializer.data)
+# 	if request.method == 'GET':
+# 		serializer = ContactsSerializer(contacts)
+# 		return Response(serializer.data)
 
-	elif request.method == 'PUT':
-		serializer = ContactsSerializer(contacts, data=request.DATA)
-		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data)
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# 	elif request.method == 'PUT':
+# 		serializer = ContactsSerializer(contacts, data=request.DATA)
+# 		if serializer.is_valid():
+# 			serializer.save()
+# 			return Response(serializer.data)
+# 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-	elif request.method == 'DELETE':
-		Contacts.delete()
-		return Response(status=status.HTTP_204_NO_CONTENT)
+# 	elif request.method == 'DELETE':
+# 		Contacts.delete()
+# 		return Response(status=status.HTTP_204_NO_CONTENT)
+
+class ContactList(generics.ListCreateAPIView):
+	queryset = Contacts.objects.all()
+	serializer_class = ContactsSerializer
+
+class ContactDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Contacts.objects.all()
+	serializer_class = ContactsSerializer
 
 
 class ContactTagList(generics.ListCreateAPIView):
@@ -53,4 +61,29 @@ class ContactTagDetail(generics.RetrieveUpdateDestroyAPIView):
 	serializer_class = ContactTagSerializer
 	# def pre_save(self, obj):
 	# 	obj.contact = name
+
+class ContactDataList(generics.ListCreateAPIView):
+	queryset = ContactData.objects.all()
+	serializer_class = ContactDataSerializer
+
+class ContactDataDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = ContactData.objects.all()
+	serializer_class = ContactDataSerializer
+
+class ContactLinkList(generics.ListCreateAPIView):
+	queryset = ContactLink.objects.all()
+	serializer_class = ContactDataSerializer
+
+class ContactLinkDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = ContactLink.objects.all()
+	serializer_class = ContactDataSerializer
+
+
+
+
+
+
+
+
+
 

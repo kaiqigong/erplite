@@ -10,6 +10,9 @@ class Contacts(models.Model):
 	modifiedDate = models.DateField(auto_now=True)
 	modifiedBy = models.CharField(max_length=100)
 
+	def __unicode__(self):
+		return '%s' % (self.name)
+
 class ContactTag(models.Model):
 	contact = models.ForeignKey('Contacts', related_name='tags')
 	tag = models.CharField(max_length=100)
