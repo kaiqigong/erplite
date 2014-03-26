@@ -1,4 +1,4 @@
-contactModule.factory('contactManager', ['$http', '$q', 'Contact','apiHost', function($http, $q, Contact, apiHost) {
+contactModule.factory('contactManager', ['$http', '$q', 'Contact','erpSettings', function($http, $q, Contact, erpSettings) {
     var contactManager = {
         _pool: {},
         _retrieveInstance: function(id, data) {
@@ -19,13 +19,13 @@ contactModule.factory('contactManager', ['$http', '$q', 'Contact','apiHost', fun
         _load: function(id, deferred) {
             var scope = this;
 
-            $http.get(apiHost+'/contacts/' + id)
+            $http.get(erpSettings.apiHost+'/contacts/' + id)
                 .success(function(contactData) {
                     var contact = scope._retrieveInstance(contactData.id, contactData);
                     deferred.resolve(contact);
                 })
-                .error(function() {
-                    deferred.reject();
+                .error(function(data,status) {
+                    deferred.reject(data,status);
                 });
         },
         /* Public Methods */
@@ -44,18 +44,25 @@ contactModule.factory('contactManager', ['$http', '$q', 'Contact','apiHost', fun
         loadAllContact: function() {
             var deferred = $q.defer();
             var scope = this;
-            $http.get(apiHost+'/contacts')
+            $http.get(erpSettings.apiHost+'/contacts')
                 .success(function(contactsArray) {
                     var contacts = [];
                     contactsArray.forEach(function(contactData) {
+                        // todo: remove this code
+                        if(contactData.id){
+                            
+                        }else{
+                            contactData.id =contacts.length+1;
+                        }
+                     
                         var contact = scope._retrieveInstance(contactData.id, contactData);
                         contacts.push(contact);
                     });
 
                     deferred.resolve(contacts);
                 })
-                .error(function() {
-                    deferred.reject();
+                .error(function(data,status) {
+                    deferred.reject(data,status);
                 });
             return deferred.promise;
         },

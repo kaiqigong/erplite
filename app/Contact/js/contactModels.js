@@ -1,7 +1,7 @@
-contactModule.factory('Contact', ['$http','apiHost', function($http,apiHost) {
+contactModule.factory('Contact', ['$http','erpSettings', function($http,erpSettings) {
     function Contact(contactData) {
         if (contactData) {
-            this.setData(contactData):
+            this.setData(contactData);
         }
     };
     Contact.prototype = {
@@ -10,18 +10,18 @@ contactModule.factory('Contact', ['$http','apiHost', function($http,apiHost) {
         },
         load: function(id) {
             var scope = this;
-            $http.get('../mockData/contact' + id + '.json').success(function(contactData) {
+            $http.get(erpSettings.apiHost+'/contacts/' + id).success(function(contactData) {
                 scope.setData(contactData);
             });
         },
-        create: function(id) {
-            $http.post(apiHost+'/contacts/', this);
+        create: function() {
+            $http.post(erpSettings.apiHost+'/contacts/', this);
         },
         delete: function(id) {
-            $http.delete(apiHost+'/contacts/' + id);
+            $http.delete(erpSettings.apiHost+'/contacts/' + id);
         },
         update: function(id) {
-            $http.put(apiHost+'/contacts/' + id, this);
+            $http.put(erpSettings.apiHost+'/contacts/' + id, this);
         }
     };
     return Contact;

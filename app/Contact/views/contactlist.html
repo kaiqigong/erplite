@@ -44,13 +44,11 @@
     <div class="list-group">
     
     <div ng-repeat="item in items | filter:query" class="col-xs-12 col-sm-12 col-md-6 repeated-item">
-		  <a href="#/contact/{{item.id}}" class="list-group-item">
-		    <img erp-img-loading class="circle avator-small" ng-src="{{item.iconurl}}" />
-		        <label>{{item.name}}</label>,&nbsp;
-		        <label>{{item.title}}</label>&nbsp;at&nbsp;
-		        <label>{{item.company}}</label>,&nbsp;
-		        <label>phone: {{item.phone}}</label>,&nbsp;
-		        <label>email: {{item.email}}</label>,&nbsp;
+		  <a href="#/contact/{{item.id}}" class="list-group-item row">
+		    <img erp-img-loading class="col-xs-1 col-sm-1 col-md-1 avator-small" ng-src="{{item.avator}}" />
+		        <label class="col-xs-2 col-sm-2 col-md-2">{{item.name}}</label>
+		        <label class="col-xs-6 col-sm-6 col-md-6">{{item.description}}</label>
+		        <label class="col-xs-3 col-sm-3 col-md-3">{{item.modifiedDate}}</label>
 		  </a>
 		  </div>
 		  

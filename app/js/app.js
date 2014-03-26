@@ -4,9 +4,10 @@ var erpApp = angular.module('erpApp', [
     'erpDirectives',
     'erpControllers',
     'erpServices',
-    'erpFilters']);
+    'erpFilters',
+    'contactModule']);
 
-erpApp.constant('apiHost', 'http://127.0.0.1:8001');
+erpApp.constant('erpSettings', {apiHost:'http://localhost:8000'});
 
 erpApp.config(['$routeProvider',
 
@@ -17,15 +18,15 @@ function ($routeProvider) {
         controller: 'HomeCtrl'
     }).
     when('/contact', {
-        templateUrl: 'views/contactlist.html',
-        controller: 'ContactCtrl'
+        templateUrl: 'Contact/views/contactlist.html',
+        controller: 'ContactListCtrl'
     }).
     when('/contact/new', {
-        templateUrl: 'views/contactdetail.html',
+        templateUrl: 'Contact/views/contactdetail.html',
         controller: 'NewContactCtrl'
     }).
     when('/contact/:id', {
-        templateUrl: 'views/contactdetail.html',
+        templateUrl: 'Contact/views/contactdetail.html',
         controller: 'ContactDetailCtrl'
     }).
     when('/login', {

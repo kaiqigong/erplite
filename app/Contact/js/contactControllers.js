@@ -1,24 +1,27 @@
-contactModule.controller('ContactCtrl', ['$scope', '$http',
+contactModule.controller('ContactListCtrl', ['$scope', '$http','contactManager',
 
- function ($scope, $http) {
+ function ($scope, $http,contactManager) {
      $scope.title = "联系人";
      $scope.icon = "./img/128px/layers_128px.png";
      $scope.backUrl = "#/home";
      $scope.currentPage = 1;
-     $http.get('../mockData/contacts.json').success(function (data, status) {
-         $scope.items = data;
-     }).
-     error(function (data, status) {
-         if (status == "404") {
-             $scope.error = "404 not found";
+     var promise = contactManager.loadAllContact();
+     promise.then(function(contacts){
+          $scope.items = contacts;
+          console.log(contacts);
+     },function(data,status){
+          if (status == "404") {
+             $rootScope.$broadcast('errorHappened', status, $location.url());
+         } else if (status == "401") {
+             $location.url("/login");
          } else {
-             $scope.error = "Error Code: " + status + ", Message: " + data;
+             console.log("Error Code: " + status + ", Message: " + data);
          }
-     });
+     },null);
  }]).
-controller('ContactDetailCtrl', ['$scope', '$http', '$routeParams',
+controller('ContactDetailCtrl', ['$scope', '$http', '$routeParams','contactManager',
 
- function ($scope, $http, $routeParams) {
+ function ($scope, $http, $routeParams,contactManager) {
      $scope.backUrl = "#/contact";
      $scope.contact = null;
      $scope.showToolbar = true;
@@ -30,7 +33,7 @@ controller('ContactDetailCtrl', ['$scope', '$http', '$routeParams',
      $scope.changeType = function (type) {
          $scope.newLink.type = type;
      };
-     $scope.add = function () {
+     $scope.addLink = function () {
          $scope.newLink.lastModifiedTime = new Date();
          console.log($scope.newLink.lastModifiedTime);
          $scope.contact.links.push($scope.newLink);
@@ -40,18 +43,21 @@ controller('ContactDetailCtrl', ['$scope', '$http', '$routeParams',
              name: ""
          };
      };
-     $http.get('../mockData/contact' + $routeParams.id + '.json').success(function (data, status) {
-         $scope.contact = data;
-         $scope.title = data.name;
-     }).
-     error(function (data, status) {
-         if (status == "404") {
-             $scope.error = "404 not found";
+     var promise = contactManager.getContact($routeParams.id);
+     promise.then(function(contactData){
+          $scope.contact = contactData;
+          $scope.title = contactData.name;
+          console.log(contactData);
+     },function(error,status){
+          if (status == "404") {
+             $rootScope.$broadcast('errorHappened', status, $location.url());
+         } else if (status == "401") {
+             $location.url("/login");
          } else {
-             $scope.error = "Error Code: " + status + ", Message: " + data;
+             console.log("Error Code: " + status + ", Message: " + error);
          }
-     });
-
+     },null);
+     
      $scope.refreshLinks = function () {
          $http.get('../mockData/links.json').success(function (data, status) {
              $scope.contact.links = data;
@@ -59,6 +65,7 @@ controller('ContactDetailCtrl', ['$scope', '$http', '$routeParams',
      };
 
      $scope.save = function () {
+         // $scope.contact.update($routeParams.id);
          console.log($scope.contact);
      };
  }]).controller('NewContactCtrl', ['$scope', '$http',
@@ -83,7 +90,7 @@ controller('ContactDetailCtrl', ['$scope', '$http', '$routeParams',
          $scope.newLink.type = type;
      };
 
-     $scope.add = function () {
+     $scope.addLink = function () {
          $scope.newLink.lastModifiedTime = new Date();
          console.log($scope.newLink.lastModifiedTime);
          $scope.contact.links.push($scope.newLink);
@@ -94,23 +101,9 @@ controller('ContactDetailCtrl', ['$scope', '$http', '$routeParams',
          };
      };
 
-     $scope.refreshLinks = function () {
-         $http.get('../mockData/links.json').success(function (data, status) {
-             $scope.contact.links = data;
-             setTimeout(function () {
-                 $("#progressbar").progressbar("start");
-             }, 100);
-             setTimeout(function () {
-                 $("#progressbar").progressbar("almost");
-             }, 500);
-             setTimeout(function () {
-                 $("#progressbar").progressbar("finish");
-             }, 1000);
-         });
-     };
-
      $scope.save = function () {
-         console.log($scope.contact);
+         // $scope.contact.create();
+         console.log($scope.contact);        
      };
 
  }]);

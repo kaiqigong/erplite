@@ -102,6 +102,8 @@ border-bottom: 1px solid #c7c7c7;
 	}
 	.avator-small{
 		width:32px;
+		margin: -4px 0 -4px 0;
+		padding: 0;
 		}
 
 .sidepager{
@@ -129,7 +131,9 @@ max-width: 330px;
 padding: 15px;
 margin: 50px auto 0 auto;
 }
-
+.updatetime{
+    line-height: 30px;
+}
 
 
 
