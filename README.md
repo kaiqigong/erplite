@@ -14,13 +14,16 @@ node scripts/web-server.js
 
 open localhost:8000/app/index.html
 
-Start django server:</br>
+Start django server<br>
 =======
-create database in mysql </br>
+create database in mysql <br>
 
-change mysql configs in Server/Server/settings.py</br>
+change mysql configs in Server/Server/settings.py<br>
 ```
-cd erplite/Server
-python manage.py syncdb
-python manage.py runserver 0.0.0.0:8001
+cd erplite
+python Server/manage.py syncdb
+python Server/manage.py runserver
 ```
+
+open localhost:8000<br>
+open localhost:8000/app/index.html
