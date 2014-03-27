@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>API Test</title>
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.3/angular.min.js"></script>
+
+  <style>
+    pre {
+      width: 600px;
+      overflow-wrap: normal;
+    }
+  </style>
+</head>
+
+<body ng-app="">
+  <div ng-controller="FetchCtrl">
+    <select ng-model="method">
+      <option>GET</option>
+      <option>POST</option>
+      <option>PUT</option>
+      <option>DELETE</option>
+    </select>
+    <br>
+    <input type="text" ng-model="url" style="width:600px;" />
+    <br>
+    <textarea type="text" ng-model="jsonData" style="width:600px;height:100px;"></textarea>
+    <br>
+    <button id="fetchbtn" ng-click="fetch()">fetch</button>
+    <br>
+    <pre>http status code: {{status}}</pre>
+    <pre>http response data: {{data | json}}</pre>
+  </div>
+  <script type="text/javascript">
+    function FetchCtrl($scope, $http, $templateCache) {
+      $scope.method = 'GET';
+      $scope.url = 'http://localhost:8000/contacts/1';
+      $scope.jsonData = null;
+      $scope.fetch = function() {
+        $scope.code = null;
+        $scope.response = null;
+        console.log(typeof($scope.jsonData));
+        console.log($scope.jsonData);
+        $http({
+          method: $scope.method,
+          data: $scope.jsonData,
+          url: $scope.url,
+          cache: $templateCache
+        }).
+        success(function(data, status) {
+          $scope.status = status;
+          $scope.data = data;
+        }).
+        error(function(data, status) {
+          $scope.data = data || "Request failed";
+          $scope.status = status;
+        });
+      };
+
+      $scope.updateModel = function(method, url) {
+        $scope.method = method;
+        $scope.url = url;
+      };
+    }
+  </script>
+</body>
+
+</html>

@@ -1,4 +1,5 @@
 1. Contacts
+==========
      CRM核心内容，contact可以自由扩展，可以和其他entity关联，用户可以加以评论，其他entity也会按照这样的思想来设计
 
      1.1 tables
@@ -147,6 +148,7 @@
 
 
 2. Attachment(next step)
+========
      保存附件信息
      
      2.1 tables
@@ -162,5 +164,70 @@
      server上的路径肯定不能作为公开url暴露，下载者也要有权限控制
      //todo
      
+3. Customer
+=========
+     部分contacts会成为Customer，与contact为1-n,集团客户可能有多个contacts
+     3.1 tables
+    
+     Customer
+     UID
+     Name:text 
+     Description:text:在list中显示
+     Type:text:个人或集团
+     Group:text:分组，白金用户，vip用户，等等，由user制定。
+     Territory：text:区域
+     Tags:text:主要为了用会能加tag，然后分类管理，*tag可以是多个的，是否放在扩展表呢，需要综合查询逻辑
+     InsertTimeStamp:stamp:该字段所有表都要有，在server存储。接下来的表省略该字段
+     UpdateTimeStamp:stamp:该字段所有表都要有，在server存储。接下来的表省略该字段
+     
+     CustomerData
+     UID
+     CustomerUID::链接Customer的UID 
+     Key:text:如Customer的一些支付信息，法律相关信息。
+     Value:text
+     
+     CustomerLink
+     UID
+     CustomerUID::链接Contact的UID  
+     EntityType:text:SalesOrder, Opportunity，Delivery ,SalesInvoice，Quotation
+     EntityUID
 
+     CustomerComment 对每一个entity都有这样一个表，*是合并在一块呢，还是分开来 (next step)
+     UID
+     CustomerUID::链接Contact的UID 
+     Comment:text:
+     AuthorUID::评论者的id
+     
+     CustomerAttachment 存储附件信息，文件名，路径，大小，上传者，*要注意的是文件在server上的保存方式，以及下载方式。 (next step)
+     UID
+     CustomerUID::链接Contact的UID 
+     AttachmentUID::链接Attachment的UID
+     
+4. SalesOrder
+========
+    Customer的订单，Customer 1 - n SalesOrder
+    
+    4.1 tables
+    
+    SalesOrder
+    UID
+    CustomerUID 
+    OrderType:text:Sales or Maintenance
+    OrderDate:datetime:订单创建时间
+    DeliveryDate：datetime:交付时间
+    PONo:text:客户方购买订单编号
+    Group:text:分组，白金用户，vip用户，等等，由user制定。
+    Territory：text:区域
+    
+    SalesOrderItem
+    UID
+    SalesOrderID
+    ProductUID
+    Quantity:int:购买数量
+    Rate:money:当前价格
+    Discount:：折扣
+    
+    
+    
+    
      
