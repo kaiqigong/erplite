@@ -35,7 +35,7 @@
     <pre>http response data: {{data | json}}</pre>
   </div>
   <script type="text/javascript">
-    function FetchCtrl($scope, $http, $templateCache) {
+    function FetchCtrl($scope, $http) {
       $scope.method = 'GET';
       $scope.url = 'http://localhost:8000/contacts/1';
       $scope.jsonData = null;
@@ -47,10 +47,10 @@
         $http({
           method: $scope.method,
           data: $scope.jsonData,
-          url: $scope.url,
-          cache: $templateCache
+          url: $scope.url
         }).
         success(function(data, status) {
+          console.log(typeof(data));
           $scope.status = status;
           $scope.data = data;
         }).
