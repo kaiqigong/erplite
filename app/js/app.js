@@ -46,15 +46,15 @@ function ($routeProvider) {
     });
 }]);
 
-erpApp.run(['$rootScope', '$location', function ($rootScope, $location) {
+erpApp.run(['$rootScope', '$location','$log', function ($rootScope, $location,$log) {
     $rootScope.$on('$routeChangeSuccess', function (event, next, current) {
 
         //if (true) $location.url("/login");
     });
     $rootScope.$on('errorHappened', function (event, status, next) {
-        console.log(event);
-        console.log(status);
-        console.log(next);
+        $log.log(event);
+        $log.log(status);
+        $log.log(next);
         if (status == "401") {
             $location.url("/login?path=" + next);
         } else if (status == "404") {

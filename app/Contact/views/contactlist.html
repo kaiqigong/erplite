@@ -43,7 +43,7 @@
     <div class="container">
     <div class="list-group">
     
-    <div ng-repeat="item in items | filter:query" class="col-xs-12 col-sm-12 col-md-6 repeated-item">
+    <div ng-repeat="item in items | filter:contactMatch(query)" class="col-xs-12 col-sm-12 col-md-6 repeated-item">
 		  <a href="#/contact/{{item.id}}" class="list-group-item row">
 		    <img erp-img-loading class="col-xs-1 col-sm-1 col-md-1 avator-small" ng-src="{{item.avator}}" />
 		        <label class="col-xs-2 col-sm-2 col-md-2">{{item.name}}</label>

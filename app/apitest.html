@@ -10,7 +10,7 @@
 
   <style>
     pre {
-      width: 600px;
+      width: 1000px;
       overflow-wrap: normal;
     }
   </style>
@@ -25,32 +25,67 @@
       <option>DELETE</option>
     </select>
     <br>
-    <input type="text" ng-model="url" style="width:600px;" />
+    <input type="text" ng-model="url" style="width:100%;" />
     <br>
-    <textarea type="text" ng-model="jsonData" style="width:600px;height:100px;"></textarea>
+    <textarea type="text" ng-model="jsonData" style="width:100%;min-height:150px;"></textarea>
     <br>
     <button id="fetchbtn" ng-click="fetch()">fetch</button>
+    <button ng-click="resetContact()">resetContact</button>
+    <button ng-click="resetTag()">resetTag</button>
+    <button ng-click="resetLink()">resetLink</button>
+    <button ng-click="resetData()">resetData</button>
     <br>
     <pre>http status code: {{status}}</pre>
     <pre>http response data: {{data | json}}</pre>
   </div>
   <script type="text/javascript">
-    function FetchCtrl($scope, $http) {
+    function FetchCtrl($scope, $http, $templateCache) {
       $scope.method = 'GET';
-      $scope.url = 'http://localhost:8000/contacts/1';
+      $scope.url = 'http://localhost:8000/contacts/';
+
+      var master = {};
+      master.contact = {
+        "name": "",
+        "avator": "",
+        "tags": null,
+        "description": "",
+        "createdBy": "",
+        "modifiedBy": ""
+      };
+      master.tag = {
+        "contact": null,
+        "tag": "",
+        "createdBy": "",
+        "modifiedBy": ""
+      };
+      master.link = {
+        "contact": null,
+        "entityType": "",
+        "entity": null,
+        "createdBy": "",
+        "modifiedBy": ""
+      };
+      master.data = {
+
+        "contact": null,
+        "keyPair": "",
+        "valuePair": "",
+        "createdBy": "",
+        "modifiedBy": ""
+
+      };
       $scope.jsonData = null;
       $scope.fetch = function() {
         $scope.code = null;
         $scope.response = null;
-        console.log(typeof($scope.jsonData));
-        console.log($scope.jsonData);
+
         $http({
           method: $scope.method,
           data: $scope.jsonData,
-          url: $scope.url
+          url: $scope.url,
+          cache: $templateCache
         }).
         success(function(data, status) {
-          console.log(typeof(data));
           $scope.status = status;
           $scope.data = data;
         }).
@@ -60,6 +95,23 @@
         });
       };
 
+      function preparePost(url, data) {
+        $scope.method = 'POST';
+        $scope.url = url;
+        $scope.jsonData = angular.toJson(data);
+      }
+      $scope.resetContact = function() {
+        preparePost('http://localhost:8000/contacts/', master.contact);
+      }
+      $scope.resetTag = function() {
+        preparePost('http://localhost:8000/contacttag/', master.tag);
+      }
+      $scope.resetLink = function() {
+        preparePost('http://localhost:8000/contactlink/', master.link);
+      }
+      $scope.resetData = function() {
+        preparePost('http://localhost:8000/contactdata/', master.data);
+      }
       $scope.updateModel = function(method, url) {
         $scope.method = method;
         $scope.url = url;

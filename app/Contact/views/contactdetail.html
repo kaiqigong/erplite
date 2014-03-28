@@ -11,9 +11,6 @@
 				<span>{{title}}</span>
 				</h2>
                 </div>
-                <div class="col-xs-4">
-                    	<h2><a ng-click="save()" title="保存" class="pull-right"><span class="glyphicon glyphicon-floppy-save"></span></a></h2>
-                </div>
             </div>
         </div>
     </div>
@@ -23,9 +20,8 @@
 	    <div class="container">
 	        <div class="row">
 	            <div class="col-xs-6">
-	            <a id="" class="icon-btn" title="上一条记录"><span class="glyphicon glyphicon-arrow-left"></span></a>
-	            <a id="" class="icon-btn" title="下一条记录"><span class="glyphicon glyphicon-arrow-right"></span></a>
-	            
+	            <a ng-click="previousId()" class="icon-btn" title="上一条记录"><span class="glyphicon glyphicon-arrow-left"></span></a>
+	            <a ng-click="nextId()" class="icon-btn" ><span class="glyphicon glyphicon-arrow-right"></span></a>
 	            </div>
 	            <div class="col-xs-6">
 	            <a id="" class="icon-btn pull-right" title="打印"><span class="glyphicon glyphicon-print"></span></a>
@@ -38,43 +34,32 @@
     <div class="container">
     <div class="panel panel-info">
   <div class="panel-heading">
-    个人信息
+    个人信息<a ng-click="save()" title="保存" class="icon-btn pull-right"><span class="glyphicon glyphicon-floppy-save"></span></a></h2>
   </div>
   <div class="panel-body">
 
   <form class="form-horizontal" role="form">
   <div class="form-group col-xs-12 col-md-6"><img erp-img-loading ng-src="{{contact.avator}}" ></div>
-  <div class="form-group col-xs-12 col-md-6">
-    <label for="fullname" class="col-sm-2 control-label">姓名</label>
+  <div class="form-group col-xs-12 col-md-6" ng-repeat="item in contact.data">
+    <label for="{{item.keyPair}}" class="col-sm-2 control-label">{{item.keyPair}}</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="fullname" placeholder="姓名" ng-model="contact.info.fullname">
-    </div>
-  </div>
-  <div class="form-group col-xs-12 col-md-6">
-    <label for="phone" class="col-sm-2 control-label">电话</label></label>
-    <div class="col-sm-10">
-      <input type="phone" class="form-control" id="phone" placeholder="电话" ng-model="contact.info.phone">
-    </div>
-  </div>
-  <div class="form-group col-xs-12 col-md-6">
-    <label for="cellphone" class="col-sm-2 control-label">手机</label></label>
-    <div class="col-sm-10">
-      <input type="phone" class="form-control" id="cellphone" placeholder="手机" ng-model="contact.info.mobile">
-    </div>
-  </div>
-  <div class="form-group col-xs-12 col-md-6">
-    <label for="cellphone" class="col-sm-2 control-label">Email</label></label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" id="cellphone" placeholder="Email" ng-model="contact.info.email">
-    </div>
-  </div>
-  <div class="form-group col-xs-12 col-md-6">
-    <label for="address" class="col-sm-2 control-label">地址</label></label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="address" placeholder="地址" ng-model="contact.info.address">
+      <input type="text" class="form-control" id="{{item.keyPair}}" placeholder="{{item.keyPair}}" ng-model="item.valuePair">
     </div>
   </div>
   </form>
+
+<form class="col-xs-8 col-sm-8 col-md-8 form-inline">
+    <hr>自定义字段<hr>
+    <div class="form-group">
+    <label class="sr-only" for="newDataKey">Field name</label>
+      <input id="newDataKey" type="text" ng-model="newData.keyPair" placeholder="字段名" class="form-control">
+    </div>
+    <div class="form-group">
+       <label class="sr-only" for="newDataValue">Field name</label>
+       <input id="newDataValue" type="text" ng-model="newData.valuePair" placeholder="字段值" class="form-control">
+    </div>
+    <a class="icon-btn" ng-click="addData()"><span class="glyphicon glyphicon-plus-sign "></span></a>
+    </form>  
 
   </div>
 
@@ -94,7 +79,7 @@
 		    <span class="{{item.type | type2class}}"></span>
 		    <label>{{item.type}}:&nbsp;</label>
 		        <label>{{item.name}}</label>
-		        <label class="pull-right">{{item.lastModifiedTime | date:'medium'}}</label>
+		        <label class="pull-right">{{item.modifiedDate | date:'medium'}}</label>
 		  </a>
 		  </div>
 		  </div>
@@ -135,7 +120,7 @@
 		    <span class="{{item.type | type2class}}"></span>
 		    <label>{{item.type}}:&nbsp;</label>
 		        <label>{{item.name}}</label>
-		        <label class="pull-right">{{item.lastModifiedTime}}</label>
+		        <label class="pull-right">{{item.modifiedDate}}</label>
 		  </a>
 		  </div>
 		  </div>
