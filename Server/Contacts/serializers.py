@@ -2,7 +2,7 @@ from rest_framework import serializers
 from Contacts.models import Contacts, ContactTag, ContactData, ContactLink
 
 class ContactsListSerializer(serializers.HyperlinkedModelSerializer):
-	tags = serializers.HyperlinkedRelatedField(many=True, view_name='contacttag-detail')
+	tags = serializers.RelatedField(many=True)
 	class Meta:
 		model = Contacts
 		fields = ('id','url', 'name', 'avator', 'tags', 'description', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')
