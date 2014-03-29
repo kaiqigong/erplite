@@ -46,7 +46,12 @@ function ($routeProvider) {
     });
 }]);
 
-erpApp.run(['$rootScope', '$location','$log', function ($rootScope, $location,$log) {
+erpApp.run(['$rootScope', '$location','$log','$http','erpSettings', function ($rootScope, $location,$log,$http,erpSettings) {
+    $http.get(erpSettings.apiHost).success(function(data){
+        $rootScope.apimap = data;
+    }).error(function(error){
+        $log.log(error);
+    });
     $rootScope.$on('$routeChangeSuccess', function (event, next, current) {
 
         //if (true) $location.url("/login");

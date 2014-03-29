@@ -25,7 +25,7 @@ contactModule.factory('contactManager', ['$http', '$q', 'Contact','ContactData',
             $http.get(erpSettings.apiHost+'/contacts/' + id)
                 .success(function(data) {
                     var contact = new Contact(data);
-                    
+                    contact.url = erpSettings.apiHost+'/contacts/' + id;
                     contact.data = [];
                     var contactDataUrls = data.data;
                     contactDataUrls.forEach(function(contactDataUrl){

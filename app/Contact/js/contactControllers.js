@@ -1,6 +1,6 @@
-contactModule.controller('ContactListCtrl', ['$scope', '$http', 'contactManager','$log',
+contactModule.controller('ContactListCtrl', ['$scope', '$http', 'contactManager','$log','ModelBase',
 
-  function($scope, $http, contactManager,$log) {
+  function($scope, $http, contactManager,$log,ModelBase) {
     $scope.title = "联系人";
     $scope.icon = "./img/128px/layers_128px.png";
     $scope.backUrl = "#/home";
@@ -28,9 +28,9 @@ contactModule.controller('ContactListCtrl', ['$scope', '$http', 'contactManager'
     }, null);
   }
 ]).
-controller('ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager','$location','$log',
+controller('ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager','$location','$log','ModelBase',
 
-  function($scope, $http, $q, $routeParams, contactManager,$location,$log) {
+  function($scope, $http, $q, $routeParams, contactManager,$location,$log,ModelBase) {
     $scope.backUrl = "#/contact";
     $scope.contact = null;
     $scope.showToolbar = true;
@@ -64,10 +64,11 @@ controller('ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'conta
     $scope.save = function() {
       $log.log($scope.contact);
       var promises = [];
-      
+
       // update data
       $scope.contact.data.forEach(function(contactData){
           var deffered  = $q.defer();
+          promises.push(deffered);
           if(!contactData.url){
               if(contactData.valuePair===""||contactData.valuePair===null){
                   // will not create, maybe the user decides not to add this field.
@@ -95,8 +96,27 @@ controller('ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'conta
           }
       });
       
-      //updata contact description
-      
+      // prepare description and updata contact
+      var newContact = new ModelBase();
+      newContact.url=$scope.contact.url;
+      newContact.avator=$scope.contact.avator;
+      newContact.name=$scope.contact.name;
+      newContact.createdBy=$scope.contact.createdBy;
+      newContact.modifiedBy='cage';
+      newContact.description = "";
+      $scope.contact.data.forEach(function(contactData){
+          // any description generation logic.
+          if(contactData.keyPair =='description' || contactData.keyPair =='描述' ){
+              newContact.description = contactData.valuePair;
+          }
+      });
+      var newContactDeffered  = $q.defer();
+      promises.push(newContactDeffered);
+      newContact.update(function(data){
+          newContactDeffered.resolve(data);
+      },function(error){
+          newContactDeffered.reject();
+      });
       
       // should reload after all the data updated.
       $q.all(promises).then($scope.reload);
