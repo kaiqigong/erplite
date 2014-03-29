@@ -3,6 +3,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from Contacts import views
 
 urlpatterns = patterns('Contacts.views',
+	url(r'^$', 'api_root'),
     url(r'^contacts/$', views.ContactList.as_view(), name='contacts-list'),
     url(r'^contacts/(?P<pk>[0-9]+)/$', views.ContactDetail.as_view(), name='contacts-detail'),
     url(r'^contacttag/$', views.ContactTagList.as_view(), name='contacttag-list'),
