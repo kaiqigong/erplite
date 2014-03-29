@@ -28,6 +28,7 @@ contactModule.factory('Contact', ['$http','erpSettings', function($http,erpSetti
 }]).
 factory('ContactData', ['$http','erpSettings', function($http,erpSettings) {
     function ContactData(contactData) {
+        this.postUrl = erpSettings.apiHost+'/contactdata/';
         if (contactData) {
             this.setData(contactData);
         }
@@ -38,21 +39,24 @@ factory('ContactData', ['$http','erpSettings', function($http,erpSettings) {
         },
         load: function(id) {
             var scope = this;
-            $http.get(erpSettings.apiHost+'/contactdata/' + id).success(function(contactData) {
+            $http.get(this.postUrl + id).success(function(contactData) {
                 if(!contactData.url){
-                    contactData.url = erpSettings.apiHost+'/contactdata/' + id;
+                    contactData.url = this.postUrl + id;
                 }
                 scope.setData(contactData);
             });
         },
-        create: function() {
-            $http.post(erpSettings.apiHost+'/contactdata/', this);
+        fromUrl: function(success,fail) {
+            $http.get(this.url).success(success).error(fail);
         },
-        delete: function() {
-            $http.delete(this.url);
+        create: function(success,fail) {
+            $http.post(this.postUrl, this).success(success).error(fail);
         },
-        update: function() {
-            $http.put(this.url, this);
+        delete: function(success,fail) {
+            $http.delete(this.url).success(success).error(fail);
+        },
+        update: function(success,fail) {
+            $http.put(this.url, this).success(success).error(fail);
         }
     };
     return ContactData;
@@ -168,4 +172,42 @@ factory('ContactAttachment', ['$http','erpSettings', function($http,erpSettings)
         }
     };
     return ContactAttachment;
+}]).
+factory('ModelBase', ['$http', function($http) {
+    function ModelBase(modelBase,postUrl) {
+        this.postUrl = postUrl;
+        if (modelBase) {
+            this.setData(modelBase);
+        }
+    };
+    ModelBase.prototype = {
+        setData: function(modelBase) {
+            angular.extend(this, modelBase);
+        },
+        fromId: function(id,success,fail) {
+            if(!this.postUrl) {
+                throw new Error("PostUrl not defined!");
+            }
+            $http.get(this.postUrl + id).success(function(modelBase) {
+                if(!modelBase.url){
+                    modelBase.url = this.postUrl + id;
+                }
+                this.setData(modelBase);
+                success(modelBase);
+            }).error(fail);
+        },
+        fromUrl: function(success,fail) {
+            $http.get(this.url).success(success).error(fail);
+        },
+        create: function(success,fail) {
+            $http.post(this.postUrl, this).success(success).error(fail);
+        },
+        delete: function(success,fail) {
+            $http.delete(this.url).success(success).error(fail);
+        },
+        update: function(success,fail) {
+            $http.put(this.url, this).success(success).error(fail);
+        }
+    };
+    return ModelBase;
 }]);

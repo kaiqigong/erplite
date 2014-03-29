@@ -28,9 +28,9 @@ contactModule.controller('ContactListCtrl', ['$scope', '$http', 'contactManager'
     }, null);
   }
 ]).
-controller('ContactDetailCtrl', ['$scope', '$http', '$routeParams', 'contactManager','$location','$log',
+controller('ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager','$location','$log',
 
-  function($scope, $http, $routeParams, contactManager,$location,$log) {
+  function($scope, $http, $q, $routeParams, contactManager,$location,$log) {
     $scope.backUrl = "#/contact";
     $scope.contact = null;
     $scope.showToolbar = true;
@@ -63,37 +63,62 @@ controller('ContactDetailCtrl', ['$scope', '$http', '$routeParams', 'contactMana
     
     $scope.save = function() {
       $log.log($scope.contact);
+      var promises = [];
+      
+      // update data
       $scope.contact.data.forEach(function(contactData){
+          var deffered  = $q.defer();
           if(!contactData.url){
               if(contactData.valuePair===""||contactData.valuePair===null){
                   // will not create, maybe the user decides not to add this field.
               }else{
-                  contactData.create();
-              }              
+                  contactData.create(function(data){
+                      deffered.resolve(data);
+                      },function(error){
+                          deffered.reject();
+                      });
+              }
           }
           else if(contactData.valuePair===""||contactData.valuePair===null){
               // delete
-              contactData.delete();
+              contactData.delete(function(data){
+                      deffered.resolve(data);
+                      },function(error){
+                          deffered.reject();
+                      });
           }else {
-              contactData.update();
+              contactData.update(function(data){
+                      deffered.resolve(data);
+                      },function(error){
+                          deffered.reject();
+                      });
           }
       });
+      
+      //updata contact description
+      
+      
+      // should reload after all the data updated.
+      $q.all(promises).then($scope.reload);
     };
     
-    var promise = contactManager.loadContact($routeParams.id);
-    promise.then(function(contactData) {
-      $scope.contact = contactData;
-      $scope.title = contactData.name;
-      $log.log(contactData);
-    }, function(error, status) {
-      if (status == "404") {
-        $rootScope.$broadcast('errorHappened', status, $location.url());
-      } else if (status == "401") {
-        $location.url("/login");
-      } else {
-        $log.log("Error Code: " + status + ", Message: " + error);
-      }
-    }, null);
+    $scope.reload = function(){
+        var promise = contactManager.loadContact($routeParams.id);
+        promise.then(function(contactData) {
+          $scope.contact = contactData;
+          $scope.title = contactData.name;
+          $log.log(contactData);
+        }, function(error, status) {
+          if (status == "404") {
+            $rootScope.$broadcast('errorHappened', status, $location.url());
+          } else if (status == "401") {
+            $location.url("/login");
+          } else {
+            $log.log("Error Code: " + status + ", Message: " + error);
+          }
+        }, null);
+    };
+    
     
     $scope.previousId = function(){
         
@@ -115,6 +140,8 @@ controller('ContactDetailCtrl', ['$scope', '$http', '$routeParams', 'contactMana
         $scope.contact.links = data;
       });
     };
+    
+    $scope.reload();
 
   }
 ]).controller('NewContactCtrl', ['$scope', '$http','$log',
