@@ -7,5 +7,7 @@ mysql<br>
 mysqldb<br>
 django-rest-framework<br>
 django-cors-headers<br>
+
+Note:
 ==================
 Please read backlog for changes.
