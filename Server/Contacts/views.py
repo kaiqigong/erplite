@@ -2,10 +2,12 @@
 # from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from Contacts.models import Contacts, ContactTag, ContactData, ContactLink
-from Contacts.serializers import ContactsListSerializer, ContactsDetailSerializer, ContactTagSerializer, ContactDataSerializer, ContactLinkSerializer
 from rest_framework import generics
 from rest_framework.reverse import reverse
+
+from Contacts.models import Contacts, ContactTag, ContactData, ContactLink
+from Contacts.serializers import ContactsListSerializer, ContactsDetailSerializer, ContactTagSerializer, ContactDataSerializer, ContactLinkSerializer
+from Contacts.filters import ContactsFilter,ContactTagFilter,ContactDataFilter,ContactLinkFilter
 # from rest_framework import viewsets
 
 @api_view(('GET',))
@@ -20,15 +22,16 @@ def api_root(request, format=None):
 class ContactList(generics.ListCreateAPIView):
 	queryset = Contacts.objects.all()
 	serializer_class = ContactsListSerializer
+	filter_class = ContactsFilter
 
 class ContactDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Contacts.objects.all()
 	serializer_class = ContactsDetailSerializer
 
-
 class ContactTagList(generics.ListCreateAPIView):
 	queryset = ContactTag.objects.all()
 	serializer_class = ContactTagSerializer
+	filter_class = ContactTagFilter
 
 class ContactTagDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = ContactTag.objects.all()
@@ -37,6 +40,7 @@ class ContactTagDetail(generics.RetrieveUpdateDestroyAPIView):
 class ContactDataList(generics.ListCreateAPIView):
 	queryset = ContactData.objects.all()
 	serializer_class = ContactDataSerializer
+	filter_class = ContactDataFilter
 
 class ContactDataDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = ContactData.objects.all()
@@ -45,27 +49,13 @@ class ContactDataDetail(generics.RetrieveUpdateDestroyAPIView):
 class ContactLinkList(generics.ListCreateAPIView):
 	queryset = ContactLink.objects.all()
 	serializer_class = ContactLinkSerializer
+	filter_class = ContactLinkFilter
 
 class ContactLinkDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = ContactLink.objects.all()
 	serializer_class = ContactLinkSerializer
 
 
-# class ContactViewSet(viewsets.ModelViewSet):
-# 	queryset = Contacts.objects.all()
-# 	serializer_class = ContactsListSerializer
-
-# class ContactTagViewSet(viewsets.ModelViewSet):
-# 	queryset = ContactTag.objects.all()
-# 	serializer_class = ContactTagSerializer
-
-# class ContactDataViewSet(viewsets.ModelViewSet):
-# 	queryset = ContactData.objects.all()
-# 	serializer_class = ContactDataSerializer
-
-# class ContactLinkViewSet(viewsets.ModelViewSet):
-# 	queryset = ContactLink.objects.all()
-# 	serializer_class = ContactLinkSerializer
 
 
 

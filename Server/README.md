@@ -7,6 +7,8 @@ mysql<br>
 mysqldb<br>
 django-rest-framework<br>
 django-cors-headers<br>
+south<br>
+django-filter<br>
 
 Note:
 ==================
