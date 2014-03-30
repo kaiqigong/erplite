@@ -1,5 +1,37 @@
  var erpControllers = angular.module('erpControllers', ['erpServices']);
 
+erpControllers.controller('RootCtrl', ['$scope','$timeout',
+
+ function ($scope,$timeout) {
+     $scope.title = "";
+     $scope.hasError = false;
+     
+     $scope.progressBar={
+         value:0,
+         show:false,
+         type:'success',
+         blink:function(){
+             // TODO: don't work :(
+             $timeout(function(){
+                 show = true;
+                 value = 50;
+                 $scope.$apply();
+             },500); 
+             $timeout(function(){
+                 value = 100;
+                 $scope.$apply();
+             },1000);    
+             $timeout(function(){
+                 show = false;
+                 $scope.$apply();
+             },1500);
+         }
+     };
+
+    $scope.progressBar.blink();
+
+ }]);
+
  erpControllers.controller('HomeCtrl', ['$scope', '$http', '$location', '$rootScope',
 
  function ($scope, $http, $location, $rootScope) {

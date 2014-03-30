@@ -5,7 +5,8 @@ var erpApp = angular.module('erpApp', [
     'erpControllers',
     'erpServices',
     'erpFilters',
-    'contactModule']);
+    'contactModule',
+    'ui.bootstrap']);
 
 erpApp.constant('erpSettings', {apiHost:'http://localhost:8000'});
 

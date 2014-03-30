@@ -1,3 +1,4 @@
+// TODO: remove
 ! function ($) {
 
     var ProgressBar = function (element, options) {
@@ -74,14 +75,5 @@
 }(window.jQuery);
 
 $(function () {
-    $("#progressbar").progressbar();
-    setTimeout(function () {
-        $("#progressbar").progressbar("start");
-    }, 100);
-    setTimeout(function () {
-        $("#progressbar").progressbar("almost");
-    }, 500);
-    setTimeout(function () {
-        $("#progressbar").progressbar("finish");
-    }, 1000);
+    
 });

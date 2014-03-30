@@ -18,7 +18,7 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body ng-controller="RootCtrl">
   <nav id="header" class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
   <!-- Brand and toggle get grouped for better mobile display -->
@@ -39,7 +39,7 @@
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown">History <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
+          <li><a ng-click="progressBar.blink()">Action</a></li>
           <li><a href="#">Another action</a></li>
           <li><a href="#">Something else here</a></li>
           <li class="divider"></li>
@@ -99,8 +99,7 @@
   </div><!-- /.navbar-collapse -->
   </div>
 </nav>
-<div id="progressbar">
-</div>
+<progressbar id="progressbar" class="progress-striped active" ng-show="progressBar.show" type="{{progressBar.type}}" value="progressBar.value"></progressbar>
 <!-- here later, will use view template <div ng-view></div> -->
     <div class="view-container">
         <div class="view view-frame" ng-view></div>
@@ -114,6 +113,8 @@
   	 <script src="lib/angular/angular-cookies.min.js"></script>
   	 <script src="lib/iCheck/icheck.min.js"></script>
     <script src="lib/angular/angular-animate.min.js"></script>
+    <script src="lib/angularui/ui-bootstrap-custom-0.10.0.min.js"></script>
+    <script src="lib/angularui/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/app.js" ></script>
     <script src="js/controllers.js"></script>

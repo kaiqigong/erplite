@@ -29,11 +29,31 @@ img.afterLoaded {
     margin-bottom: 0px;
     position: fixed;
     top:51px;
-    height: 20px;
+    height: 15px;
     width: 100%;
     z-index: 1500;
     background-color: rgba(255, 255, 255, 0.5);
+    
 }
+
+#progressbar.ng-hide-add, #progressbar.ng-hide-remove {
+-webkit-transition:all linear 0.5s;
+-moz-transition:all linear 0.5s;
+-o-transition:all linear 0.5s;
+transition:all linear 0.5s;
+display:block!important;
+}
+
+#progressbar.ng-hide-add.ng-hide-add-active,
+#progressbar.ng-hide-remove {
+opacity:0;
+}
+
+#progressbar.ng-hide-add,
+#progressbar.ng-hide-remove.ng-hide-remove-active {
+opacity:1;
+}
+
 .view{
 	top: 51px;
 	position: absolute;
