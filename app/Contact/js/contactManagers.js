@@ -1,4 +1,5 @@
-contactModule.factory('contactManager', ['$http', '$q', 'Contact','ContactData','erpSettings','$log', function($http, $q, Contact, ContactData, erpSettings,$log) {
+contactModule.factory('contactManager', ['$http', '$q', 'Contact','ContactData','erpSettings','$log','$rootScope', 
+function($http, $q, Contact, ContactData, erpSettings,$log,$rootScope) {
     var contactManager = {
         _pool: {},
         _syncTimeDict:{},
@@ -22,10 +23,10 @@ contactModule.factory('contactManager', ['$http', '$q', 'Contact','ContactData',
         _load: function(id, deferred) {
             var scope = this;
 
-            $http.get(erpSettings.apiHost+'/contacts/' + id)
+            $http.get($rootScope.apimap.contact + id)
                 .success(function(data) {
                     var contact = new Contact(data);
-                    contact.url = erpSettings.apiHost+'/contacts/' + id;
+                    contact.url = $rootScope.apimap.contact + id;
                     contact.data = [];
                     var contactDataUrls = data.data;
                     contactDataUrls.forEach(function(contactDataUrl){
@@ -51,7 +52,7 @@ contactModule.factory('contactManager', ['$http', '$q', 'Contact','ContactData',
         },
         loadContactList:function(){
             var deferred = $q.defer();
-            $http.get(erpSettings.apiHost+'/contacts')
+            $http.get($rootScope.apimap.contact)
                 .success(function(data,status) {
                     deferred.resolve(data);
                     _contactList=data;
@@ -112,7 +113,7 @@ contactModule.factory('contactManager', ['$http', '$q', 'Contact','ContactData',
         loadAllContact: function() {
             var deferred = $q.defer();
             var scope = this;
-            $http.get(erpSettings.apiHost+'/contacts')
+            $http.get($rootScope.apimap.contact)
                 .success(function(contactsArray) {
                     var contacts = [];
                     contactsArray.forEach(function(contactData) {
