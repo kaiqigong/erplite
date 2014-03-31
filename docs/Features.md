@@ -29,3 +29,6 @@ Contact
     2.3 Create
         Upload Img
         Create Contact
+
+3. Contact Fields
+    surname givenname company department title phone mobile fax origin email address birthday region website qq weibo im
