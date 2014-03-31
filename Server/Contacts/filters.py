@@ -8,9 +8,10 @@ class ContactsFilter(django_filters.FilterSet):
 	createdBy = django_filters.CharFilter(name='createdBy', lookup_type='icontains')
 	modifiedDate = django_filters.DateTimeFilter(name='modifiedDate')
 	modifiedBy = django_filters.CharFilter(name='modifiedBy', lookup_type='icontains')
+	tags = django_filters.CharFilter(name='tags__tag', lookup_type='icontains')
 	class Meta:
 		model = Contacts
-		fields = ('name','description','createdDate','createdBy','modifiedDate','modifiedBy',)
+		fields = ('name','description','tags','createdDate','createdBy','modifiedDate','modifiedBy',)
 
 class ContactTagFilter(django_filters.FilterSet):
 	contact = django_filters.CharFilter(name='contact__name', lookup_type='icontains')
