@@ -30,12 +30,56 @@
 							</div>
 	            </div>
 	            <div class="col-xs-3">
-	                	<button type="button" class="btn btn-primary">高级查询&nbsp;<span class="caret"></span></button>
+	                	<button type="button" ng-click="toggleAdvanceSearch()" class="btn btn-primary">高级查询&nbsp;<span class="caret"></span></button>
 	            </div>
 	            <div class="col-xs-3">
 	                	<a id="export" class="icon-btn pull-right"><span class="glyphicon glyphicon-cloud-download"></span></a>
 	            </div>
 	        </div>
+	    </div>
+	    <div collapse="isAdvanceSearchCollapsed" class="advanceSearch-block">
+    	    <div class="container">
+        	    <div class="row">
+            	    <div class="criteria col-xs-6">
+            	        <div class="input-group">
+            		        <label class="input-group-addon">姓名</label><input class="form-control" type="text"/>
+            		    </div>
+            	    </div>
+            	    <div class="criteria col-xs-6">
+            	        <div class="input-group">
+            		        <label class="input-group-addon">地址</label><input class="form-control" type="text"/>
+            		    </div>
+            	    </div>
+            	    <div class="criteria col-xs-6">
+            	        <div class="input-group">
+            		        <label class="input-group-addon">标签</label><input class="form-control" type="text"/>
+            		    </div>
+            	    </div>
+            	    <div class="criteria col-xs-6">
+                	    <div class="dropdown">
+                		    <button class="btn dropdown-toggle">更多&nbsp;<span class="caret"></span></button>
+                		    <ul class="dropdown-menu">
+                                <li>
+                                  <a>key1</a>
+                                </li>
+                                <li>
+                                  <a>key2</a>
+                                </li>
+                                <li>
+                                  <a>key3</a>
+                                </li>
+                                <li>
+                                  <a>key4</a>
+                                </li>
+                              </ul>
+                          </div>
+            	    </div>
+            	    <div class="criteria col-xs-6">
+            		    <button class="btn btn-danger">Search</button>
+            	    </div>
+        	    </div>
+        	    <div><button ng-click="toggleAdvanceSearch()" class="advanceSearch-collapse btn btn-primary">^</button></div>
+    	    </div>
 	    </div>
     </div>
     
@@ -43,8 +87,8 @@
     <div class="container">
     <div class="list-group">
     
-    <div ng-repeat="item in items | filter:contactMatch(query)" class="col-xs-12 col-sm-12 col-md-6 repeated-item">
-		  <a href="#/contact/{{item.id}}" class="list-group-item row">
+    <div ng-repeat="item in items | filter:contactMatch(query)" class="col-xs-12 col-sm-12 col-md-6 list-item">
+		  <a href="#/contact/{{item.id}}" class="list-group-item row list-item">
 		    <img erp-img-loading class="col-xs-1 col-sm-1 col-md-1 avator-small" ng-src="{{item.avator}}" />
 		        <label class="col-xs-2 col-sm-2 col-md-2">{{item.name}}</label>
 		        <label class="col-xs-6 col-sm-6 col-md-6">{{item.description}}</label>

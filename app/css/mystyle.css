@@ -158,8 +158,26 @@ color: #888888;
 padding-right: 0;
 margin: 0;
 }
-
-
+.advanceSearch-block{
+    padding: 5px 0 20px 0;
+    background-color: antiquewhite;
+    position: relative;
+}
+.advanceSearch-collapse{
+    padding: 0;
+    height: 15px;
+    bottom: 0;
+    position: absolute;
+    left: 25%;
+    width: 50%;
+}
+.criteria{
+    height: 40px;
+}
+.list-item{
+    height: 50px;
+    margin:2px 0;
+}
 
 
 
