@@ -13,11 +13,15 @@ contactModule.controller('ContactListCtrl', ['$scope', '$http', 'contactManager'
         return item.name.indexOf(query) >= 0 || item.description.indexOf(query) >= 0;
       };
     };
+    $scope.progressBar.start();
+    $scope.progressBar.set(50);
     var promise = contactManager.loadContactList();
     promise.then(function(contacts) {
       $scope.items = contacts;
       $log.log(contacts);
+      $scope.progressBar.end();
     }, function(data, status) {
+      $scope.progressBar.end();
       if (status == "404") {
         $rootScope.$broadcast('errorHappened', status, $location.url());
       } else if (status == "401") {
@@ -31,6 +35,8 @@ contactModule.controller('ContactListCtrl', ['$scope', '$http', 'contactManager'
 controller('ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager','$location','$log','ModelBase',
 
   function($scope, $http, $q, $routeParams, contactManager,$location,$log,ModelBase) {
+    $scope.progressBar.start();
+    $scope.progressBar.set(50);
     $scope.backUrl = "#/contact";
     $scope.contact = null;
     $scope.showToolbar = true;
@@ -64,7 +70,8 @@ controller('ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'conta
     $scope.save = function() {
       $log.log($scope.contact);
       var promises = [];
-
+      $scope.progressBar.start();
+      $scope.progressBar.set(20);
       // update data
       $scope.contact.data.forEach(function(contactData){
           var deffered  = $q.defer();
@@ -128,7 +135,9 @@ controller('ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'conta
           $scope.contact = contactData;
           $scope.title = contactData.name;
           $log.log(contactData);
+          $scope.progressBar.end();
         }, function(error, status) {
+          $scope.progressBar.end();
           if (status == "404") {
             $rootScope.$broadcast('errorHappened', status, $location.url());
           } else if (status == "401") {
@@ -162,7 +171,6 @@ controller('ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'conta
     };
     
     $scope.reload();
-
   }
 ]).controller('NewContactCtrl', ['$scope', '$http','$log',
 

@@ -5,31 +5,43 @@ erpControllers.controller('RootCtrl', ['$scope','$timeout',
  function ($scope,$timeout) {
      $scope.title = "";
      $scope.hasError = false;
+     $scope.progressShow = false;
+     $scope.progressValue = 0;
+     $scope.progressType = 'success';
      
      $scope.progressBar={
-         value:0,
-         show:false,
-         type:'success',
          blink:function(){
              // TODO: don't work :(
+             
              $timeout(function(){
-                 show = true;
-                 value = 50;
-                 $scope.$apply();
+                 $scope.progressShow = true;
+                 $scope.progressValue = 50;
              },500); 
              $timeout(function(){
-                 value = 100;
-                 $scope.$apply();
+                 $scope.progressValue = 100;
              },1000);    
              $timeout(function(){
-                 show = false;
-                 $scope.$apply();
+                 $scope.progressShow = false;
              },1500);
+             $timeout(function(){
+                 $scope.progressValue = 0;
+             },2500);
+         },
+         start:function(){
+             $scope.progressShow = true;
+             $scope.progressValue = 0;
+         },
+         set:function(progress){
+             $scope.progressValue = progress;
+         },
+         end:function(){
+             $scope.progressValue = 100; 
+             $scope.progressShow = false;
+             $timeout(function(){
+                 $scope.progressValue = 0;
+             },1000);
          }
      };
-
-    $scope.progressBar.blink();
-
  }]);
 
  erpControllers.controller('HomeCtrl', ['$scope', '$http', '$location', '$rootScope',
@@ -37,11 +49,15 @@ erpControllers.controller('RootCtrl', ['$scope','$timeout',
  function ($scope, $http, $location, $rootScope) {
      $scope.title = "Welcome, Kaiqi";
      $scope.hasError = false;
+     $scope.progressBar.start();
+     $scope.progressBar.set(50);
      $http.get('../mockData/applist.json').success(function (data, status) {
          $scope.apps = data;
+         $scope.progressBar.end();
      }).
      error(function (data, status) {
          $scope.hasError = true;
+         $scope.progressBar.end();
          if (status == "404") {
              $scope.error = "404 not found";
              $rootScope.$broadcast('errorHappened', status, $location.url());
@@ -76,4 +92,4 @@ erpControllers.controller('RootCtrl', ['$scope','$timeout',
 
  function ($scope, $http) {
 
- }]);
+ }]);'success'
