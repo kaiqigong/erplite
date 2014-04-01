@@ -18,3 +18,4 @@ tmp
 _yardoc
 doc/
 *pyc
+Server/Contacts/migrations/*
