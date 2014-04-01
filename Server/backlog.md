@@ -19,3 +19,8 @@ pip install django-filter<br>
 "contactlink": "http://localhost:8000/contactlink?contact=&&tag="<br> 
 "contacttag": "http://localhost:8000/contacttag?contact=&&keyPair=&&keyValue=" <br>
 "contactdata": "http://localhost:8000/contactdata?contact=&&entityType&&entity"<br>
+
+<h3>update 2014/04/01</h3>
+<b>migration</b>
+./manage.py schemamigration Contacts --auto #检测对models的更改<br>
+./manage.py migrate Contacts #将更改反应到数据库（如果出现表已存在的错误，后面加 --fake）<br>

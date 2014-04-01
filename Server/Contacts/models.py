@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Contacts(models.Model):
 	name = models.CharField(max_length=255)
-	avator = models.URLField(blank=True)
+	avator = models.CharField(max_length=100, blank=True)
 	description = models.TextField(blank=True)
 	createdDate = models.DateTimeField(auto_now_add=True)
 	createdBy = models.CharField(max_length=100)
@@ -27,8 +27,26 @@ class ContactTag(models.Model):
 class ContactData(models.Model):
 	# surname givenname company department title phone mobile fax origin email address birthday region website qq weibo im 
 	contact = models.ForeignKey('Contacts', related_name='data')
-	keyPair = models.TextField()
-	valuePair = models.TextField()
+	keyPair = models.CharField(max_length=100, blank=True)
+	valuePair = models.CharField(max_length=100, blank=True)
+	surname = models.CharField(max_length=255, blank=True)
+	givenname = models.CharField(max_length=255, blank=True)
+	company = models.CharField(max_length=100, blank=True)
+	department = models.CharField(max_length=100, blank=True)
+	title = models.CharField(max_length=100, blank=True)
+	phone = models.CharField(max_length=100, blank=True)
+	mobile = models.CharField(max_length=100, blank=True)
+	fax = models.CharField(max_length=100, blank=True)
+	origin = models.CharField(max_length=100, blank=True)
+	email = models.EmailField(blank=True)
+	address = models.CharField(max_length=100, blank=True)
+	birthday = models.DateField(null=True, blank=True)
+	region = models.CharField(max_length=100, blank=True)
+	website = models.URLField(blank=True)
+	qq = models.CharField(max_length=100, blank=True)
+	weibo = models.CharField(max_length=100, blank=True)
+	im =models.CharField(max_length=100, blank=True)
+
 	createdDate = models.DateTimeField(auto_now_add=True)
 	createdBy = models.CharField(max_length=100)
 	modifiedDate = models.DateTimeField(auto_now=True)
