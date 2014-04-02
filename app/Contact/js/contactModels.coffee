@@ -7,8 +7,10 @@ angular.module 'contactModule'
 				this.postUrl = postUrl
 			if modelBase?
 				this.setData modelBase
+
 		setData: (modelBase)->
 			angular.extend this,modelBase
+
 		fromId: (id,success,fail)->
 			if this.postUrl?
 				$http.get this.postUrl + id
@@ -19,18 +21,22 @@ angular.module 'contactModule'
 					success modelBase
 				.error fail
 			else throw new Error "PostUrl not defined!"
+
 		fromUrl: (success,fail)->
 			$http.get this.url 
 			.success success 
 			.error fail
+
 		create: (success,fail) ->
 			$http.post this.postUrl, this 
 			.success success
 			.error fail
+
 		delete: (success,fail) ->
 			$http.delete this.url
 			.success success
 			.error fail
+
 		update: (success,fail) ->
 			$http.put this.url, this
 			.success success

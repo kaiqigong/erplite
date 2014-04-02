@@ -20,17 +20,8 @@ angular.module 'contactModule'
 		$http.get $rootScope.apimap.contact + id 
 		.success (data) ->
 			contact = new Contact data
+			# better resolve url in contactdetail
 			contact.url = $rootScope.apimap.contact + id
-			contact.data = []
-			contactDataUrls = data.data
-			
-			for contactDataUrl in contactDataUrls
-				do (contactDataUrl)->
-					$http.get contactDataUrl
-					.success (contactData)->
-						contactData.url = contactDataUrl
-						contact.data.push new ContactData contactData 
-
 			deferred.resolve contact
 
 		.error (data,status) ->

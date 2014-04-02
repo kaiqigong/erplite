@@ -25,21 +25,9 @@
           var scope;
           scope = this;
           $http.get($rootScope.apimap.contact + id).success(function(data) {
-            var contact, contactDataUrl, contactDataUrls, _fn, _i, _len;
+            var contact;
             contact = new Contact(data);
             contact.url = $rootScope.apimap.contact + id;
-            contact.data = [];
-            contactDataUrls = data.data;
-            _fn = function(contactDataUrl) {
-              return $http.get(contactDataUrl).success(function(contactData) {
-                contactData.url = contactDataUrl;
-                return contact.data.push(new ContactData(contactData));
-              });
-            };
-            for (_i = 0, _len = contactDataUrls.length; _i < _len; _i++) {
-              contactDataUrl = contactDataUrls[_i];
-              _fn(contactDataUrl);
-            }
             return deferred.resolve(contact);
           }).error(function(data, status) {
             return deferred.reject(data, status);
@@ -64,7 +52,6 @@
         },
         getPreviousContact: function(id) {
           var index, _i, _ref;
-          $log.log(_contactList);
           if (typeof _contactList !== "undefined" && _contactList !== null) {
             for (index = _i = 0, _ref = _contactList.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; index = 0 <= _ref ? ++_i : --_i) {
               if (_contactList[index].id === id) {

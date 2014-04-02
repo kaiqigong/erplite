@@ -47,7 +47,15 @@ angular.module 'contactModule'
 	$scope.newLink = 
 		type: "Supplier"
 		name: ""
+	# used to bind the data fields to view
+	$scope.contactDatas=[]
 
+	# vaild data fields
+	dataFields=[]
+
+	# unset data fields
+	$scope.unsetFields=[]
+	
 	$scope.changeType = (type) ->
 		$scope.newLink.type = type
 
@@ -60,40 +68,33 @@ angular.module 'contactModule'
 			name: ""
 
 	$scope.addData = () ->
-		$scope.newData.createdBy = "cage"
-		$scope.newData.modifiedBy = "cage"
-		$scope.newData.contact = $scope.contact.id
-		newData = contactManager.initContactData $scope.newData
-		$scope.contact.data.push newData
+		newData = angular.copy $scope.newData
+		$scope.newData.key = ""
+		$scope.newData.value = "" 
+		$scope.contactDatas.push newData
 
 	$scope.save = () ->
 		$log.log($scope.contact)
 		promises = []
 		$scope.progressBar.start()
 		$scope.progressBar.set(20)
+
 		# update data
-		$scope.contact.data.forEach (contactData) ->
-			deffered = $q.defer()
-			promises.push deffered
-			if not contactData.url?
-				if not contactData.valuePair?
-					# will not create, maybe the user decides not to add this field.
-				else
-					contactData.create (data) ->
-						deffered.resolve data
-					, (error) ->
-						deffered.reject()
-			else if not contactData.valuePair?
-				# delete
-				contactData.delete (data) ->
-					deffered.resolve data
-				, (error) ->
-					deffered.reject()
-			else
-				contactData.update (data) ->
-					deffered.resolve data
-				, (error) ->
-					deffered.reject()
+		updatedContactDataDeffered = $q.defer()
+		promises.push updatedContactDataDeffered
+		updatedContactData = contactManager.initContactData()
+		updatedContactData.url = $scope.contact.data.url
+		updatedContactData.contact = $scope.contact.data.contact
+		updatedContactData.createdBy = $scope.contact.data.createdBy
+		updatedContactData.modifiedBy = 'cage' # TODO hard code
+		for contactData in $scope.contactDatas when contactData.key in ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile', 'fax', 'origin', 'email', 'address', 'birthday', 'region', 'website', 'qq', 'weibo', 'im' ]
+			do (contactData) ->
+				updatedContactData[contactData.key] = contactData.value
+
+		updatedContactData.update (data) ->
+			updatedContactDataDeffered.resolve data
+		, (error) ->
+			updatedContactDataDeffered.reject error
 
 		# prepare description and updata contact
 		newContact = new ModelBase()
@@ -102,11 +103,7 @@ angular.module 'contactModule'
 		newContact.name = $scope.contact.name
 		newContact.createdBy = $scope.contact.createdBy
 		newContact.modifiedBy = 'cage'
-		newContact.description = ""
-		$scope.contact.data.forEach (contactData) ->
-		    # any description generation logic.
-		    if contactData.keyPair == 'description' or contactData.keyPair == '描述'
-		        newContact.description = contactData.valuePair
+		newContact.description = $scope.contact.description
 
 		newContactDeffered = $q.defer()
 		promises.push newContactDeffered
@@ -123,6 +120,15 @@ angular.module 'contactModule'
 		promise = contactManager.loadContact $routeParams.id
 		promise.then (contactData) ->
 			$scope.contact = contactData
+			$scope.contactDatas = []
+			$scope.unsetFields = []
+			dataFields = []
+			for own propName, propValue of contactData.data when propName not in ["id","contactname","contact","url","createdDate","createdBy","modifiedDate","modifiedBy"]
+				dataFields.push propName
+				if propValue? and propValue isnt ""
+					$scope.contactDatas.push {key:propName,value:propValue}
+				else
+					$scope.unsetFields.push propName
 			$scope.title = contactData.name
 			$scope.progressBar.end()
 		, (error, status) ->
