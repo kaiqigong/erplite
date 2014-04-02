@@ -7,7 +7,7 @@ from rest_framework.reverse import reverse
 
 from Contacts.models import Contacts, ContactTag, ContactData, ContactLink
 from Contacts.serializers import ContactsListSerializer, ContactsDetailSerializer, ContactTagSerializer, ContactDataSerializer, ContactLinkSerializer
-from Contacts.filters import ContactsFilter,ContactTagFilter,ContactDataFilter,ContactLinkFilter
+from Contacts.filters import ContactsFilter,ContactTagFilter,ContactLinkFilter#,ContactDataFilter
 # from rest_framework import viewsets
 
 @api_view(('GET',))
@@ -40,7 +40,7 @@ class ContactTagDetail(generics.RetrieveUpdateDestroyAPIView):
 class ContactDataList(generics.ListCreateAPIView):
 	queryset = ContactData.objects.all()
 	serializer_class = ContactDataSerializer
-	filter_class = ContactDataFilter
+	# filter_class = ContactDataFilter
 
 class ContactDataDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = ContactData.objects.all()

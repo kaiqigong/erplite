@@ -7,20 +7,20 @@ class ContactsListSerializer(serializers.HyperlinkedModelSerializer):
 		model = Contacts
 		fields = ('id','url', 'name', 'avator', 'tags', 'description', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')
 
-class ContactDataSerializer(serializers.HyperlinkedModelSerializer):
-	contactname = serializers.Field(source='contact.name')
-	class Meta:
-		model = ContactData
-		fields = ('id','contactname','contact','url','surname','givenname','company','department','title','phone','mobile','fax','origin','email','address','birthday','region','website','qq','weibo','im', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy') 
-
 class ContactsDetailSerializer(serializers.HyperlinkedModelSerializer):
 	tags = serializers.HyperlinkedRelatedField(many=True,view_name='contacttag-detail')
-	data = ContactDataSerializer(required=False)
+	# data = serializers.RelatedField(many=False)
+	data = serializers.HyperlinkedRelatedField(many=False, view_name='contactdata-detail')
 	links = serializers.HyperlinkedRelatedField(many=True, view_name='contactlink-detail')
 	class Meta:
 		model = Contacts
 		fields = ('id', 'name', 'avator', 'tags', 'data', 'links', 'description', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')
-		depth = 1
+
+class ContactDataSerializer(serializers.ModelSerializer):
+	contactname = serializers.Field(source='contact.name')
+	class Meta:
+		model = ContactData
+		fields = ('contact','contactname','surname','givenname','company','department','title','phone','mobile','fax','origin','email','address','birthday','region','website','qq','weibo','im', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy') 
 
 class ContactTagSerializer(serializers.ModelSerializer):
 	contactname = serializers.Field(source='contact.name')

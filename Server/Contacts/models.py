@@ -50,9 +50,6 @@ class ContactData(models.Model):
 	modifiedDate = models.DateTimeField(auto_now=True)
 	modifiedBy = models.CharField(max_length=100)
 
-	def __unicode__(self):
-		return '%s: %s' % (self.keyPair, self.valuePair)
-
 class ContactLink(models.Model):
 	contact = models.ForeignKey('Contacts', related_name='links')
 	entityType = models.TextField()

@@ -24,17 +24,15 @@ class ContactTagFilter(django_filters.FilterSet):
 		model = ContactTag
 		fields = ('contact','tag','createdDate','createdBy','modifiedDate','modifiedBy',)
 
-class ContactDataFilter(django_filters.FilterSet):
-	contact = django_filters.CharFilter(name='contact__name', lookup_type='icontains')
-	keyPair = django_filters.CharFilter(name='keyPair', lookup_type='icontains')
-	valuePair = django_filters.CharFilter(name='valuePair', lookup_type='icontains')
-	createdDate = django_filters.DateTimeFilter(name='createdDate')
-	createdBy = django_filters.CharFilter(name='createdBy', lookup_type='icontains')
-	modifiedDate = django_filters.DateTimeFilter(name='modifiedDate')
-	modifiedBy = django_filters.CharFilter(name='modifiedBy', lookup_type='icontains')
-	class Meta:
-		model = ContactData
-		fields = ('contact','keyPair','valuePair','createdDate','createdBy','modifiedDate','modifiedBy',)
+# class ContactDataFilter(django_filters.FilterSet):
+# 	contact = django_filters.CharFilter(name='contact__name', lookup_type='icontains')
+# 	createdDate = django_filters.DateTimeFilter(name='createdDate')
+# 	createdBy = django_filters.CharFilter(name='createdBy', lookup_type='icontains')
+# 	modifiedDate = django_filters.DateTimeFilter(name='modifiedDate')
+# 	modifiedBy = django_filters.CharFilter(name='modifiedBy', lookup_type='icontains')
+# 	class Meta:
+# 		model = ContactData
+# 		fields = ('contact','createdDate','createdBy','modifiedDate','modifiedBy',)
 
 class ContactLinkFilter(django_filters.FilterSet):
 	contact = django_filters.CharFilter(name='contact__name', lookup_type='icontains')
