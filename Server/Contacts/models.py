@@ -26,9 +26,7 @@ class ContactTag(models.Model):
 
 class ContactData(models.Model):
 	# surname givenname company department title phone mobile fax origin email address birthday region website qq weibo im 
-	contact = models.ForeignKey('Contacts', related_name='data')
-	keyPair = models.CharField(max_length=100, blank=True)
-	valuePair = models.CharField(max_length=100, blank=True)
+	contact = models.OneToOneField('Contacts', related_name='data')
 	surname = models.CharField(max_length=255, blank=True)
 	givenname = models.CharField(max_length=255, blank=True)
 	company = models.CharField(max_length=100, blank=True)
