@@ -17,7 +17,7 @@ angular.module 'contactModule'
 		(item) ->
 			if not query?
 				return true
-			return item.name.indexOf query  >= 0 or item.description.indexOf(query) >= 0
+			return item.name.indexOf(query)  >= 0 or item.description.indexOf(query) >= 0
 	
 	$scope.progressBar.start()
 	$scope.progressBar.set 50

@@ -22,7 +22,7 @@
           if (query == null) {
             return true;
           }
-          return item.name.indexOf(query >= 0 || item.description.indexOf(query) >= 0);
+          return (item.name.indexOf(query) >= 0 || item.description.indexOf(query) >= 0);
         };
       };
       $scope.progressBar.start();
