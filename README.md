@@ -27,3 +27,15 @@ python Server/manage.py runserver
 
 open localhost:8000<br>
 open localhost:8000/app/index.html
+
+## Use CoffeeScript
+install coffeescript
+```bash
+sudo npm install -g coffee-script
+```
+Add syntax and snippet to TextMate or Subline
+[coffee-script-tmbundle](https://github.com/jashkenas/coffee-script-tmbundle)
+
+build the coffees
+
+
