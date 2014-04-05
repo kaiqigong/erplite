@@ -1,0 +1,6 @@
+Django
+south
+corsheaders
+djangorestframework
+MySQL-python
+django-filter

@@ -12,4 +12,7 @@ django-filter<br>
 
 Note:
 ==================
-Please read backlog for changes.
+Please read backlog for changes.<br>
+<br>
+Install related apps:<br>
+pip install -r requirement.txt
