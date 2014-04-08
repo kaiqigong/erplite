@@ -40,6 +40,7 @@
 
      *我了解的有两种api形式 
      一 所有api访问统一个url，通过param来区别对应操作 
+```
      {
          userid："cage",
           token：""，
@@ -49,13 +50,13 @@
                Take:100,
           }
      }
-
+```
      二 通过url区别操作 /contacts
 
      a. get contact list 
      request
      //todo 
-
+```
      response 
      { 
      Status:”200”,
@@ -83,7 +84,7 @@
           Status:"500",
           Result:"error"
      }
-
+```
 
      b. get single contact 
      request
@@ -91,6 +92,7 @@
      
      response
      主要思想是，data作为contact的info属性，links，comments，attachments作为collection
+     ```
      {
          "id":1,
          "name":"凯奇",
@@ -145,7 +147,7 @@
                "lastModifiedTime":"2014/03/11",
             }]，	
       }
-
+```
 
 2. Attachment(next step)
 ========
@@ -226,6 +228,12 @@
     Quantity:int:购买数量
     Rate:money:当前价格
     Discount:：折扣
+    
+5. Authentication
+========
+    Put security token in request header.
+    `$http.defaults.headers.post.Authorization = "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==";`
+
     
     
     
