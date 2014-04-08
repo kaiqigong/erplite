@@ -1,0 +1,13 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <title>Account Register</title>
+</head>
+<body><form action="" method="post">{% csrf_token %}
+    <table border="0" cellpadding="0" >
+        {{form.as_table}}        
+    </table>
+    <p> <a href="{%url login%}">登陆</a> <a href="{%url index%}">返回首页</a> <input type="submit" value="注册"/></p>
+    </form>
+</body>
+</html>

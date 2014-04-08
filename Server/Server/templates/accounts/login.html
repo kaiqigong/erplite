@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <title>Account Login</title>
+</head>
+<body>
+    {% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    <form action="" method="post">{% csrf_token %}
+    <table border="0" cellpadding="0" >
+        {{form.as_table}}        
+    </table>
+    <p> <a href="{%url register%}">注册</a> <a href="{%url index%}">返回首页</a> <input type="submit" value="登录"/></p>
+    </form>
+</body>
+</html>
