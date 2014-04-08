@@ -6,7 +6,7 @@
     <script>
         function generate(name) {
             alert("xx");
-            $.get('generate/'+name+'/', function (data) {
+            $.get('generate?name='+name, function (data) {
                 alert("counter updated!");
             });
         }
@@ -24,7 +24,7 @@
     {% endif %}
 
     <p>{% if request.user.is_authenticated %}
-     <input type="button" value="Generate your API Code" onclick="generate(“{{w}}”)">
+     <input type="button" value="Generate your API Code" onclick="generate('{{name}}')">
      <br>
      <label>Code:</label>
      <label id="code"></label>
