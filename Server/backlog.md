@@ -24,3 +24,10 @@ pip install django-filter<br>
 <b>migration</b>
 ./manage.py schemamigration Contacts --auto #检测对models的更改<br>
 ./manage.py migrate Contacts #将更改反应到数据库（如果出现表已存在的错误，后面加 --fake）<br>
+
+<h3>update 2014/04/09</h3>
+<b>TokenAuthentication</b>
+migrate db<br>
+register user in page /account and get Authentication Token.<br>
+For clients to authenticate, the token key should be included in the Authorization HTTP header. The key should be prefixed by the string literal "Token", with whitespace separating the two strings. For example:<br>
+Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
