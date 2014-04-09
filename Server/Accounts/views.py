@@ -8,14 +8,18 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login ,logout as auth_logout
 from django.utils.translation import ugettext_lazy as _
 from forms import RegisterForm,LoginForm
+from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.models import Token
 
 def index(request):
     '''首页视图'''
-    template_var={"w":_(u"欢迎您 游客!"),"request":request,"name":request.user.username}
+    template_var={"w":_(u"欢迎您 游客!"),"request":request,"name":request.user.username,"token":''}
     if request.user.is_authenticated():
         template_var["w"]=_(u"欢迎您 %s!")%request.user.username
+        token = Token.objects.filter(user_id__exact=User.objects.get(username__icontains=request.user.username))
+        if token:
+            template_var["token"] = token[0]
     return render_to_response("accounts/welcome.html",template_var,context_instance=RequestContext(request))
 
 def register(request):
@@ -67,11 +71,10 @@ def logout(request):
     return HttpResponseRedirect(reverse('index'))
 
 def generate(request):
-    print '1'
     if 'name' in request.GET:
         name = request.GET['name']
-        print name
         user = User.objects.get(username__icontains=name)
         token = Token.objects.create(user=user)
         print token
+        return HttpResponse(token)
 

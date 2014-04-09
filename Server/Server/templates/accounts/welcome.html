@@ -5,9 +5,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
         function generate(name) {
-            alert("xx");
-            $.get('generate?name='+name, function (data) {
-                alert("counter updated!");
+            $.get('generate',{name: name}, function (data) {
+                $("#code").text(data)
             });
         }
     </script>
@@ -24,10 +23,12 @@
     {% endif %}
 
     <p>{% if request.user.is_authenticated %}
+        {% if not token %}
      <input type="button" value="Generate your API Code" onclick="generate('{{name}}')">
      <br>
+     {% endif %}
      <label>Code:</label>
-     <label id="code"></label>
+     <label id="code">{{ token }}</label>
     {% endif %}
     </p>
 
