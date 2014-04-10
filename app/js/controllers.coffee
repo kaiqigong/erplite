@@ -1,6 +1,6 @@
 erpControllers = angular.module 'erpControllers', ['erpServices']
 
-erpControllers.controller 'RootCtrl', ['$scope','$timeout', ($scope,$timeout) ->
+erpControllers.controller 'RootCtrl', ['$scope','$timeout','erpSettings', ($scope,$timeout,erpSettings) ->
 	$scope.title = ""
 	$scope.hasError = false
 	$scope.progressShow = false
@@ -36,7 +36,8 @@ erpControllers.controller 'RootCtrl', ['$scope','$timeout', ($scope,$timeout) ->
 			$timeout ()->
 				$scope.progressValue = 0
 			,1000
-	return
+
+	$scope.erpSettings = erpSettings
 ]
 
 erpControllers.controller 'HomeCtrl', ['$scope', '$http', '$location', '$rootScope', ($scope, $http, $location, $rootScope) ->
@@ -61,14 +62,29 @@ erpControllers.controller 'HomeCtrl', ['$scope', '$http', '$location', '$rootSco
 	return
 ]
 
-erpControllers.controller 'LoginCtrl', ['$scope', '$http', 'security', ($scope, $http, security) ->
+erpControllers.controller 'LoginCtrl', ['$scope', '$http', 'security','$routeParams','$location', ($scope, $http, security,$routeParams,$location) ->
+	if $location.url() is '/logout'
+		$http.get($scope.erpSettings.apiHost+'/accounts/logout')
+		.success ->
+			console.log 'logout'
 	$scope.rememberMe = false
 	$scope.login = () ->
-		loginParam =
-			username: $scope.username
-			password: $scope.password # security.encrypt($scope.password)
-			rememberMe: $scope.rememberMe
-		# $http.post('/someUrl',loginParam).success()
+		loginParam = "csrfmiddlewaretoken="+security.getCSRF() +
+		"&username=" + $scope.username +
+		"&password=" + $scope.password # security.encrypt($scope.password)"
+		$http.post($scope.erpSettings.apiHost+'/accounts/login',loginParam,{headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
+        .success ->
+        	if $routeParams.query?
+        		$location.url(encodeURIComponent($routeParams.query))
+        		$location.replace()
+        	else
+        		$location.url('/home')
+        		$location.replace()
+        .error ()->
+        	console.log 'error'
+        .finally ()->
+        	console.log 'finally'
 		security.saveCookie()
 		# add token to cookie. Need a security service in which can get and set the token.
 	return

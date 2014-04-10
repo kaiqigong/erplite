@@ -5,3 +5,5 @@ erpServices.factory 'security', ($cookies) ->
             $cookies.test = "test"
 	getCookie: () ->
 		token: $cookies.test
+	getCSRF: () ->
+		$cookies.csrftoken

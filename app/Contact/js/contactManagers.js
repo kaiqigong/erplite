@@ -30,7 +30,10 @@
             contact.url = $rootScope.apimap.contact + id;
             return deferred.resolve(contact);
           }).error(function(data, status) {
-            return deferred.reject(data, status);
+            return deferred.reject({
+              "data": data,
+              "status": status
+            });
           });
         },
         loadContact: function(id) {
@@ -46,7 +49,10 @@
             deferred.resolve(data);
             return this._contactList = data;
           }).error(function(data, status) {
-            return deferred.reject(data, status);
+            return deferred.reject({
+              "data": data,
+              "status": status
+            });
           });
           return deferred.promise;
         },
@@ -115,7 +121,10 @@
             });
             return deferred.resolve(contacts);
           }).error(function(data, status) {
-            return deferred.reject(data, status);
+            return deferred.reject({
+              "data": data,
+              "status": status
+            });
           });
           return deferred.promise;
         },

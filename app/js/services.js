@@ -13,6 +13,9 @@
         return {
           token: $cookies.test
         };
+      },
+      getCSRF: function() {
+        return $cookies.csrftoken;
       }
     };
   });

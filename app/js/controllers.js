@@ -5,7 +5,7 @@
   erpControllers = angular.module('erpControllers', ['erpServices']);
 
   erpControllers.controller('RootCtrl', [
-    '$scope', '$timeout', function($scope, $timeout) {
+    '$scope', '$timeout', 'erpSettings', function($scope, $timeout, erpSettings) {
       $scope.title = "";
       $scope.hasError = false;
       $scope.progressShow = false;
@@ -42,6 +42,7 @@
           }, 1000);
         }
       };
+      return $scope.erpSettings = erpSettings;
     }
   ]);
 
@@ -70,15 +71,33 @@
   ]);
 
   erpControllers.controller('LoginCtrl', [
-    '$scope', '$http', 'security', function($scope, $http, security) {
+    '$scope', '$http', 'security', '$routeParams', '$location', function($scope, $http, security, $routeParams, $location) {
+      if ($location.url() === '/logout') {
+        $http.get($scope.erpSettings.apiHost + '/accounts/logout').success(function() {
+          return console.log('logout');
+        });
+      }
       $scope.rememberMe = false;
       $scope.login = function() {
         var loginParam;
-        loginParam = {
-          username: $scope.username,
-          password: $scope.password,
-          rememberMe: $scope.rememberMe
-        };
+        loginParam = "csrfmiddlewaretoken=" + security.getCSRF() + "&username=" + $scope.username + "&password=" + $scope.password;
+        $http.post($scope.erpSettings.apiHost + '/accounts/login', loginParam, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          }
+        }).success(function() {
+          if ($routeParams.query != null) {
+            $location.url(encodeURIComponent($routeParams.query));
+            return $location.replace();
+          } else {
+            $location.url('/home');
+            return $location.replace();
+          }
+        }).error(function() {
+          return console.log('error');
+        })["finally"](function() {
+          return console.log('finally');
+        });
         return security.saveCookie();
       };
     }

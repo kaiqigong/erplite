@@ -25,7 +25,7 @@ angular.module 'contactModule'
 			deferred.resolve contact
 
 		.error (data,status) ->
-			deferred.reject data,status
+			deferred.reject {"data":data,"status":status}
 		return
 
 	# Public Methods
@@ -43,7 +43,7 @@ angular.module 'contactModule'
 			this._contactList = data
 			
 		.error (data,status) ->
-			deferred.reject data,status
+			deferred.reject {"data":data,"status":status}
 		return deferred.promise
 	
 	getPreviousContact : (id)->
@@ -100,7 +100,7 @@ angular.module 'contactModule'
 			deferred.resolve contacts
 
 		.error (data,status) ->
-			deferred.reject data,status
+			deferred.reject {"data":data,"status":status}
 		
 		return deferred.promise
 

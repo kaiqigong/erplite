@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty;
 
   angular.module('contactModule').controller('ContactListCtrl', [
-    '$scope', '$http', 'contactManager', '$log', 'ModelBase', function($scope, $http, contactManager, $log, ModelBase) {
+    '$scope', '$http', '$location', 'contactManager', '$log', 'ModelBase', function($scope, $http, $location, contactManager, $log, ModelBase) {
       var promise;
       $scope.title = "联系人";
       $scope.icon = "./img/128px/layers_128px.png";
@@ -22,7 +22,7 @@
           if (query == null) {
             return true;
           }
-          return (item.name.indexOf(query) >= 0 || item.description.indexOf(query) >= 0);
+          return item.name.indexOf(query) >= 0 || item.description.indexOf(query) >= 0;
         };
       };
       $scope.progressBar.start();
@@ -32,14 +32,15 @@
         $scope.items = contacts;
         $log.log(contacts);
         return $scope.progressBar.end();
-      }, function(data, status) {
+      }, function(reason) {
         $scope.progressBar.end();
-        if (status === "404") {
-          return $rootScope.$broadcast('errorHappened', status, $location.url());
-        } else if (status === "401") {
-          return $location.url("/login");
+        if (reason.status === 404) {
+          return $rootScope.$broadcast('errorHappened', reason.status, $location.url());
+        } else if (reason.status === 401 || reason.status === 403) {
+          $location.url("/login?query=" + encodeURIComponent($location.url()));
+          return $location.replace();
         } else {
-          return $log.log("Error Code: " + status + ", Message: " + data);
+          return $log.log("Error Code: " + reason.status + ", Message: " + reason.data);
         }
       }, null);
     }
@@ -148,14 +149,14 @@
           }
           $scope.title = contactData.name;
           return $scope.progressBar.end();
-        }, function(error, status) {
+        }, function(reason) {
           $scope.progressBar.end();
-          if (status === "404") {
-            return $rootScope.$broadcast('errorHappened', status, $location.url());
-          } else if (status === "401") {
+          if (reason.status === 404) {
+            return $rootScope.$broadcast('errorHappened', reason.status, $location.url());
+          } else if (reason.status === 401 || reason.status === 403) {
             return $location.url("/login");
           } else {
-            return $log.log("Error Code: " + status + ", Message: " + error);
+            return $log.log("Error Code: " + reason.status + ", Message: " + reason.data);
           }
         }, null);
       };

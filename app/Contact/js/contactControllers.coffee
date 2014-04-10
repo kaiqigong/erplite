@@ -1,5 +1,5 @@
 angular.module 'contactModule'
-.controller 'ContactListCtrl', ['$scope', '$http', 'contactManager', '$log', 'ModelBase',($scope, $http, contactManager, $log, ModelBase) ->
+.controller 'ContactListCtrl', ['$scope', '$http', '$location', 'contactManager', '$log', 'ModelBase',($scope, $http, $location, contactManager, $log, ModelBase) ->
 	$scope.title = "联系人"
 	$scope.icon = "./img/128px/layers_128px.png"
 	$scope.backUrl = "#/home"
@@ -27,14 +27,15 @@ angular.module 'contactModule'
 		$scope.items = contacts
 		$log.log(contacts)
 		$scope.progressBar.end()
-	, (data, status)->
+	, (reason)->
 		$scope.progressBar.end()
-		if status == "404"
-			$rootScope.$broadcast 'errorHappened', status, $location.url()
-		else if status == "401"
-			$location.url "/login"
+		if reason.status is 404
+			$rootScope.$broadcast 'errorHappened', reason.status, $location.url()
+		else if reason.status is 401 or reason.status is 403
+			$location.url "/login?query=" + encodeURIComponent($location.url())
+			$location.replace()
 		else 
-			$log.log("Error Code: " + status + ", Message: " + data)
+			$log.log("Error Code: " + reason.status + ", Message: " + reason.data)
 	, null
 ]
 .controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase', ($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase) ->
@@ -131,14 +132,14 @@ angular.module 'contactModule'
 					$scope.unsetFields.push propName
 			$scope.title = contactData.name
 			$scope.progressBar.end()
-		, (error, status) ->
+		, (reason) ->
 			$scope.progressBar.end()
-			if status == "404"
-				$rootScope.$broadcast 'errorHappened', status, $location.url()
-			else if status == "401"
+			if reason.status is 404
+				$rootScope.$broadcast 'errorHappened', reason.status, $location.url()
+			else if reason.status is 401 or reason.status is 403
 				$location.url "/login"
 			else 
-				$log.log "Error Code: " + status + ", Message: " + error
+				$log.log "Error Code: " + reason.status + ", Message: " + reason.data
 		, null
 
 	# TODO: disable the button before data is retrieved.

@@ -25,7 +25,10 @@
       }).when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
-      }).when('/login/:id', {
+      }).when('/logout', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
+      }).when('/login/:query', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       }).when('/404', {
@@ -46,9 +49,6 @@
       });
       $rootScope.$on('$routeChangeSuccess', function(event, next, current) {});
       return $rootScope.$on('errorHappened', function(event, status, next) {
-        $log.log(event);
-        $log.log(status);
-        $log.log(next);
         switch (status) {
           case '401':
             return $location.url("/login?path=" + next);

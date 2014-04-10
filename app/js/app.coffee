@@ -22,7 +22,9 @@ erpApp.config(['$routeProvider',($routeProvider) ->
 		{templateUrl: 'Contact/views/contactdetail.html',controller: 'ContactDetailCtrl'}
 	.when '/login', 
 		{templateUrl: 'views/login.html',controller: 'LoginCtrl'}
-	.when '/login/:id', 
+	.when '/logout', 
+		{templateUrl: 'views/login.html',controller: 'LoginCtrl'}
+	.when '/login/:query', 
 		{templateUrl: 'views/login.html',controller: 'LoginCtrl'}
 	.when '/404', 
 		{templateUrl: 'views/404.html',controller: '404Ctrl'}
@@ -41,9 +43,6 @@ erpApp.run ['$rootScope', '$location','$log','$http','erpSettings', ($rootScope,
 		#if (true) $location.url("/login");
 	$rootScope
 	.$on 'errorHappened', (event, status, next) ->
-		$log.log event
-		$log.log status
-		$log.log next
 		switch status
 			when '401' then $location.url "/login?path=" + next 
 			when '404' then $location.url "/404" 
