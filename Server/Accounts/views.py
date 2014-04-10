@@ -10,8 +10,6 @@ from django.utils.translation import ugettext_lazy as _
 from forms import RegisterForm,LoginForm
 from rest_framework.authtoken.models import Token
 
-from rest_framework.authtoken.models import Token
-
 def index(request):
     '''首页视图'''
     template_var={"w":_(u"欢迎您 游客!"),"request":request,"name":request.user.username,"token":''}
