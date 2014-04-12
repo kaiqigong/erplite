@@ -85,6 +85,34 @@
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           }
+        }).success(function(data) {
+          console.log(data);
+          if ($routeParams.query != null) {
+            $location.url(encodeURIComponent($routeParams.query));
+            return $location.replace();
+          } else {
+            $location.url('/home');
+            return $location.replace();
+          }
+        }).error(function() {
+          return console.log('error');
+        })["finally"](function() {
+          return console.log('finally');
+        });
+        return security.saveCookie();
+      };
+    }
+  ]);
+
+  erpControllers.controller('SignupCtrl', [
+    '$scope', '$http', 'security', '$routeParams', '$location', function($scope, $http, security, $routeParams, $location) {
+      $scope.signup = function() {
+        var signupParam;
+        signupParam = "csrfmiddlewaretoken=" + security.getCSRF() + "&username=" + $scope.username + "&email=" + $scope.email + "&password=" + $scope.password;
+        $http.post($scope.erpSettings.apiHost + '/accounts/register', signupParam, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          }
         }).success(function() {
           if ($routeParams.query != null) {
             $location.url(encodeURIComponent($routeParams.query));

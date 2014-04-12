@@ -3,9 +3,9 @@
     margin:0;
 }
 a:hover{
-text-decoration: none !important;	
-cursor: pointer;
-	}
+    text-decoration: none !important;   
+    cursor: pointer;
+}
 img.beforeLoaded {
     opacity:0;
     transition:opacity 1s;
@@ -16,7 +16,7 @@ img.afterLoaded {
 }
 
 #page-desktop {
-	position: fixed;
+    position: fixed;
     left: 0px;
     overflow: auto;
     min-width: 100%;
@@ -37,28 +37,28 @@ img.afterLoaded {
 }
 
 #progressbar.ng-hide-add, #progressbar.ng-hide-remove {
--webkit-transition:all linear 0.5s;
--moz-transition:all linear 0.5s;
--o-transition:all linear 0.5s;
-transition:all linear 0.5s;
-display:block!important;
+    -webkit-transition:all linear 0.5s;
+    -moz-transition:all linear 0.5s;
+    -o-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+    display:block!important;
 }
 
 #progressbar.ng-hide-add.ng-hide-add-active,
 #progressbar.ng-hide-remove {
-opacity:0;
+    opacity:0;
 }
 
 #progressbar.ng-hide-add,
 #progressbar.ng-hide-remove.ng-hide-remove-active {
-opacity:1;
+    opacity:1;
 }
 
 .view{
-	top: 51px;
-	position: absolute;
-	width: 100%;
-	overflow-y: auto;
+    top: 51px;
+    position: absolute;
+    width: 100%;
+    overflow-y: auto;
 }
 
 .case-wrapper {
@@ -106,57 +106,57 @@ opacity:1;
 }
 
 .titlebar {
-border-bottom: 1px solid #c7c7c7;
+    border-bottom: 1px solid #c7c7c7;
 }
 .toolbar{
-	background-color: #f2f2f2;
-	margin-bottom: 12px;
+    background-color: #f2f2f2;
+    margin-bottom: 12px;
 }
 
 .icon-btn{
-	padding: 1px;
-	width: 24px;
-	height: 24px;
-	line-height: 20px;
-	font-size: 20px;
-	}
-	.avator-small{
-		width:32px;
-		margin: -4px 0 -4px 0;
-		padding: 0;
-		}
+    padding: 1px;
+    width: 24px;
+    height: 24px;
+    line-height: 20px;
+    font-size: 20px;
+}
+.avator-small{
+  width:32px;
+  margin: -4px 0 -4px 0;
+  padding: 0;
+}
 
 .sidepager{
-	position: fixed;
-	right: 0;
-	top: 50%;
-	width: 30px;
-	height: 90px;
-	}
-	.sidepager label{
-		display: block;
-		text-align: center;
-		}
+    position: fixed;
+    right: 0;
+    top: 50%;
+    width: 30px;
+    height: 90px;
+}
+.sidepager label{
+  display: block;
+  text-align: center;
+}
 .loginMask{
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	top:0;
-	left:0;
-	background-color: #eee;
-	z-index: 9999;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    background-color: #eee;
+    z-index: 9999;
 }
 .form-signin {
-max-width: 330px;
-padding: 15px;
-margin: 50px auto 0 auto;
+    max-width: 330px;
+    padding: 15px;
+    margin: 50px auto 0 auto;
 }
 .updatetime-small{
     font-size: 10px;
-font-weight: 100;
-color: #888888;
-padding-right: 0;
-margin: 0;
+    font-weight: 100;
+    color: #888888;
+    padding-right: 0;
+    margin: 0;
 }
 .advanceSearch-block{
     padding: 5px 0 20px 0;
@@ -179,6 +179,10 @@ margin: 0;
     margin:2px 0;
 }
 
-
+.form-signup{
+    max-width: 330px;
+    padding: 15px;
+    margin: 50px auto 0 auto;
+}
 
 

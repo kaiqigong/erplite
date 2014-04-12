@@ -26,6 +26,8 @@ erpApp.config(['$routeProvider',($routeProvider) ->
 		{templateUrl: 'views/login.html',controller: 'LoginCtrl'}
 	.when '/login/:query', 
 		{templateUrl: 'views/login.html',controller: 'LoginCtrl'}
+	.when '/signup', 
+		{templateUrl: 'views/signup.html',controller: 'SignupCtrl'}
 	.when '/404', 
 		{templateUrl: 'views/404.html',controller: '404Ctrl'}
 	.otherwise redirectTo: '/home'

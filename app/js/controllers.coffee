@@ -74,6 +74,31 @@ erpControllers.controller 'LoginCtrl', ['$scope', '$http', 'security','$routePar
 		"&password=" + $scope.password # security.encrypt($scope.password)"
 		$http.post($scope.erpSettings.apiHost+'/accounts/login',loginParam,{headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
+        .success (data)->
+        	console.log data # TODO: crawl the user name in dom html
+        	if $routeParams.query?
+        		$location.url(encodeURIComponent($routeParams.query))
+        		$location.replace()
+        	else
+        		$location.url('/home')
+        		$location.replace()
+        .error ()->
+        	console.log 'error'
+        .finally ()->
+        	console.log 'finally'
+		security.saveCookie()
+		# add token to cookie. Need a security service in which can get and set the token.
+	return
+]
+
+erpControllers.controller 'SignupCtrl', ['$scope', '$http', 'security','$routeParams','$location', ($scope, $http, security,$routeParams,$location) ->
+	$scope.signup = () ->
+		signupParam = "csrfmiddlewaretoken="+security.getCSRF() +
+		"&username=" + $scope.username +
+		"&email=" + $scope.email +
+		"&password=" + $scope.password # security.encrypt($scope.password)"
+		$http.post($scope.erpSettings.apiHost+'/accounts/register',signupParam,{headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
         .success ->
         	if $routeParams.query?
         		$location.url(encodeURIComponent($routeParams.query))
