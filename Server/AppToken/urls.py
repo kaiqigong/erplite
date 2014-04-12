@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from rest_framework.urlpatterns import format_suffix_patterns
-from Accounts import views
+from AppToken import views
 
 urlpatterns = patterns('Accounts.views',
 	url(r'^$', 'index',name="index"),
