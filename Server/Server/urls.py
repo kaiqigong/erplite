@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('Contacts.urls')),
     url(r'^accounts/', include('AppToken.urls')),
+    # url(r'^sign/', include('Login.urls')),
     # url(r'^', include(router.urls)),
     # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
   )
