@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty;
 
   angular.module('contactModule').controller('ContactListCtrl', [
-    '$scope', '$http', '$location', 'contactManager', '$log', 'ModelBase', function($scope, $http, $location, contactManager, $log, ModelBase) {
+    '$scope', '$http', '$location', 'contactManager', '$log', 'ModelBase', 'Restangular', function($scope, $http, $location, contactManager, $log, ModelBase, Restangular) {
       var promise;
       $scope.title = "联系人";
       $scope.icon = "./img/128px/layers_128px.png";

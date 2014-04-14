@@ -73,19 +73,24 @@ erpControllers.controller 'LoginCtrl', ['$scope', '$http', 'security','$routePar
 		"&username=" + $scope.username +
 		"&password=" + $scope.password # security.encrypt($scope.password)"
 		$http.post($scope.erpSettings.apiHost+'/accounts/login',loginParam,{headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
-        .success (data)->
-        	console.log data # TODO: crawl the user name in dom html
-        	if $routeParams.query?
-        		$location.url(encodeURIComponent($routeParams.query))
-        		$location.replace()
-        	else
-        		$location.url('/home')
-        		$location.replace()
-        .error ()->
-        	console.log 'error'
-        .finally ()->
-        	console.log 'finally'
+		'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
+		.success (data)->
+			console.log data # TODO: crawl the user name in dom html
+			result = angular.element data
+			token = result.find("#code").text()
+			headers=
+				'Authorization': token
+			security.setHttpHeader headers
+			if $routeParams.query?
+				$location.url(encodeURIComponent($routeParams.query))
+				$location.replace()
+			else
+				$location.url('/home')
+				$location.replace()
+		.error ()->
+			console.log 'error'
+		.finally ()->
+			console.log 'finally'
 		security.saveCookie()
 		# add token to cookie. Need a security service in which can get and set the token.
 	return
@@ -98,18 +103,18 @@ erpControllers.controller 'SignupCtrl', ['$scope', '$http', 'security','$routePa
 		"&email=" + $scope.email +
 		"&password=" + $scope.password # security.encrypt($scope.password)"
 		$http.post($scope.erpSettings.apiHost+'/accounts/register',signupParam,{headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
-        .success ->
-        	if $routeParams.query?
-        		$location.url(encodeURIComponent($routeParams.query))
-        		$location.replace()
-        	else
-        		$location.url('/home')
-        		$location.replace()
-        .error ()->
-        	console.log 'error'
-        .finally ()->
-        	console.log 'finally'
+		'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
+		.success ->
+			if $routeParams.query?
+				$location.url(encodeURIComponent($routeParams.query))
+				$location.replace()
+			else
+				$location.url('/home')
+				$location.replace()
+		.error ()->
+			console.log 'error'
+		.finally ()->
+			console.log 'finally'
 		security.saveCookie()
 		# add token to cookie. Need a security service in which can get and set the token.
 	return

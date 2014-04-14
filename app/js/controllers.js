@@ -86,7 +86,14 @@
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           }
         }).success(function(data) {
+          var headers, result, token;
           console.log(data);
+          result = angular.element(data);
+          token = result.find("#code").text();
+          headers = {
+            'Authorization': token
+          };
+          security.setHttpHeader(headers);
           if ($routeParams.query != null) {
             $location.url(encodeURIComponent($routeParams.query));
             return $location.replace();

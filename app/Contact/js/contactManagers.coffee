@@ -1,6 +1,6 @@
 angular.module 'contactModule' 
-.factory 'contactManager', ['$http', '$q', 'Contact','ContactData','erpSettings','$log','$rootScope', 
-($http, $q, Contact, ContactData, erpSettings,$log,$rootScope) ->
+.factory 'contactManager', ['$http', '$q', 'Contact','ContactData','erpSettings','$log','$rootScope', 'Restangular',
+($http, $q, Contact, ContactData, erpSettings,$log,$rootScope,Restangular) ->
 	_pool: {}
 	_syncTimeDict:{}
 	_contactList:[]
@@ -22,8 +22,17 @@ angular.module 'contactModule'
 			contact = new Contact data
 			# better resolve url in contactdetail
 			contact.url = $rootScope.apimap.contact + id
-			deferred.resolve contact
-
+			if contact.data?
+				contactDataUrl = contact.data
+				$http.get contactDataUrl
+					.success (contactData)->
+						contact.data = contactData
+						contact.data.url = contactDataUrl
+						deferred.resolve contact
+					.error (data,status) ->
+						deferred.reject {"data":data,"status":status}
+			else 
+				deferred.resolve contact
 		.error (data,status) ->
 			deferred.reject {"data":data,"status":status}
 		return
@@ -37,13 +46,13 @@ angular.module 'contactModule'
 	
 	loadContactList: ->
 		deferred = $q.defer()
-		$http.get $rootScope.apimap.contact
-		.success (data,status) ->
+		Restangular.all('contacts').getList()
+		.then (data) ->
 			deferred.resolve data
 			this._contactList = data
-			
-		.error (data,status) ->
-			deferred.reject {"data":data,"status":status}
+		, (response)->
+			console.log response
+			deferred.reject response
 		return deferred.promise
 	
 	getPreviousContact : (id)->

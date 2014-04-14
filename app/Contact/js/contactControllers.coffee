@@ -1,5 +1,5 @@
 angular.module 'contactModule'
-.controller 'ContactListCtrl', ['$scope', '$http', '$location', 'contactManager', '$log', 'ModelBase',($scope, $http, $location, contactManager, $log, ModelBase) ->
+.controller 'ContactListCtrl', ['$scope', '$http', '$location', 'contactManager', '$log', 'ModelBase','Restangular',($scope, $http, $location, contactManager, $log, ModelBase,Restangular) ->
 	$scope.title = "联系人"
 	$scope.icon = "./img/128px/layers_128px.png"
 	$scope.backUrl = "#/home"
@@ -37,6 +37,7 @@ angular.module 'contactModule'
 		else 
 			$log.log("Error Code: " + reason.status + ", Message: " + reason.data)
 	, null
+
 ]
 .controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase', ($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase) ->
 	$scope.progressBar.start()

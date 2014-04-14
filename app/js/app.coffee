@@ -1,5 +1,6 @@
 erpApp = angular.module 'erpApp', [
     'ngRoute'
+    'restangular'
     'erpAnimations'
     'erpDirectives'
     'erpControllers'
@@ -33,13 +34,14 @@ erpApp.config(['$routeProvider',($routeProvider) ->
 	.otherwise redirectTo: '/home'
 ])
 
-erpApp.run ['$rootScope', '$location','$log','$http','erpSettings', ($rootScope, $location,$log,$http,erpSettings) ->
+erpApp.run ['$rootScope', '$location','$log','$http','erpSettings','Restangular', ($rootScope, $location,$log,$http,erpSettings,Restangular) ->
 	$http
 	.get erpSettings.apiHost 
 	.success (data)->
 		$rootScope.apimap = data
 	.error (error)->
 		$log.log error
+	Restangular.setBaseUrl(erpSettings.apiHost)
 	$rootScope
 	.$on '$routeChangeSuccess', (event, next, current)->
 		#if (true) $location.url("/login");
