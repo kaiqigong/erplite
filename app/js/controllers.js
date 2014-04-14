@@ -73,6 +73,7 @@
   erpControllers.controller('LoginCtrl', [
     '$scope', '$http', 'security', '$routeParams', '$location', function($scope, $http, security, $routeParams, $location) {
       if ($location.url() === '/logout') {
+        security.clearAccessToken();
         $http.get($scope.erpSettings.apiHost + '/accounts/logout').success(function() {
           return console.log('logout');
         });
@@ -84,7 +85,7 @@
           username: $scope.username,
           password: $scope.password
         };
-        $http.post($scope.erpSettings.apiHost + '/login/', loginParam).success(function(data) {
+        return $http.post($scope.erpSettings.apiHost + '/login/', loginParam).success(function(data) {
           var headers, token;
           console.log(data);
           token = data.token;
@@ -104,7 +105,6 @@
         })["finally"](function() {
           return console.log('finally');
         });
-        return security.saveCookie();
       };
     }
   ]);

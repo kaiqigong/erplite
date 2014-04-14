@@ -8,18 +8,20 @@
     '$cookies', '$http', function($cookies, $http) {
       return {
         setHttpHeader: function(header) {
-          return $http.defaults.headers.common.Authorization = "Token " + header.Authorization;
-        },
-        saveCookie: function() {
-          return $cookies.test = "test";
-        },
-        getCookie: function() {
-          return {
-            token: $cookies.test
-          };
+          $http.defaults.headers.common.Authorization = "Token " + header.Authorization;
+          return $cookies.access_token = header.Authorization;
         },
         getCSRF: function() {
           return $cookies.csrftoken;
+        },
+        clearAccessToken: function() {
+          delete $http.defaults.headers.common["Authorization"];
+          return delete $cookies["access_token"];
+        },
+        restoreToken: function() {
+          if ($cookies.access_token != null) {
+            return $http.defaults.headers.common.Authorization = "Token " + $cookies.access_token;
+          }
         }
       };
     }

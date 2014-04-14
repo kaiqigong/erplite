@@ -44,7 +44,8 @@
   ]);
 
   erpApp.run([
-    '$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangular', function($rootScope, $location, $log, $http, erpSettings, Restangular) {
+    '$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangular', 'security', function($rootScope, $location, $log, $http, erpSettings, Restangular, security) {
+      security.restoreToken();
       $http.get(erpSettings.apiHost).success(function(data) {
         return $rootScope.apimap = data;
       }).error(function(error) {

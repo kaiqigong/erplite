@@ -64,6 +64,7 @@ erpControllers.controller 'HomeCtrl', ['$scope', '$http', '$location', '$rootSco
 
 erpControllers.controller 'LoginCtrl', ['$scope', '$http', 'security','$routeParams','$location', ($scope, $http, security,$routeParams,$location) ->
 	if $location.url() is '/logout'
+		security.clearAccessToken()
 		$http.get($scope.erpSettings.apiHost+'/accounts/logout')
 		.success ->
 			console.log 'logout'
@@ -89,8 +90,6 @@ erpControllers.controller 'LoginCtrl', ['$scope', '$http', 'security','$routePar
 			console.log 'error'
 		.finally ()->
 			console.log 'finally'
-		security.saveCookie()
-		# add token to cookie. Need a security service in which can get and set the token.
 	return
 ]
 

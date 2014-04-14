@@ -34,7 +34,8 @@ erpApp.config(['$routeProvider',($routeProvider) ->
 	.otherwise redirectTo: '/home'
 ])
 
-erpApp.run ['$rootScope', '$location','$log','$http','erpSettings','Restangular', ($rootScope, $location,$log,$http,erpSettings,Restangular) ->
+erpApp.run ['$rootScope', '$location','$log','$http','erpSettings','Restangular','security', ($rootScope, $location,$log,$http,erpSettings,Restangular,security) ->
+	security.restoreToken()
 	$http
 	.get erpSettings.apiHost 
 	.success (data)->
