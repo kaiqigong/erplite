@@ -5,7 +5,7 @@ angular.module 'contactModule'
 	_syncTimeDict:{}
 	_contactList:[]
 	_retrieveInstance: (id, data) ->
-		instance = this._pool[id]
+		instance = thids._pool[id]
 		if instance?
 			instance.setData(data)
 		else

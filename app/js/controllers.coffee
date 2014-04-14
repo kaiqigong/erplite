@@ -69,15 +69,13 @@ erpControllers.controller 'LoginCtrl', ['$scope', '$http', 'security','$routePar
 			console.log 'logout'
 	$scope.rememberMe = false
 	$scope.login = () ->
-		loginParam = "csrfmiddlewaretoken="+security.getCSRF() +
-		"&username=" + $scope.username +
-		"&password=" + $scope.password # security.encrypt($scope.password)"
-		$http.post($scope.erpSettings.apiHost+'/accounts/login',loginParam,{headers: {
-		'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
+		loginParam = 
+			username:$scope.username
+			password:$scope.password
+		$http.post($scope.erpSettings.apiHost+'/login/',loginParam)
 		.success (data)->
 			console.log data # TODO: crawl the user name in dom html
-			result = angular.element data
-			token = result.find("#code").text()
+			token = data.token
 			headers=
 				'Authorization': token
 			security.setHttpHeader headers

@@ -8,7 +8,7 @@
     '$cookies', '$http', function($cookies, $http) {
       return {
         setHttpHeader: function(header) {
-          return $http.defaults.headers.common.Authorization = header.Authorization;
+          return $http.defaults.headers.common.Authorization = "Token " + header.Authorization;
         },
         saveCookie: function() {
           return $cookies.test = "test";
