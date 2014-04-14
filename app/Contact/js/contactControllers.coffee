@@ -106,6 +106,7 @@ angular.module 'contactModule'
 		newContact.createdBy = $scope.contact.createdBy
 		newContact.modifiedBy = 'cage'
 		newContact.description = $scope.contact.description
+		newContact.data=$scope.contact.data.url
 
 		newContactDeffered = $q.defer()
 		promises.push newContactDeffered

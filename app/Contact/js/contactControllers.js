@@ -112,6 +112,7 @@
         newContact.createdBy = $scope.contact.createdBy;
         newContact.modifiedBy = 'cage';
         newContact.description = $scope.contact.description;
+        newContact.data = $scope.contact.data.url;
         newContactDeffered = $q.defer();
         promises.push(newContactDeffered);
         newContact.update(function(data) {
