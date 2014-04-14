@@ -130,7 +130,7 @@ INSTALLED_APPS = (
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'AppToken',
+    'Accounts',
     'Contacts',
 )
 
