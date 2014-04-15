@@ -39,7 +39,7 @@ angular.module 'contactModule'
 	, null
 
 ]
-.controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase', ($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase) ->
+.controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase','Restangular', ($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase,Restangular) ->
 	$scope.progressBar.start()
 	$scope.progressBar.set 50
 	$scope.backUrl = "#/contact"
@@ -82,38 +82,20 @@ angular.module 'contactModule'
 		$scope.progressBar.set(20)
 
 		# update data
-		updatedContactDataDeffered = $q.defer()
-		promises.push updatedContactDataDeffered
-		updatedContactData = contactManager.initContactData()
-		updatedContactData.url = $scope.contact.data.url
-		updatedContactData.contact = $scope.contact.data.contact
-		updatedContactData.createdBy = $scope.contact.data.createdBy
-		updatedContactData.modifiedBy = 'cage' # TODO hard code
+		if not $scope.contact.data?
+			$scope.contact.dataObj = {}
+			console.log 1
 		for contactData in $scope.contactDatas when contactData.key in ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile', 'fax', 'origin', 'email', 'address', 'birthday', 'region', 'website', 'qq', 'weibo', 'im' ]
 			do (contactData) ->
-				updatedContactData[contactData.key] = contactData.value
-
-		updatedContactData.update (data) ->
-			updatedContactDataDeffered.resolve data
-		, (error) ->
-			updatedContactDataDeffered.reject error
+				$scope.contact.dataObj[contactData.key] = contactData.value
+		if not $scope.contact.data?
+			#post
+			promises.push Restangular.all("contactdata").post($scope.contact.dataObj)
+		else
+			promises.push $scope.contact.dataObj.put()
 
 		# prepare description and updata contact
-		newContact = new ModelBase()
-		newContact.url = $scope.contact.url
-		newContact.avator = $scope.contact.avator
-		newContact.name = $scope.contact.name
-		newContact.createdBy = $scope.contact.createdBy
-		newContact.modifiedBy = 'cage'
-		newContact.description = $scope.contact.description
-		newContact.data=$scope.contact.data.url
-
-		newContactDeffered = $q.defer()
-		promises.push newContactDeffered
-		newContact.update (data) ->
-		    newContactDeffered.resolve data
-		, (error) ->
-			newContactDeffered.reject()
+		promises.push $scope.contact.put()
 
 		# should reload after all the data updated.
 		$q.all promises 
@@ -121,18 +103,20 @@ angular.module 'contactModule'
 
 	$scope.reload = () ->
 		promise = contactManager.loadContact $routeParams.id
-		promise.then (contactData) ->
-			$scope.contact = contactData
+		promise.then (contact) ->
+			$scope.contact = contact
 			$scope.contactDatas = []
 			$scope.unsetFields = []
 			dataFields = []
-			for own propName, propValue of contactData.data when propName not in ["id","contactname","contact","url","createdDate","createdBy","modifiedDate","modifiedBy"]
+			for own propName, propValue of contact.dataObj when propName in ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile', 'fax', 'origin', 'email', 'address', 'birthday', 'region', 'website', 'qq', 'weibo', 'im' ]
 				dataFields.push propName
 				if propValue? and propValue isnt ""
 					$scope.contactDatas.push {key:propName,value:propValue}
 				else
 					$scope.unsetFields.push propName
-			$scope.title = contactData.name
+			if not contact.dataObj
+				$scope.unsetFields = ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile', 'fax', 'origin', 'email', 'address', 'birthday', 'region', 'website', 'qq', 'weibo', 'im' ]
+			$scope.title = contact.name
 			$scope.progressBar.end()
 		, (reason) ->
 			$scope.progressBar.end()

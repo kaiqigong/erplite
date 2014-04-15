@@ -42,7 +42,13 @@ erpApp.run ['$rootScope', '$location','$log','$http','erpSettings','Restangular'
 		$rootScope.apimap = data
 	.error (error)->
 		$log.log error
+
+	# Restangular settings
 	Restangular.setBaseUrl(erpSettings.apiHost)
+	Restangular.configuration.requestSuffix = '/';
+	Restangular.setRestangularFields
+		selfLink: 'url'
+
 	$rootScope
 	.$on '$routeChangeSuccess', (event, next, current)->
 		#if (true) $location.url("/login");

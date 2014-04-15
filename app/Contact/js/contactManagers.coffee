@@ -17,24 +17,19 @@ angular.module 'contactModule'
 		return this._pool[id]
 	_load: (id, deferred) ->
 		scope = this
-		$http.get $rootScope.apimap.contact + id 
-		.success (data) ->
-			contact = new Contact data
-			# better resolve url in contactdetail
-			contact.url = $rootScope.apimap.contact + id
+		Restangular.one('contacts',id).get().then (contact)->
+			console.log contact
 			if contact.data?
-				contactDataUrl = contact.data
-				$http.get contactDataUrl
-					.success (contactData)->
-						contact.data = contactData
-						contact.data.url = contactDataUrl
-						deferred.resolve contact
-					.error (data,status) ->
-						deferred.reject {"data":data,"status":status}
-			else 
+				Restangular.oneUrl('contactdata',contact.data).get().then (contactData)->
+					contact.dataObj=contactData
+					deferred.resolve contact
+				, (response)->
+					deferred.reject response
+			else
 				deferred.resolve contact
-		.error (data,status) ->
-			deferred.reject {"data":data,"status":status}
+		, (response)->
+			console.log response
+			deferred.reject response
 		return
 
 	# Public Methods
@@ -91,27 +86,6 @@ angular.module 'contactModule'
 
 	initContactData: (contactData) ->
 		new ContactData contactData
-
-	# Use this function in order to get instances of all the contacts
-	loadAllContact: () ->
-		deferred = $q.defer()
-		scope = this
-		$http.get $rootScope.apimap.contact
-		.success (contactsArray) ->
-			contacts = []
-			contactsArray.forEach (contactData) ->
-				# todo: remove this code
-				if contactData.id?
-				else
-					contactData.id =contacts.length+1
-					contact = scope._retrieveInstance contactData.id, contactData
-					contacts.push contact
-			deferred.resolve contacts
-
-		.error (data,status) ->
-			deferred.reject {"data":data,"status":status}
-		
-		return deferred.promise
 
 	# This function is useful when we got somehow the contact data and we wish to store it or update the pool and get a contact instance in return
 	setContact: (contactData) ->

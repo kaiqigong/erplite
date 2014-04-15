@@ -52,6 +52,10 @@
         return $log.log(error);
       });
       Restangular.setBaseUrl(erpSettings.apiHost);
+      Restangular.configuration.requestSuffix = '/';
+      Restangular.setRestangularFields({
+        selfLink: 'url'
+      });
       $rootScope.$on('$routeChangeSuccess', function(event, next, current) {});
       return $rootScope.$on('errorHappened', function(event, status, next) {
         switch (status) {

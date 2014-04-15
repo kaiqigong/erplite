@@ -45,7 +45,7 @@
       }, null);
     }
   ]).controller('ContactDetailCtrl', [
-    '$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase', function($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase) {
+    '$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase', 'Restangular', function($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase, Restangular) {
       var dataFields;
       $scope.progressBar.start();
       $scope.progressBar.set(50);
@@ -79,63 +79,46 @@
         return $scope.contactDatas.push(newData);
       };
       $scope.save = function() {
-        var contactData, newContact, newContactDeffered, promises, updatedContactData, updatedContactDataDeffered, _i, _len, _ref, _ref1;
+        var contactData, promises, _i, _len, _ref, _ref1;
         $log.log($scope.contact);
         promises = [];
         $scope.progressBar.start();
         $scope.progressBar.set(20);
-        updatedContactDataDeffered = $q.defer();
-        promises.push(updatedContactDataDeffered);
-        updatedContactData = contactManager.initContactData();
-        updatedContactData.url = $scope.contact.data.url;
-        updatedContactData.contact = $scope.contact.data.contact;
-        updatedContactData.createdBy = $scope.contact.data.createdBy;
-        updatedContactData.modifiedBy = 'cage';
+        if ($scope.contact.data == null) {
+          $scope.contact.dataObj = {};
+          console.log(1);
+        }
         _ref = $scope.contactDatas;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           contactData = _ref[_i];
           if ((_ref1 = contactData.key) === 'surname' || _ref1 === 'givenname' || _ref1 === 'company' || _ref1 === 'department' || _ref1 === 'title' || _ref1 === 'phone' || _ref1 === 'mobile' || _ref1 === 'fax' || _ref1 === 'origin' || _ref1 === 'email' || _ref1 === 'address' || _ref1 === 'birthday' || _ref1 === 'region' || _ref1 === 'website' || _ref1 === 'qq' || _ref1 === 'weibo' || _ref1 === 'im') {
             (function(contactData) {
-              return updatedContactData[contactData.key] = contactData.value;
+              return $scope.contact.dataObj[contactData.key] = contactData.value;
             })(contactData);
           }
         }
-        updatedContactData.update(function(data) {
-          return updatedContactDataDeffered.resolve(data);
-        }, function(error) {
-          return updatedContactDataDeffered.reject(error);
-        });
-        newContact = new ModelBase();
-        newContact.url = $scope.contact.url;
-        newContact.avator = $scope.contact.avator;
-        newContact.name = $scope.contact.name;
-        newContact.createdBy = $scope.contact.createdBy;
-        newContact.modifiedBy = 'cage';
-        newContact.description = $scope.contact.description;
-        newContact.data = $scope.contact.data.url;
-        newContactDeffered = $q.defer();
-        promises.push(newContactDeffered);
-        newContact.update(function(data) {
-          return newContactDeffered.resolve(data);
-        }, function(error) {
-          return newContactDeffered.reject();
-        });
+        if ($scope.contact.data == null) {
+          promises.push(Restangular.all("contactdata").post($scope.contact.dataObj));
+        } else {
+          promises.push($scope.contact.dataObj.put());
+        }
+        promises.push($scope.contact.put());
         return $q.all(promises).then($scope.reload);
       };
       $scope.reload = function() {
         var promise;
         promise = contactManager.loadContact($routeParams.id);
-        return promise.then(function(contactData) {
+        return promise.then(function(contact) {
           var propName, propValue, _ref;
-          $scope.contact = contactData;
+          $scope.contact = contact;
           $scope.contactDatas = [];
           $scope.unsetFields = [];
           dataFields = [];
-          _ref = contactData.data;
+          _ref = contact.dataObj;
           for (propName in _ref) {
             if (!__hasProp.call(_ref, propName)) continue;
             propValue = _ref[propName];
-            if (!(propName !== "id" && propName !== "contactname" && propName !== "contact" && propName !== "url" && propName !== "createdDate" && propName !== "createdBy" && propName !== "modifiedDate" && propName !== "modifiedBy")) {
+            if (!(propName === 'surname' || propName === 'givenname' || propName === 'company' || propName === 'department' || propName === 'title' || propName === 'phone' || propName === 'mobile' || propName === 'fax' || propName === 'origin' || propName === 'email' || propName === 'address' || propName === 'birthday' || propName === 'region' || propName === 'website' || propName === 'qq' || propName === 'weibo' || propName === 'im')) {
               continue;
             }
             dataFields.push(propName);
@@ -148,7 +131,10 @@
               $scope.unsetFields.push(propName);
             }
           }
-          $scope.title = contactData.name;
+          if (!contact.dataObj) {
+            $scope.unsetFields = ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile', 'fax', 'origin', 'email', 'address', 'birthday', 'region', 'website', 'qq', 'weibo', 'im'];
+          }
+          $scope.title = contact.name;
           return $scope.progressBar.end();
         }, function(reason) {
           $scope.progressBar.end();

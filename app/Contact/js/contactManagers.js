@@ -8,7 +8,7 @@
         _contactList: [],
         _retrieveInstance: function(id, data) {
           var instance;
-          instance = this._pool[id];
+          instance = thids._pool[id];
           if (instance != null) {
             instance.setData(data);
           } else {
@@ -24,30 +24,21 @@
         _load: function(id, deferred) {
           var scope;
           scope = this;
-          $http.get($rootScope.apimap.contact + id).success(function(data) {
-            var contact, contactDataUrl;
-            contact = new Contact(data);
-            contact.url = $rootScope.apimap.contact + id;
+          Restangular.one('contacts', id).get().then(function(contact) {
+            console.log(contact);
             if (contact.data != null) {
-              contactDataUrl = contact.data;
-              return $http.get(contactDataUrl).success(function(contactData) {
-                contact.data = contactData;
-                contact.data.url = contactDataUrl;
+              return Restangular.oneUrl('contactdata', contact.data).get().then(function(contactData) {
+                contact.dataObj = contactData;
                 return deferred.resolve(contact);
-              }).error(function(data, status) {
-                return deferred.reject({
-                  "data": data,
-                  "status": status
-                });
+              }, function(response) {
+                return deferred.reject(response);
               });
             } else {
               return deferred.resolve(contact);
             }
-          }).error(function(data, status) {
-            return deferred.reject({
-              "data": data,
-              "status": status
-            });
+          }, function(response) {
+            console.log(response);
+            return deferred.reject(response);
           });
         },
         loadContact: function(id) {
@@ -113,32 +104,6 @@
         },
         initContactData: function(contactData) {
           return new ContactData(contactData);
-        },
-        loadAllContact: function() {
-          var deferred, scope;
-          deferred = $q.defer();
-          scope = this;
-          $http.get($rootScope.apimap.contact).success(function(contactsArray) {
-            var contacts;
-            contacts = [];
-            contactsArray.forEach(function(contactData) {
-              var contact;
-              if (contactData.id != null) {
-
-              } else {
-                contactData.id = contacts.length + 1;
-                contact = scope._retrieveInstance(contactData.id, contactData);
-                return contacts.push(contact);
-              }
-            });
-            return deferred.resolve(contacts);
-          }).error(function(data, status) {
-            return deferred.reject({
-              "data": data,
-              "status": status
-            });
-          });
-          return deferred.promise;
         },
         setContact: function(contactData) {
           var contact, scope;

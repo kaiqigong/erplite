@@ -20,7 +20,7 @@ class ContactDataSerializer(serializers.ModelSerializer):
 	contactname = serializers.Field(source='contact.name')
 	class Meta:
 		model = ContactData
-		fields = ('contact','contactname','surname','givenname','company','department','title','phone','mobile','fax','origin','email','address','birthday','region','website','qq','weibo','im', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy') 
+		fields = ('id', 'contact','contactname','surname','givenname','company','department','title','phone','mobile','fax','origin','email','address','birthday','region','website','qq','weibo','im', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy') 
 
 class ContactTagSerializer(serializers.ModelSerializer):
 	contactname = serializers.Field(source='contact.name')
