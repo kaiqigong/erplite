@@ -3,6 +3,7 @@ erpApp = angular.module 'erpApp', [
     'restangular'
     'erpAnimations'
     'erpDirectives'
+    'angularFileUpload'
     'erpControllers'
     'erpServices'
     'erpFilters'
@@ -11,7 +12,7 @@ erpApp = angular.module 'erpApp', [
 
 erpApp.constant 'erpSettings', {apiHost:'http://localhost:8000'}
 
-erpApp.config(['$routeProvider',($routeProvider) -> 
+erpApp.config ['$routeProvider', ($routeProvider) -> 
 	$routeProvider
 	.when '/home',
 		{templateUrl: 'views/home.html',controller: 'HomeCtrl'}
@@ -32,7 +33,7 @@ erpApp.config(['$routeProvider',($routeProvider) ->
 	.when '/404', 
 		{templateUrl: 'views/404.html',controller: '404Ctrl'}
 	.otherwise redirectTo: '/home'
-])
+]
 
 erpApp.run ['$rootScope', '$location','$log','$http','erpSettings','Restangular','security', ($rootScope, $location,$log,$http,erpSettings,Restangular,security) ->
 	security.restoreToken()
@@ -45,9 +46,9 @@ erpApp.run ['$rootScope', '$location','$log','$http','erpSettings','Restangular'
 
 	# Restangular settings
 	Restangular.setBaseUrl(erpSettings.apiHost)
-	Restangular.configuration.requestSuffix = '/';
 	Restangular.setRestangularFields
 		selfLink: 'url'
+	Restangular.setRequestSuffix '/'
 
 	$rootScope
 	.$on '$routeChangeSuccess', (event, next, current)->

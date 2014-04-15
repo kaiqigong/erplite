@@ -39,7 +39,7 @@ angular.module 'contactModule'
 	, null
 
 ]
-.controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase','Restangular', ($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase,Restangular) ->
+.controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase','Restangular', '$upload', ($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase,Restangular,$upload) ->
 	$scope.progressBar.start()
 	$scope.progressBar.set 50
 	$scope.backUrl = "#/contact"
@@ -84,18 +84,20 @@ angular.module 'contactModule'
 		# update data
 		if not $scope.contact.data?
 			$scope.contact.dataObj = {}
-			console.log 1
+			$scope.contact.dataObj.createdBy = 'Cage'
+			$scope.contact.dataObj.modifiedBy = 'Cage' # Todo: auto generate in DB 
 		for contactData in $scope.contactDatas when contactData.key in ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile', 'fax', 'origin', 'email', 'address', 'birthday', 'region', 'website', 'qq', 'weibo', 'im' ]
 			do (contactData) ->
 				$scope.contact.dataObj[contactData.key] = contactData.value
 		if not $scope.contact.data?
 			#post
-			promises.push Restangular.all("contactdata").post($scope.contact.dataObj)
+			$scope.contact.dataObj.contact = $scope.contact.id
+			promises.push (Restangular.all("contactdata").post($scope.contact.dataObj).then (contactdata)->
+				console.log contactdata
+				)
 		else
 			promises.push $scope.contact.dataObj.put()
-
-		# prepare description and updata contact
-		promises.push $scope.contact.put()
+			promises.push $scope.contact.put()
 
 		# should reload after all the data updated.
 		$q.all promises 
@@ -146,8 +148,31 @@ angular.module 'contactModule'
 		.success (data, status) ->
 			$scope.contact.links = data
 
-	$scope.reload()
+	$scope.onFileSelect= ($files)->
+		# $files: an array of files selected, each file has name, size, and type.
+		for file in $files
+			$scope.upload = $upload.upload
+				url: '/files/upload/', #upload.php script, node.js route, or servlet url
+				# method: POST or PUT,
+				# headers: {'header-key': 'header-value'},
+				# withCredentials: true,
+				data: {myObj: $scope.myModelObj},
+				file: file
+				# set the file formData name ('Content-Desposition'). Default is 'file' 
+				fileFormDataName: 'file', # or a list of names for multiple files (html5).
+				# customize how data is added to formData. See #40#issuecomment-28612000 for sample code
+				# formDataAppender: function(formData, key, val){}
+			.progress (evt)->
+				console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+			.success (data, status, headers, config) ->
+				# file is uploaded successfully
+				$scope.contact.avator = '/'+data
+			.error (response)->
+				console.log response
+			#.then(success, error, progress); 
+			#.xhr(function(xhr){xhr.upload.addEventListener(...)})// access and attach any event listener to XMLHttpRequest.
 
+	$scope.reload()
 ]
 .controller 'NewContactCtrl', ['$scope', '$http', '$log', ($scope, $http, $log) ->
 	$scope.backUrl = "#/contact"

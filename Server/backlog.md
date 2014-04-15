@@ -31,3 +31,10 @@ migrate db<br>
 register user in page /account and get Authentication Token.<br>
 For clients to authenticate, the token key should be included in the Authorization HTTP header. The key should be prefixed by the string literal "Token", with whitespace separating the two strings. For example:<br>
 Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
+
+###update 2014/04/15
+**FileUpload**
+Added FileUpload module.  
+Added url to the media folder in root path. The folder is igonred in github.  
+```post "files/upload" file:yourfile```  
+File will be saved to media/files/ramdonpath/filename  

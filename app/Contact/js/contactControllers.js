@@ -45,7 +45,7 @@
       }, null);
     }
   ]).controller('ContactDetailCtrl', [
-    '$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase', 'Restangular', function($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase, Restangular) {
+    '$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase', 'Restangular', '$upload', function($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase, Restangular, $upload) {
       var dataFields;
       $scope.progressBar.start();
       $scope.progressBar.set(50);
@@ -86,7 +86,8 @@
         $scope.progressBar.set(20);
         if ($scope.contact.data == null) {
           $scope.contact.dataObj = {};
-          console.log(1);
+          $scope.contact.dataObj.createdBy = 'Cage';
+          $scope.contact.dataObj.modifiedBy = 'Cage';
         }
         _ref = $scope.contactDatas;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -98,11 +99,14 @@
           }
         }
         if ($scope.contact.data == null) {
-          promises.push(Restangular.all("contactdata").post($scope.contact.dataObj));
+          $scope.contact.dataObj.contact = $scope.contact.id;
+          promises.push(Restangular.all("contactdata").post($scope.contact.dataObj).then(function(contactdata) {
+            return console.log(contactdata);
+          }));
         } else {
           promises.push($scope.contact.dataObj.put());
+          promises.push($scope.contact.put());
         }
-        promises.push($scope.contact.put());
         return $q.all(promises).then($scope.reload);
       };
       $scope.reload = function() {
@@ -165,6 +169,29 @@
         return $http.get('../mockData/links.json').success(function(data, status) {
           return $scope.contact.links = data;
         });
+      };
+      $scope.onFileSelect = function($files) {
+        var file, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = $files.length; _i < _len; _i++) {
+          file = $files[_i];
+          _results.push($scope.upload = $upload.upload({
+            url: '/files/upload/',
+            data: {
+              myObj: $scope.myModelObj
+            },
+            file: file,
+            fileFormDataName: 'file'
+          }).progress(function(evt) {
+            return console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+          }).success(function(data, status, headers, config) {
+            $scope.contact.avator = '/' + data;
+            return console.log(data);
+          }).error(function(response) {
+            return console.log(response);
+          }));
+        }
+        return _results;
       };
       return $scope.reload();
     }

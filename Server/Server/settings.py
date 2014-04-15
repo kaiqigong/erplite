@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'Accounts',
     'Contacts',
+    'FileUpload',
 )
 
 REST_FRAMEWORK = {

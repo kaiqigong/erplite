@@ -2,7 +2,7 @@
 (function() {
   var erpApp;
 
-  erpApp = angular.module('erpApp', ['ngRoute', 'restangular', 'erpAnimations', 'erpDirectives', 'erpControllers', 'erpServices', 'erpFilters', 'contactModule', 'ui.bootstrap']);
+  erpApp = angular.module('erpApp', ['ngRoute', 'restangular', 'erpAnimations', 'erpDirectives', 'angularFileUpload', 'erpControllers', 'erpServices', 'erpFilters', 'contactModule', 'ui.bootstrap']);
 
   erpApp.constant('erpSettings', {
     apiHost: 'http://localhost:8000'
@@ -52,10 +52,10 @@
         return $log.log(error);
       });
       Restangular.setBaseUrl(erpSettings.apiHost);
-      Restangular.configuration.requestSuffix = '/';
       Restangular.setRestangularFields({
         selfLink: 'url'
       });
+      Restangular.setRequestSuffix('/');
       $rootScope.$on('$routeChangeSuccess', function(event, next, current) {});
       return $rootScope.$on('errorHappened', function(event, status, next) {
         switch (status) {

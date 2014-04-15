@@ -19,3 +19,5 @@ _yardoc
 doc/
 *pyc
 Server/Contacts/migrations/*
+# ignore user file path
+media
