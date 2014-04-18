@@ -14,7 +14,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import viewsets
 
-# from rest_framework_extensions.mixins import DetailSerializerMixin
+from rest_framework_extensions.mixins import DetailSerializerMixin
 
 @api_view(('GET',))
 def api_root(request, format=None):
@@ -40,11 +40,12 @@ def api_root(request, format=None):
 # 	queryset = Contacts.objects.all()
 # 	serializer_class = ContactsDetailSerializer
 
-class ContactViewSet(viewsets.ModelViewSet):
+class ContactViewSet(DetailSerializerMixin, viewsets.ModelViewSet):
 	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)
 	queryset = Contacts.objects.all()
 	serializer_class = ContactsListSerializer
+    serializer_detail_class = ContactsDetailSerializer
 
 class ContactTagViewSet(viewsets.ModelViewSet):
 	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)

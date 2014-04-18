@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'Accounts',
     'Contacts',
     'FileUpload',
+    'rest_framework_extensions',
 )
 
 REST_FRAMEWORK = {
