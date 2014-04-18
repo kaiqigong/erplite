@@ -14,6 +14,8 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import viewsets
 
+# from rest_framework_extensions.mixins import DetailSerializerMixin
+
 @api_view(('GET',))
 def api_root(request, format=None):
     return Response({
@@ -23,42 +25,26 @@ def api_root(request, format=None):
         'contactlink': reverse('contactlink-list', request=request, format=format),
     })
 
-class ContactList(generics.ListCreateAPIView):
-	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
-	permission_classes = (IsAuthenticated,)
+# class ContactList(generics.ListCreateAPIView):
+# 	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
+# 	permission_classes = (IsAuthenticated,)
 
-	queryset = Contacts.objects.all()
-	serializer_class = ContactsListSerializer
-	filter_class = ContactsFilter
+# 	queryset = Contacts.objects.all()
+# 	serializer_class = ContactsListSerializer
+# 	filter_class = ContactsFilter
 
-class ContactDetail(generics.RetrieveUpdateDestroyAPIView):
-	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
-	permission_classes = (IsAuthenticated,)
-
-	queryset = Contacts.objects.all()
-	serializer_class = ContactsDetailSerializer
-
-# class ContactViewSet(viewsets.ModelViewSet):
+# class ContactDetail(generics.RetrieveUpdateDestroyAPIView):
 # 	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
 # 	permission_classes = (IsAuthenticated,)
 
 # 	queryset = Contacts.objects.all()
 # 	serializer_class = ContactsDetailSerializer
 
-
-# class ContactTagList(generics.ListCreateAPIView):
-# 	authentication_classes = (TokenAuthentication, BasicAuthentication)
-# 	permission_classes = (IsAuthenticated,)
-
-# 	queryset = ContactTag.objects.all()
-# 	serializer_class = ContactTagSerializer
-
-# class ContactTagDetail(generics.RetrieveUpdateDestroyAPIView):
-# 	authentication_classes = (TokenAuthentication, BasicAuthentication)
-# 	permission_classes = (IsAuthenticated,)
-
-# 	queryset = ContactTag.objects.all()
-# 	serializer_class = ContactTagSerializer
+class ContactViewSet(viewsets.ModelViewSet):
+	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	permission_classes = (IsAuthenticated,)
+	queryset = Contacts.objects.all()
+	serializer_class = ContactsListSerializer
 
 class ContactTagViewSet(viewsets.ModelViewSet):
 	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
