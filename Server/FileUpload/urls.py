@@ -3,5 +3,5 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from Accounts import views
 
 urlpatterns = patterns('FileUpload.views',
-    url(r'^upload/$', 'upload_file',name="upload_file"),
+	url(r'^upload/$', 'upload_file',name="upload_file"),
 )

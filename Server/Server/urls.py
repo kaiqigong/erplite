@@ -12,13 +12,13 @@ router.register(r'ContactData', views.ContactDataViewSet)
 router.register(r'ContactLink', views.ContactLinkViewSet)
 
 urlpatterns = patterns('',
-    (r'^app/(?P<path>.*)','django.views.static.serve',{'document_root':'app'}),
-    (r'^media/(?P<path>.*)','django.views.static.serve',{'document_root':'media'}),
-    (r'^mockData/(?P<path>.*)','django.views.static.serve',{'document_root':'mockData'}),
-    url(r'^admin/', include(admin.site.urls)),
-    # url(r'^', include('Contacts.urls')),
-    url(r'^', include(router.urls)),
-    url(r'^accounts/', include('Accounts.urls')),
-    url(r'^files/', include('FileUpload.urls')),
-    url(r'^login/', 'rest_framework.authtoken.views.obtain_auth_token'),
+	(r'^app/(?P<path>.*)','django.views.static.serve',{'document_root':'app'}),
+	(r'^media/(?P<path>.*)','django.views.static.serve',{'document_root':'media'}),
+	(r'^mockData/(?P<path>.*)','django.views.static.serve',{'document_root':'mockData'}),
+	url(r'^admin/', include(admin.site.urls)),
+	# url(r'^', include('Contacts.urls')),
+	url(r'^', include(router.urls)),
+	url(r'^accounts/', include('Accounts.urls')),
+	url(r'^files/', include('FileUpload.urls')),
+	url(r'^login/', 'rest_framework.authtoken.views.obtain_auth_token'),
   )

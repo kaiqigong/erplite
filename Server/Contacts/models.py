@@ -25,7 +25,7 @@ class ContactTag(models.Model):
 		return '%s' % (self.tag)
 
 class ContactData(models.Model):
-	# surname givenname company department title phone mobile fax origin email address birthday region website qq weibo im 
+	# surname givenname company department title phone mobile fax origin email address birthday region website qq weibo im
 	contact = models.OneToOneField('Contacts', related_name='data')
 	surname = models.CharField(max_length=255, blank=True)
 	givenname = models.CharField(max_length=255, blank=True)
