@@ -18,7 +18,7 @@ angular.module 'contactModule'
 			if not query?
 				return true
 			return item.name.indexOf(query)  >= 0 or item.description.indexOf(query) >= 0
-	
+
 	$scope.progressBar.start()
 	$scope.progressBar.set 50
 	promise = contactManager.loadContactList()
@@ -34,19 +34,19 @@ angular.module 'contactModule'
 		else if reason.status is 401 or reason.status is 403
 			$location.url "/login?query=" + encodeURIComponent($location.url())
 			$location.replace()
-		else 
+		else
 			$log.log("Error Code: " + reason.status + ", Message: " + reason.data)
 	, null
 
 ]
-.controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase','Restangular', '$upload', ($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase,Restangular,$upload) ->
+.controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase','Restangular', '$upload', '$modal', ($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase,Restangular,$upload,$modal) ->
 	$scope.progressBar.start()
 	$scope.progressBar.set 50
 	$scope.backUrl = "#/contact"
 	$scope.contact = null
 	$scope.showToolbar = true
 	$scope.showRefresh = true
-	$scope.newLink = 
+	$scope.newLink =
 		type: "Supplier"
 		name: ""
 	# used to bind the data fields to view
@@ -57,7 +57,7 @@ angular.module 'contactModule'
 
 	# unset data fields
 	$scope.unsetFields=[]
-	
+
 	$scope.changeType = (type) ->
 		$scope.newLink.type = type
 
@@ -65,14 +65,14 @@ angular.module 'contactModule'
 		$scope.newLink.modifiedDate = new Date()
 		$scope.contact.links.push angular.copy $scope.newLink
 		# $http.post('/someUrl',$scope.newLink).success()
-		$scope.newLink = 
+		$scope.newLink =
 			type: "Supplier"
 			name: ""
 
 	$scope.addData = () ->
 		newData = angular.copy $scope.newData
 		$scope.newData.key = ""
-		$scope.newData.value = "" 
+		$scope.newData.value = ""
 		$scope.contactDatas.push newData
 
 	$scope.save = () ->
@@ -85,22 +85,22 @@ angular.module 'contactModule'
 		if not $scope.contact.data?
 			$scope.contact.dataObj = {}
 			$scope.contact.dataObj.createdBy = 'Cage'
-			$scope.contact.dataObj.modifiedBy = 'Cage' # Todo: auto generate in DB 
+			$scope.contact.dataObj.modifiedBy = 'Cage' # Todo: auto generate in DB
 		for contactData in $scope.contactDatas when contactData.key in ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile', 'fax', 'origin', 'email', 'address', 'birthday', 'region', 'website', 'qq', 'weibo', 'im' ]
 			do (contactData) ->
 				$scope.contact.dataObj[contactData.key] = contactData.value
 		if not $scope.contact.data?
 			#post
 			$scope.contact.dataObj.contact = $scope.contact.id
-			promises.push (Restangular.all("contactdata").post($scope.contact.dataObj).then (contactdata)->
+			promises.push (Restangular.all("ContactData").post($scope.contact.dataObj).then (contactdata)->
 				console.log contactdata
-				)
+			)
 		else
 			promises.push $scope.contact.dataObj.put()
 			promises.push $scope.contact.put()
 
 		# should reload after all the data updated.
-		$q.all promises 
+		$q.all promises
 		.then $scope.reload
 
 	$scope.reload = () ->
@@ -126,7 +126,7 @@ angular.module 'contactModule'
 				$rootScope.$broadcast 'errorHappened', reason.status, $location.url()
 			else if reason.status is 401 or reason.status is 403
 				$location.url "/login"
-			else 
+			else
 				$log.log "Error Code: " + reason.status + ", Message: " + reason.data
 		, null
 
@@ -148,35 +148,21 @@ angular.module 'contactModule'
 		.success (data, status) ->
 			$scope.contact.links = data
 
-	$scope.onFileSelect= ($files)->
-		# $files: an array of files selected, each file has name, size, and type.
-		for file in $files
-			$scope.upload = $upload.upload
-				url: '/files/upload/', #upload.php script, node.js route, or servlet url
-				# method: POST or PUT,
-				# headers: {'header-key': 'header-value'},
-				# withCredentials: true,
-				data: {myObj: $scope.myModelObj},
-				file: file
-				# set the file formData name ('Content-Desposition'). Default is 'file' 
-				fileFormDataName: 'file', # or a list of names for multiple files (html5).
-				# customize how data is added to formData. See #40#issuecomment-28612000 for sample code
-				# formDataAppender: function(formData, key, val){}
-			.progress (evt)->
-				console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-			.success (data, status, headers, config) ->
-				# file is uploaded successfully
-				$scope.contact.avator = '/'+data
-			.error (response)->
-				console.log response
-			#.then(success, error, progress); 
-			#.xhr(function(xhr){xhr.upload.addEventListener(...)})// access and attach any event listener to XMLHttpRequest.
+	$scope.onAvatorClick = ->
+		modalInstance = $modal.open({
+			templateUrl: '../app/views/imageprocess.html',
+			controller: "ImgProcessCtrl"})
+
+		modalInstance.result.then (avatorUrl) ->
+			$scope.contact.avator = avatorUrl
+		, () ->
+			$log.info('Modal dismissed')
 
 	$scope.reload()
 ]
 .controller 'NewContactCtrl', ['$scope', '$http', '$log', ($scope, $http, $log) ->
 	$scope.backUrl = "#/contact"
-	$scope.contact = 
+	$scope.contact =
 		info: {}
 		avator: "./img/default_avatar.png"
 		links: []
@@ -184,7 +170,7 @@ angular.module 'contactModule'
 	$scope.title = "新建联系人"
 	$scope.showToolbar = false
 	$scope.showRefresh = false
-	$scope.newLink = 
+	$scope.newLink =
 		type: "Supplier"
 		name: ""
 	$scope.changeType = (type) ->
@@ -194,7 +180,7 @@ angular.module 'contactModule'
 		$scope.newLink.modifiedDate = new Date()
 		$scope.contact.links.push $scope.newLink
 		# $http.post('/someUrl',$scope.newLink).success()
-		$scope.newLink = 
+		$scope.newLink =
 			type: "Supplier"
 			name: ""
 
