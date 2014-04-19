@@ -24,7 +24,24 @@ def api_root(request, format=None):
 		'contactdata': reverse('contactdata-list', request=request, format=format),
 		'contactlink': reverse('contactlink-list', request=request, format=format),
 	})
+<<<<<<< HEAD
+=======
 
+# class ContactList(generics.ListCreateAPIView):
+# 	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
+# 	permission_classes = (IsAuthenticated,)
+
+# 	queryset = Contacts.objects.all()
+# 	serializer_class = ContactsListSerializer
+# 	filter_class = ContactsFilter
+
+# class ContactDetail(generics.RetrieveUpdateDestroyAPIView):
+# 	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
+# 	permission_classes = (IsAuthenticated,)
+
+# 	queryset = Contacts.objects.all()
+# 	serializer_class = ContactsDetailSerializer
+>>>>>>> FETCH_HEAD
 
 class ContactViewSet(DetailSerializerMixin, viewsets.ModelViewSet):
 	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
@@ -47,6 +64,23 @@ class ContactDataViewSet(viewsets.ModelViewSet):
 	queryset = ContactData.objects.all()
 	serializer_class = ContactDataSerializer
 
+<<<<<<< HEAD
+=======
+# class ContactLinkList(generics.ListCreateAPIView):
+# 	authentication_classes = (TokenAuthentication, BasicAuthentication)
+# 	permission_classes = (IsAuthenticated,)
+
+# 	queryset = ContactLink.objects.all()
+# 	serializer_class = ContactLinkSerializer
+
+# class ContactLinkDetail(generics.RetrieveUpdateDestroyAPIView):
+# 	authentication_classes = (TokenAuthentication, BasicAuthentication)
+# 	permission_classes = (IsAuthenticated,)
+
+# 	queryset = ContactLink.objects.all()
+# 	serializer_class = ContactLinkSerializer
+
+>>>>>>> FETCH_HEAD
 class ContactLinkViewSet(viewsets.ModelViewSet):
 	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)
