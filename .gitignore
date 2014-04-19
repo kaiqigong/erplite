@@ -21,3 +21,9 @@ doc/
 Server/Contacts/migrations/*
 # ignore user file path
 media
+# node packages
+node_modules
+.tmp
+
+#bower components
+app/bower_components

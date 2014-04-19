@@ -23,8 +23,17 @@ python Server/manage.py syncdb
 python Server/manage.py runserver
 ```
 
-open localhost:8000<br>
+##Start Client
+###Install
+We use bower to manage vendor libs
+```
+cd erplite
+npm install
+bower install
+```
 open localhost:8000/app/index.html
+###Run test
+###Build
 
 ## Use CoffeeScript
 install coffeescript
