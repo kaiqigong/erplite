@@ -138,4 +138,55 @@
 
   erpControllers.controller('404Ctrl', ['$scope', '$http', function($scope, $http) {}]);
 
+  erpControllers.controller('ImgProcessCtrl', [
+    '$scope', '$modalInstance', '$upload', function($scope, $modalInstance, $upload) {
+      var files;
+      $scope.avator = "";
+      $scope.step = "Please Choose a Picture";
+      files = null;
+      $scope.onFileSelect = function($files) {
+        var reader;
+        console.log($files);
+        reader = new FileReader();
+        reader.onload = function(event) {
+          $scope.avator = event.target.result;
+          return $scope.$apply();
+        };
+        reader.readAsDataURL($files[0]);
+        $scope.step = "Please Resize the Picture and Save";
+        return files = $files;
+      };
+      $scope.save = function() {
+        var file, _i, _len, _results;
+        if (files == null) {
+          return;
+        }
+        _results = [];
+        for (_i = 0, _len = files.length; _i < _len; _i++) {
+          file = files[_i];
+          _results.push($scope.upload = $upload.upload({
+            url: '/files/upload/',
+            data: {
+              myObj: $scope.myModelObj
+            },
+            file: file,
+            fileFormDataName: 'file'
+          }).progress(function(evt) {
+            return console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+          }).success(function(data, status, headers, config) {
+            $scope.avator = '/' + data;
+            return $modalInstance.close($scope.avator);
+          }).error(function(response) {
+            console.log(response);
+            return $scope.step = response;
+          }));
+        }
+        return _results;
+      };
+      return $scope.cancel = function() {
+        return $modalInstance.dismiss('cancel');
+      };
+    }
+  ]);
+
 }).call(this);

@@ -45,7 +45,7 @@
       }, null);
     }
   ]).controller('ContactDetailCtrl', [
-    '$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase', 'Restangular', '$upload', function($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase, Restangular, $upload) {
+    '$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase', 'Restangular', '$upload', '$modal', function($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase, Restangular, $upload, $modal) {
       var dataFields;
       $scope.progressBar.start();
       $scope.progressBar.set(50);
@@ -100,7 +100,7 @@
         }
         if ($scope.contact.data == null) {
           $scope.contact.dataObj.contact = $scope.contact.id;
-          promises.push(Restangular.all("contactdata").post($scope.contact.dataObj).then(function(contactdata) {
+          promises.push(Restangular.all("ContactData").post($scope.contact.dataObj).then(function(contactdata) {
             return console.log(contactdata);
           }));
         } else {
@@ -170,28 +170,17 @@
           return $scope.contact.links = data;
         });
       };
-      $scope.onFileSelect = function($files) {
-        var file, _i, _len, _results;
-        _results = [];
-        for (_i = 0, _len = $files.length; _i < _len; _i++) {
-          file = $files[_i];
-          _results.push($scope.upload = $upload.upload({
-            url: '/files/upload/',
-            data: {
-              myObj: $scope.myModelObj
-            },
-            file: file,
-            fileFormDataName: 'file'
-          }).progress(function(evt) {
-            return console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-          }).success(function(data, status, headers, config) {
-            $scope.contact.avator = '/' + data;
-            return console.log(data);
-          }).error(function(response) {
-            return console.log(response);
-          }));
-        }
-        return _results;
+      $scope.onAvatorClick = function() {
+        var modalInstance;
+        modalInstance = $modal.open({
+          templateUrl: '../app/views/imageprocess.html',
+          controller: "ImgProcessCtrl"
+        });
+        return modalInstance.result.then(function(avatorUrl) {
+          return $scope.contact.avator = avatorUrl;
+        }, function() {
+          return $log.info('Modal dismissed');
+        });
       };
       return $scope.reload();
     }

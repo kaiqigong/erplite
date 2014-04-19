@@ -1,4 +1,4 @@
-##Erplite
+#Erplite
 This is a ERP for small business.
 
 Use AngularJS for frontend MVC.
@@ -23,10 +23,20 @@ python Server/manage.py syncdb
 python Server/manage.py runserver
 ```
 
-open localhost:8000<br>
+##Start Client
+###Install
+We use bower to manage vendor libs
+```
+cd erplite
+npm install
+bower install
+```
 open localhost:8000/app/index.html
+###Run test
+###Build
 
-## Use CoffeeScript
+##Contribute to Erplite
+###Use CoffeeScript
 install coffeescript
 ```bash
 sudo npm install -g coffee-script
@@ -36,4 +46,7 @@ Add syntax and snippet to TextMate or Subline
 
 build the coffees
 
-
+###Editor Config
+Please follow the indent in `.editorconfig`  
+You may need this [plugin](https://github.com/sindresorhus/editorconfig-sublime) in Sublime.  
+Others please refer to [EditorConfig](http://editorconfig.org/)

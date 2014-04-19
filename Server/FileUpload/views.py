@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseServer
 
 # Imaginary function to handle an uploaded file.
 
-@csrf_exempt 
+@csrf_exempt
 def upload_file(request):
 	if request.method != 'POST':
 		return HttpResponseNotAllowed('Only POST here')
