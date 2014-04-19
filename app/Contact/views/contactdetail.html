@@ -32,7 +32,7 @@
 	        </div>
 	    </div>
     </div>
-    
+
     <!-- basic info -->
     <div class="container">
     <div class="panel panel-info">
@@ -43,8 +43,7 @@
 
   <form class="form-horizontal" role="form">
   <div class="form-group col-xs-12 col-md-6">
-    <img erp-img-loading ng-src="{{contact.avator}}" class="profile-avator">
-    <input type="file" ng-file-select="onFileSelect($files)" >
+    <a ng-click="onAvatorClick()"><img erp-img-loading ng-src="{{contact.avator}}" class="profile-avator"></a>
   </div>
   <div class="form-group col-xs-12 col-md-6" ng-repeat="item in contactDatas">
     <label for="{{item.key}}" class="col-sm-2 control-label">{{item.key}}</label>
@@ -66,13 +65,13 @@
     </div>
     <a class="icon-btn" ng-click="addData()"><span class="glyphicon glyphicon-plus-sign "></span></a>
     {{unsetFields | json}}
-    </form>  
+    </form>
 
   </div>
 
 </div>
     </div>
-    
+
     <!-- references -->
     <div class="container">
     <div class="panel panel-info">
@@ -92,7 +91,7 @@
 		  </div>
 				  <hr>
 		<div class="row">
-		  
+
 		  <div class="col-xs-8 col-sm-8 col-md-8">
 		    <div class="input-group">
       <div class="input-group-btn">
@@ -113,7 +112,7 @@
   </div>
   </div>
   </div>
-  
+
       <!-- comments -->
     <div class="container">
     <div class="panel panel-info">
@@ -133,7 +132,7 @@
 		  </div>
 		  <hr>
 		<div class="row">
-		  
+
 		  <div class="col-xs-8 col-sm-8 col-md-8">
 		    <div class="input-group">
       <div class="input-group-btn">
@@ -154,5 +153,5 @@
   </div>
   </div>
   </div>
-  
+
     </div>

@@ -1,4 +1,4 @@
-angular.module 'contactModule' 
+angular.module 'contactModule'
 .factory 'contactManager', ['$http', '$q', 'Contact','ContactData','erpSettings','$log','$rootScope', 'Restangular',
 ($http, $q, Contact, ContactData, erpSettings,$log,$rootScope,Restangular) ->
 	_pool: {}
@@ -20,7 +20,7 @@ angular.module 'contactModule'
 		Restangular.one('contacts',id).get().then (contact)->
 			console.log contact
 			if contact.data?
-				Restangular.oneUrl('contactdata',contact.data).get().then (contactData)->
+				Restangular.oneUrl('ContactData',contact.data).get().then (contactData)->
 					contact.dataObj=contactData
 					deferred.resolve contact
 				, (response)->
@@ -33,12 +33,12 @@ angular.module 'contactModule'
 		return
 
 	# Public Methods
-	# Use this function in order to get a contact instance by it's id 
+	# Use this function in order to get a contact instance by it's id
 	loadContact : (id) ->
 		deferred = $q.defer()
 		this._load id, deferred
 		return deferred.promise
-	
+
 	loadContactList: ->
 		deferred = $q.defer()
 		Restangular.all('contacts').getList()
@@ -49,7 +49,7 @@ angular.module 'contactModule'
 			console.log response
 			deferred.reject response
 		return deferred.promise
-	
+
 	getPreviousContact : (id)->
 		if _contactList?
 			for index in [0.._contactList.length-1]
@@ -80,7 +80,7 @@ angular.module 'contactModule'
 		contact = this._search id
 		if contact?
 			deferred.resolve contact
-		else 
+		else
 			this._load id, deferred
 		return deferred.promise
 
