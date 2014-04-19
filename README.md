@@ -1,4 +1,4 @@
-##Erplite
+#Erplite
 This is a ERP for small business.
 
 Use AngularJS for frontend MVC.
