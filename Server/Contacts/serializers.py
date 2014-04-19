@@ -20,17 +20,17 @@ class ContactDataSerializer(serializers.ModelSerializer):
 	contactname = serializers.Field(source='contact.name')
 	class Meta:
 		model = ContactData
-		fields = ('id', 'contact','contactname','surname','givenname','company','department','title','phone','mobile','fax','origin','email','address','birthday','region','website','qq','weibo','im', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy') 
+		fields = ('id', 'contact','contactname','surname','givenname','company','department','title','phone','mobile','fax','origin','email','address','birthday','region','website','qq','weibo','im', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')
 
 class ContactTagSerializer(serializers.ModelSerializer):
 	contactname = serializers.Field(source='contact.name')
 	class Meta:
 		model = ContactTag
-		fields = ('contact','contactname','tag', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy') 
+		fields = ('contact','contactname','tag', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')
 
 class ContactLinkSerializer(serializers.ModelSerializer):
 	contactname = serializers.Field(source='contact.name')
 	entityname = serializers.Field(source='entity.name')
 	class Meta:
 		model = ContactLink
-		fields = ('contact','contactname','entityType', 'entity','entityname', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy') 
+		fields = ('contact','contactname','entityType', 'entity','entityname', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')

@@ -9,7 +9,7 @@ class ContactsFilter(django_filters.FilterSet):
 	modifiedDate = django_filters.DateTimeFilter(name='modifiedDate')
 	modifiedBy = django_filters.CharFilter(name='modifiedBy', lookup_type='icontains')
 	tags = django_filters.CharFilter(name='tags__tag', lookup_type='icontains')
-	# surname givenname company department title phone mobile fax origin email address birthday region website qq weibo im 
+	# surname givenname company department title phone mobile fax origin email address birthday region website qq weibo im
 	surname = django_filters.CharFilter(name='data__surname', lookup_type='icontains')
 	givenname = django_filters.CharFilter(name='data__givenname', lookup_type='icontains')
 	department = django_filters.CharFilter(name='data__department', lookup_type='icontains')
