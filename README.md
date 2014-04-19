@@ -35,7 +35,8 @@ open localhost:8000/app/index.html
 ###Run test
 ###Build
 
-## Use CoffeeScript
+##Contribute to Erplite
+###Use CoffeeScript
 install coffeescript
 ```bash
 sudo npm install -g coffee-script
@@ -45,4 +46,7 @@ Add syntax and snippet to TextMate or Subline
 
 build the coffees
 
-
+###Editor Config
+Please follow the indent in `.editorconfig`  
+You may need this [plugin](https://github.com/sindresorhus/editorconfig-sublime) in Sublime.  
+Others please refer to [EditorConfig](http://editorconfig.org/)
