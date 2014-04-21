@@ -29,6 +29,7 @@ def api_root(request, format=None):
 class ContactViewSet(DetailSerializerMixin, viewsets.ModelViewSet):
 	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)
+
 	queryset = Contacts.objects.all()
 	serializer_class = ContactsListSerializer
 	serializer_detail_class = ContactsDetailSerializer
@@ -40,12 +41,26 @@ class ContactTagViewSet(viewsets.ModelViewSet):
 	queryset = ContactTag.objects.all()
 	serializer_class = ContactTagSerializer
 
+	def get_queryset(self):
+		contact_id = self.kwargs.get('contact_pk', None)
+		print contact_id
+		if contact_id:
+			return ContactTag.objects.filter(contact=contact_id)
+		return super(ContactTagViewSet, self).get_queryset()
+
 class ContactDataViewSet(viewsets.ModelViewSet):
 	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)
 
 	queryset = ContactData.objects.all()
 	serializer_class = ContactDataSerializer
+
+	def get_queryset(self):
+		contact_id = self.kwargs.get('contact_pk', None)
+		print contact_id
+		if contact_id:
+			return ContactData.objects.filter(contact=contact_id)
+		return super(ContactDataViewSet, self).get_queryset()
 
 class ContactLinkViewSet(viewsets.ModelViewSet):
 	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
