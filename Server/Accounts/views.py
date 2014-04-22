@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login ,logout as auth_logout
 from django.utils.translation import ugettext_lazy as _
-from forms import RegisterForm,LoginForm
+from forms import RegisterForm,LoginForm,ChangepwdForm
 from rest_framework.authtoken.models import Token
 
 def index(request):
@@ -76,23 +76,24 @@ def generate(request):
 		print token
 		return HttpResponse(token)
 
-# def changepwd(request):
-#     if request.method == 'GET':
-#         form = ChangepwdForm()
-#         return render_to_response('changepwd.html', RequestContext(request, {'form': form,}))
-#     else:
-#         form = ChangepwdForm(request.POST)
-#         if form.is_valid():
-#             username = request.user.username
-#             oldpassword = request.POST.get('oldpassword', '')
-#             user = auth.authenticate(username=username, password=oldpassword)
-#             if user is not None and user.is_active:
-#                 newpassword = request.POST.get('newpassword1', '')
-#                 user.set_password(newpassword)
-#                 user.save()
-#                 return render_to_response('index.html', RequestContext(request,{'changepwd_success':True}))
-#             else:
-#                 return render_to_response('changepwd.html', RequestContext(request, {'form': form,'oldpassword_is_wrong':True}))
-#         else:
-#             return render_to_response('changepwd.html', RequestContext(request, {'form': form,}))
+def changepwd(request):
+	if request.method == 'GET':
+		form = ChangepwdForm()
+		return render_to_response('accounts/changepwd.html', RequestContext(request, {'form': form,}))
+	else:
+		form = ChangepwdForm(request.POST)
+		if form.is_valid():
+			username = request.user.username
+			oldpassword = request.POST.get('oldpassword', '')
+			user = authenticate(username=username, password=oldpassword)
+			if user is not None and user.is_active:
+				newpassword = request.POST.get('newpassword1', '')
+				user.set_password(newpassword)
+				user.save()
+				_login(request,username,newpassword)#注册完毕 直接登陆
+				return HttpResponseRedirect(reverse("index"))
+			else:
+				return render_to_response('accounts/changepwd.html', RequestContext(request, {'form': form,'oldpassword_is_wrong':True}))
+		else:
+			return render_to_response('accounts/changepwd.html', RequestContext(request, {'form': form,}))
 

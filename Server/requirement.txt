@@ -4,3 +4,5 @@ corsheaders
 djangorestframework
 MySQL-python
 django-filter
+drf-nested-routers
+drf-extensions

@@ -1,14 +1,7 @@
 API Server
 ==================
-Required:<br>
-python<br>
-Django<br>
-mysql<br>
-mysqldb<br>
-django-rest-framework<br>
-django-cors-headers<br>
-south<br>
-django-filter<br>
+pip install /path/to/requirements.txt -f file:///path/to/archive/
+
 
 Note:
 ==================
