@@ -1,6 +1,6 @@
 Django
 south
-corsheaders
+django-cors-headers
 djangorestframework
 MySQL-python
 django-filter
