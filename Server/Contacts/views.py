@@ -16,14 +16,14 @@ from rest_framework import viewsets
 
 from rest_framework_extensions.mixins import DetailSerializerMixin
 
-@api_view(('GET',))
-def api_root(request, format=None):
-	return Response({
-		'contact': reverse('contacts-list', request=request, format=format),
-		'contacttag': reverse('contacttag-list', request=request, format=format),
-		'contactdata': reverse('contactdata-list', request=request, format=format),
-		'contactlink': reverse('contactlink-list', request=request, format=format),
-	})
+# @api_view(('GET',))
+# def api_root(request, format=None):
+# 	return Response({
+# 		'contact': reverse('contacts-list', request=request, format=format),
+# 		'contacttag': reverse('contacttag-list', request=request, format=format),
+# 		'contactdata': reverse('contactdata-list', request=request, format=format),
+# 		'contactlink': reverse('contactlink-list', request=request, format=format),
+# 	})
 
 
 class ContactViewSet(DetailSerializerMixin, viewsets.ModelViewSet):
