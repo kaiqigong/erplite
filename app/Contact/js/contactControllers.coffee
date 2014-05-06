@@ -1,5 +1,5 @@
 angular.module 'contactModule'
-.controller 'ContactListCtrl', ['$scope', '$http', '$location', 'contactManager', '$log', 'ModelBase','Restangular',($scope, $http, $location, contactManager, $log, ModelBase,Restangular) ->
+.controller 'ContactListCtrl', ['$scope', '$http', '$location', 'contactManager', '$log', 'ModelBase','Restangular','$rootScope',($scope, $http, $location, contactManager, $log, ModelBase,Restangular,$rootScope) ->
 	$scope.title = "联系人"
 	$scope.icon = "./img/128px/layers_128px.png"
 	$scope.backUrl = "#/home"
@@ -39,7 +39,7 @@ angular.module 'contactModule'
 	, null
 
 ]
-.controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase','Restangular', '$upload', '$modal', ($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase,Restangular,$upload,$modal) ->
+.controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log', 'ModelBase','Restangular', '$upload', '$modal','$rootScope', ($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase,Restangular,$upload,$modal,$rootScope) ->
 	$scope.progressBar.start()
 	$scope.progressBar.set 50
 	$scope.backUrl = "#/contact"
@@ -160,7 +160,7 @@ angular.module 'contactModule'
 
 	$scope.reload()
 ]
-.controller 'NewContactCtrl', ['$scope', '$http', '$log', 'Restangular','$upload', '$modal', ($scope, $http, $log,Restangular,$upload,$modal) ->
+.controller 'NewContactCtrl', ['$scope', '$http', '$log', 'Restangular','$upload', '$modal', '$location','$rootScope', ($scope, $http, $log,Restangular,$upload,$modal, $location,$rootScope) ->
 	$scope.backUrl = "#/contact"
 	$scope.contact =
 		info: {}
@@ -226,10 +226,13 @@ angular.module 'contactModule'
 		$scope.contact.dataObj.contact = $scope.contact.id
 		$scope.contact.createdBy = 'Cage'
 		$scope.contact.modifiedBy = 'Cage'
-		$scope.contact.name=$scope.contact.dataObj.givenname
+		$scope.contact.name=$scope.title
 		Restangular.all('contacts').post($scope.contact).then (contact)->
 			$scope.contact.dataObj.contact = contact.id
 			Restangular.one('contacts',contact.id).all('contactdata').post($scope.contact.dataObj).then (contactData)->
 				console.log contactData
+				$location.url("/contact/#{contact.id}")
+				$scope.progressBar.end()
+
 
 ]

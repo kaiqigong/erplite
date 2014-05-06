@@ -2,7 +2,7 @@ erpDirectives = angular.module 'erpDirectives',[]
 
 ###
   angular directive erp-icheck
- 
+
   @description icheck is a plugin of jquery for beautifying checkbox &amp; radio, now I complied it with angular directive
   @require jquery, icheck
   @example <input type="radio" ng-model="paomian" value="kangshifu" erp-icheck>
@@ -15,7 +15,7 @@ erpDirectives.directive 'erpIcheck', ($document) ->
 	link: ($scope, $element, $attrs, $ngModel)->
 		if !$ngModel
 			return
-		
+
 		# using iCheck
 		$element.iCheck {
 			labelHover: false,

@@ -78,6 +78,7 @@
           return console.log('logout');
         });
       }
+      security.clearAccessToken();
       $scope.rememberMe = false;
       $scope.login = function() {
         var loginParam;

@@ -68,6 +68,7 @@ erpControllers.controller 'LoginCtrl', ['$scope', '$http', 'security','$routePar
 		$http.get($scope.erpSettings.apiHost+'/accounts/logout')
 		.success ->
 			console.log 'logout'
+	security.clearAccessToken()
 	$scope.rememberMe = false
 	$scope.login = () ->
 		loginParam =
