@@ -160,7 +160,7 @@ angular.module 'contactModule'
 
 	$scope.reload()
 ]
-.controller 'NewContactCtrl', ['$scope', '$http', '$log', ($scope, $http, $log) ->
+.controller 'NewContactCtrl', ['$scope', '$http', '$log', 'Restangular','$upload', '$modal', ($scope, $http, $log,Restangular,$upload,$modal) ->
 	$scope.backUrl = "#/contact"
 	$scope.contact =
 		info: {}
@@ -173,6 +173,15 @@ angular.module 'contactModule'
 	$scope.newLink =
 		type: "Supplier"
 		name: ""
+
+	$scope.contactDatas=[]
+
+	# vaild data fields
+	dataFields=[]
+
+	# unset data fields
+	$scope.unsetFields = ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile', 'fax', 'origin', 'email', 'address', 'birthday', 'region', 'website', 'qq', 'weibo', 'im' ]
+
 	$scope.changeType = (type) ->
 		$scope.newLink.type = type
 
@@ -184,7 +193,43 @@ angular.module 'contactModule'
 			type: "Supplier"
 			name: ""
 
+	$scope.addData = () ->
+		newData = angular.copy $scope.newData
+		$scope.newData.key = ""
+		$scope.newData.value = ""
+		$scope.contactDatas.push newData
+
+	$scope.onAvatorClick = ->
+		modalInstance = $modal.open({
+			templateUrl: '../app/views/imageprocess.html',
+			controller: "ImgProcessCtrl"})
+
+		modalInstance.result.then (avatorUrl) ->
+			$scope.contact.avator = avatorUrl
+		, () ->
+			$log.info('Modal dismissed')
+
 	$scope.save = () ->
 		# $scope.contact.create()
 		$log.log $scope.contact
+		$scope.progressBar.start()
+		$scope.progressBar.set(20)
+
+		# update data
+		$scope.contact.dataObj = {}
+		$scope.contact.dataObj.createdBy = 'Cage'
+		$scope.contact.dataObj.modifiedBy = 'Cage' # Todo: auto generate in DB
+		for contactData in $scope.contactDatas when contactData.key in ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile', 'fax', 'origin', 'email', 'address', 'birthday', 'region', 'website', 'qq', 'weibo', 'im' ]
+			do (contactData) ->
+				$scope.contact.dataObj[contactData.key] = contactData.value
+		# post
+		$scope.contact.dataObj.contact = $scope.contact.id
+		$scope.contact.createdBy = 'Cage'
+		$scope.contact.modifiedBy = 'Cage'
+		$scope.contact.name=$scope.contact.dataObj.givenname
+		Restangular.all('contacts').post($scope.contact).then (contact)->
+			$scope.contact.dataObj.contact = contact.id
+			Restangular.one('contacts',contact.id).all('contactdata').post($scope.contact.dataObj).then (contactData)->
+				console.log contactData
+
 ]

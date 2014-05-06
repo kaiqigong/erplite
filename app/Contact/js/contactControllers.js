@@ -185,7 +185,8 @@
       return $scope.reload();
     }
   ]).controller('NewContactCtrl', [
-    '$scope', '$http', '$log', function($scope, $http, $log) {
+    '$scope', '$http', '$log', 'Restangular', '$upload', '$modal', function($scope, $http, $log, Restangular, $upload, $modal) {
+      var dataFields;
       $scope.backUrl = "#/contact";
       $scope.contact = {
         info: {},
@@ -200,6 +201,9 @@
         type: "Supplier",
         name: ""
       };
+      $scope.contactDatas = [];
+      dataFields = [];
+      $scope.unsetFields = ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile', 'fax', 'origin', 'email', 'address', 'birthday', 'region', 'website', 'qq', 'weibo', 'im'];
       $scope.changeType = function(type) {
         return $scope.newLink.type = type;
       };
@@ -211,8 +215,52 @@
           name: ""
         };
       };
+      $scope.addData = function() {
+        var newData;
+        newData = angular.copy($scope.newData);
+        $scope.newData.key = "";
+        $scope.newData.value = "";
+        return $scope.contactDatas.push(newData);
+      };
+      $scope.onAvatorClick = function() {
+        var modalInstance;
+        modalInstance = $modal.open({
+          templateUrl: '../app/views/imageprocess.html',
+          controller: "ImgProcessCtrl"
+        });
+        return modalInstance.result.then(function(avatorUrl) {
+          return $scope.contact.avator = avatorUrl;
+        }, function() {
+          return $log.info('Modal dismissed');
+        });
+      };
       return $scope.save = function() {
-        return $log.log($scope.contact);
+        var contactData, _i, _len, _ref, _ref1;
+        $log.log($scope.contact);
+        $scope.progressBar.start();
+        $scope.progressBar.set(20);
+        $scope.contact.dataObj = {};
+        $scope.contact.dataObj.createdBy = 'Cage';
+        $scope.contact.dataObj.modifiedBy = 'Cage';
+        _ref = $scope.contactDatas;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          contactData = _ref[_i];
+          if ((_ref1 = contactData.key) === 'surname' || _ref1 === 'givenname' || _ref1 === 'company' || _ref1 === 'department' || _ref1 === 'title' || _ref1 === 'phone' || _ref1 === 'mobile' || _ref1 === 'fax' || _ref1 === 'origin' || _ref1 === 'email' || _ref1 === 'address' || _ref1 === 'birthday' || _ref1 === 'region' || _ref1 === 'website' || _ref1 === 'qq' || _ref1 === 'weibo' || _ref1 === 'im') {
+            (function(contactData) {
+              return $scope.contact.dataObj[contactData.key] = contactData.value;
+            })(contactData);
+          }
+        }
+        $scope.contact.dataObj.contact = $scope.contact.id;
+        $scope.contact.createdBy = 'Cage';
+        $scope.contact.modifiedBy = 'Cage';
+        $scope.contact.name = $scope.contact.dataObj.givenname;
+        return Restangular.all('contacts').post($scope.contact).then(function(contact) {
+          $scope.contact.dataObj.contact = contact.id;
+          return Restangular.one('contacts', contact.id).all('contactdata').post($scope.contact.dataObj).then(function(contactData) {
+            return console.log(contactData);
+          });
+        });
       };
     }
   ]);
