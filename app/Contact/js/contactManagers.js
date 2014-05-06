@@ -27,7 +27,7 @@
           Restangular.one('contacts', id).get().then(function(contact) {
             console.log(contact);
             if (contact.data != null) {
-              return Restangular.oneUrl('ContactData', contact.data).get().then(function(contactData) {
+              return Restangular.oneUrl('contactdata', contact.data).get().then(function(contactData) {
                 contact.dataObj = contactData;
                 return deferred.resolve(contact);
               }, function(response) {

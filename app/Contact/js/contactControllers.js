@@ -100,13 +100,13 @@
         }
         if ($scope.contact.data == null) {
           $scope.contact.dataObj.contact = $scope.contact.id;
-          promises.push(Restangular.all("ContactData").post($scope.contact.dataObj).then(function(contactdata) {
+          promises.push(Restangular.one('contacts', contact.id).all('contactdata').post($scope.contact.dataObj).then(function(contactdata) {
             return console.log(contactdata);
           }));
         } else {
           promises.push($scope.contact.dataObj.put());
-          promises.push($scope.contact.put());
         }
+        promises.push($scope.contact.put());
         return $q.all(promises).then($scope.reload);
       };
       $scope.reload = function() {

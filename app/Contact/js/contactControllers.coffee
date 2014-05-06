@@ -92,12 +92,12 @@ angular.module 'contactModule'
 		if not $scope.contact.data?
 			#post
 			$scope.contact.dataObj.contact = $scope.contact.id
-			promises.push (Restangular.all("ContactData").post($scope.contact.dataObj).then (contactdata)->
+			promises.push (Restangular.one('contacts',contact.id).all('contactdata').post($scope.contact.dataObj).then (contactdata)->
 				console.log contactdata
 			)
 		else
 			promises.push $scope.contact.dataObj.put()
-			promises.push $scope.contact.put()
+		promises.push $scope.contact.put()
 
 		# should reload after all the data updated.
 		$q.all promises

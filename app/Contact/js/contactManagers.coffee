@@ -20,7 +20,7 @@ angular.module 'contactModule'
 		Restangular.one('contacts',id).get().then (contact)->
 			console.log contact
 			if contact.data?
-				Restangular.oneUrl('ContactData',contact.data).get().then (contactData)->
+				Restangular.oneUrl('contactdata',contact.data).get().then (contactData)->
 					contact.dataObj=contactData
 					deferred.resolve contact
 				, (response)->
