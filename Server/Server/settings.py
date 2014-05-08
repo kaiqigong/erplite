@@ -1,5 +1,6 @@
 # Django settings for Server project.
 import os
+import datetime
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -134,12 +135,18 @@ INSTALLED_APPS = (
 	'Contacts',
 	'FileUpload',
 	'rest_framework_extensions',
+	# 'provider',
+	# 'provider.oauth2',
+	'oauth2_provider',
+	'rest_framework',
 )
 
 REST_FRAMEWORK = {
 	'DEFAULT_AUTHENTICATION_CLASSES': (
-		'rest_framework.authentication.TokenAuthentication',
-		'rest_framework.authentication.SessionAuthentication',  # optional
+		# 'rest_framework.authentication.TokenAuthentication',
+		# 'rest_framework.authentication.SessionAuthentication',  # optional
+		# 'rest_framework.authentication.OAuth2Authentication',
+		'oauth2_provider.ext.rest_framework.OAuth2Authentication',
 	),
 
 	# Use hyperlinked styles by default.
@@ -150,11 +157,36 @@ REST_FRAMEWORK = {
 	'DEFAULT_FILTER_BACKENDS':(
 		'rest_framework.filters.DjangoFilterBackend',
 	),
+
+	'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = ()
+
+#---- Django OAuth Toolkit---------------------------------------------------------------------
+# OAUTH2_PROVIDER = {
+#     # this is the list of available scopes
+#     'SCOPES': {'read': 'Read scope', 'write': 'Write scope'}
+# }
+
+#-----django-oauth2-provider-------------------------------------------------------------------
+READ = 1 << 1
+WRITE = 1 << 2
+READ_WRITE = READ | WRITE
+
+OAUTH_SCOPES = (
+    (READ_WRITE, 'read+write'),
+)
+
+OAUTH_DELETE_EXPIRED = True
+OAUTH_EXPIRE_DELTA = datetime.timedelta(seconds=10)
+# OAUTH_ENFORCE_SECURE = True
+# OAUTH_SINGLE_ACCESS_TOKEN = True
+#-----------------------------------------------------------------------------------------------
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

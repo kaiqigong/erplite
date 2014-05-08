@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^', include(contacts_router.urls)),
     url(r'^accounts/', include('Accounts.urls')),
     url(r'^files/', include('FileUpload.urls')),
-    url(r'^login/', 'rest_framework.authtoken.views.obtain_auth_token'),
-
+    # url(r'^login/', 'rest_framework.authtoken.views.obtain_auth_token'),
+    url(r'^login/', include('provider.oauth2.urls', namespace = 'oauth2')),
+    # url(r'^login/', include('oauth2_provider.urls', namespace='oauth2_provider')),
   )

@@ -9,12 +9,14 @@ from Contacts.models import Contacts, ContactTag, ContactData, ContactLink
 from Contacts.serializers import ContactsListSerializer, ContactsDetailSerializer, ContactTagSerializer, ContactDataSerializer, ContactLinkSerializer
 from Contacts.filters import ContactsFilter
 
-from rest_framework.authentication import TokenAuthentication, BasicAuthentication, SessionAuthentication
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication, SessionAuthentication, OAuth2Authentication
 from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import viewsets
 
 from rest_framework_extensions.mixins import DetailSerializerMixin
+
+# from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
 
 # @api_view(('GET',))
 # def api_root(request, format=None):
@@ -27,16 +29,16 @@ from rest_framework_extensions.mixins import DetailSerializerMixin
 
 
 class ContactViewSet(DetailSerializerMixin, viewsets.ModelViewSet):
-	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
-	permission_classes = (IsAuthenticated,)
+	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	# permission_classes = (IsAuthenticated, TokenHasReadWriteScope)
 
 	queryset = Contacts.objects.all()
 	serializer_class = ContactsListSerializer
 	serializer_detail_class = ContactsDetailSerializer
 
 class ContactTagViewSet(viewsets.ModelViewSet):
-	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
-	permission_classes = (IsAuthenticated,)
+	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	# permission_classes = (IsAuthenticated, TokenHasReadWriteScope)
 
 	queryset = ContactTag.objects.all()
 	serializer_class = ContactTagSerializer
@@ -49,8 +51,8 @@ class ContactTagViewSet(viewsets.ModelViewSet):
 		return super(ContactTagViewSet, self).get_queryset()
 
 class ContactDataViewSet(viewsets.ModelViewSet):
-	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
-	permission_classes = (IsAuthenticated,)
+	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	# permission_classes = (IsAuthenticated, TokenHasReadWriteScope)
 
 	queryset = ContactData.objects.all()
 	serializer_class = ContactDataSerializer
@@ -63,8 +65,8 @@ class ContactDataViewSet(viewsets.ModelViewSet):
 		return super(ContactDataViewSet, self).get_queryset()
 
 class ContactLinkViewSet(viewsets.ModelViewSet):
-	authentication_classes = (SessionAuthentication, TokenAuthentication, BasicAuthentication)
-	permission_classes = (IsAuthenticated,)
+	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	# permission_classes = (IsAuthenticated, TokenHasReadWriteScope)
 
 	queryset = ContactLink.objects.all()
 	serializer_class = ContactLinkSerializer
