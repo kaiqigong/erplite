@@ -1,7 +1,7 @@
 angular.module 'contactModule'
 .factory 'ModelBase', ['$http', ($http) ->
 	class ModelBase
-	
+
 		constructor: (modelBase,postUrl) ->
 			if postUrl?
 				this.postUrl = postUrl
@@ -23,12 +23,12 @@ angular.module 'contactModule'
 			else throw new Error "PostUrl not defined!"
 
 		fromUrl: (success,fail)->
-			$http.get this.url 
-			.success success 
+			$http.get this.url
+			.success success
 			.error fail
 
 		create: (success,fail) ->
-			$http.post this.postUrl, this 
+			$http.post this.postUrl, this
 			.success success
 			.error fail
 
@@ -77,4 +77,9 @@ angular.module 'contactModule'
 
 		constructor: (contactAttachment) ->
 			ModelBase.call this, contactAttachment, $rootScope.apimap.contactattachment
+]
+.factory 'Contact.Models', ['Contact','ContactData','ContactLink', ()->
+	Contact:Contact
+	ContactData:ContactData
+	ContactLink:ContactLink
 ]

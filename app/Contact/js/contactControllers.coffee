@@ -97,6 +97,7 @@ angular.module 'contactModule'
 			)
 		else
 			promises.push $scope.contact.dataObj.put()
+		$scope.contact.name=$scope.title
 		promises.push $scope.contact.put()
 
 		# should reload after all the data updated.

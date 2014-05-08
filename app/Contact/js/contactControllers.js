@@ -106,6 +106,7 @@
         } else {
           promises.push($scope.contact.dataObj.put());
         }
+        $scope.contact.name = $scope.title;
         promises.push($scope.contact.put());
         return $q.all(promises).then($scope.reload);
       };

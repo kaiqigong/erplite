@@ -138,6 +138,14 @@
 
       })(ModelBase);
     }
+  ]).factory('Contact.Models', [
+    'Contact', 'ContactData', 'ContactLink', function() {
+      return {
+        Contact: Contact,
+        ContactData: ContactData,
+        ContactLink: ContactLink
+      };
+    }
   ]);
 
 }).call(this);
