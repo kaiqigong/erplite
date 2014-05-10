@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Asia/Shanghai'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -130,15 +130,14 @@ INSTALLED_APPS = (
 	# 'django.contrib.admindocs',
 	'corsheaders',
 	'rest_framework',
-	'rest_framework.authtoken',
+	# 'rest_framework.authtoken',
 	'Accounts',
 	'Contacts',
 	'FileUpload',
 	'rest_framework_extensions',
-	# 'provider',
-	# 'provider.oauth2',
-	'oauth2_provider',
-	'rest_framework',
+	'provider',
+	'provider.oauth2',
+	# 'oauth2_provider',
 )
 
 REST_FRAMEWORK = {
@@ -183,7 +182,7 @@ OAUTH_SCOPES = (
 )
 
 OAUTH_DELETE_EXPIRED = True
-OAUTH_EXPIRE_DELTA = datetime.timedelta(seconds=10)
+OAUTH_EXPIRE_DELTA = datetime.timedelta(seconds=60*60)
 # OAUTH_ENFORCE_SECURE = True
 # OAUTH_SINGLE_ACCESS_TOKEN = True
 #-----------------------------------------------------------------------------------------------
