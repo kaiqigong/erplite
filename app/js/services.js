@@ -8,19 +8,19 @@
     '$cookies', '$http', function($cookies, $http) {
       return {
         setHttpHeader: function(header) {
-          $http.defaults.headers.common.Authorization = "Token " + header.Authorization;
-          return $cookies.access_token = header.Authorization;
+          $http.defaults.headers.common.Authorization = header.tokenType + ' ' + header.token;
+          return $cookies.authorization = $http.defaults.headers.common.Authorization;
         },
         getCSRF: function() {
           return $cookies.csrftoken;
         },
         clearAccessToken: function() {
           delete $http.defaults.headers.common["Authorization"];
-          return delete $cookies["access_token"];
+          return delete $cookies["authorization"];
         },
         restoreToken: function() {
-          if ($cookies.access_token != null) {
-            return $http.defaults.headers.common.Authorization = "Token " + $cookies.access_token;
+          if ($cookies.authorization != null) {
+            return $http.defaults.headers.common.Authorization = $cookies.authorization;
           }
         }
       };
@@ -28,3 +28,5 @@
   ]);
 
 }).call(this);
+
+//# sourceMappingURL=services.map

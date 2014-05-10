@@ -1,4 +1,4 @@
-erpDirectives = angular.module 'erpDirectives',[]
+erpDirectives = angular.module 'erpDirectives', []
 
 ###
   angular directive erp-icheck
@@ -22,8 +22,8 @@ erpDirectives.directive 'erpIcheck', ($document) ->
 			cursor: true,
 			checkboxClass: 'icheckbox_flat-blue',
 			radioClass: 'iradio_flat-blue'
-			}
-		.on 'ifClicked',  (event) ->
+		}
+		.on 'ifClicked', (event) ->
 			if $attrs.type == "checkbox"
 				# checkbox, $ViewValue = true/false/undefined
 				$scope.$apply () ->

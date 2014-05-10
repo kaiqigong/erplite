@@ -5,7 +5,9 @@
   erpApp = angular.module('erpApp', ['ngRoute', 'restangular', 'erpAnimations', 'erpDirectives', 'angularFileUpload', 'erpControllers', 'erpServices', 'erpFilters', 'contactModule', 'ui.bootstrap']);
 
   erpApp.constant('erpSettings', {
-    apiHost: 'http://localhost:8000'
+    apiHost: 'http://localhost:8000',
+    client_id: '24777dd22781c6e783a6',
+    client_secret: '5abb4a5bd64e98cf720ac97985482dd374ae73d5'
   });
 
   erpApp.config([
@@ -69,3 +71,5 @@
   ]);
 
 }).call(this);
+
+//# sourceMappingURL=app.map

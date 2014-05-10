@@ -25,3 +25,4 @@ document.write '<script src="Contact/js/init.js"></script>'
 document.write '<script src="Contact/js/contactModels.js"></script>'
 document.write '<script src="Contact/js/contactManagers.js"></script>'
 document.write '<script src="Contact/js/contactControllers.js"></script>'
+

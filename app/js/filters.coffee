@@ -8,7 +8,7 @@ erpFilters.filter 'boolean2display', () ->
 	(input) ->
 		if input then 'visible' else 'none'
 
-erpFilters.filter 'type2class', () -> 
+erpFilters.filter 'type2class', () ->
 	(input) ->
 		result = null
 		switch input

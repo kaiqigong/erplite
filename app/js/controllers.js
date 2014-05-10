@@ -83,15 +83,27 @@
       $scope.login = function() {
         var loginParam;
         loginParam = {
+          client_id: $scope.erpSettings.client_id,
+          client_secret: $scope.erpSettings.client_secret,
           username: $scope.username,
-          password: $scope.password
+          password: $scope.password,
+          grant_type: 'password'
         };
-        return $http.post($scope.erpSettings.apiHost + '/login/', loginParam).success(function(data) {
-          var headers, token;
+        return $http({
+          method: "POST",
+          url: $scope.erpSettings.apiHost + '/login/access_token/',
+          data: $.param(loginParam),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).success(function(data) {
+          var headers, token, tokenType;
           console.log(data);
-          token = data.token;
+          token = data.access_token;
+          tokenType = data.token_type;
           headers = {
-            'Authorization': token
+            'token': token,
+            'tokenType': tokenType
           };
           security.setHttpHeader(headers);
           if ($routeParams.query != null) {
@@ -115,24 +127,49 @@
       $scope.signup = function() {
         var signupParam;
         signupParam = "csrfmiddlewaretoken=" + security.getCSRF() + "&username=" + $scope.username + "&email=" + $scope.email + "&password=" + $scope.password;
-        $http.post($scope.erpSettings.apiHost + '/accounts/register', signupParam, {
+        return $http.post($scope.erpSettings.apiHost + '/accounts/register', signupParam, {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           }
         }).success(function() {
-          if ($routeParams.query != null) {
-            $location.url(encodeURIComponent($routeParams.query));
-            return $location.replace();
-          } else {
-            $location.url('/home');
-            return $location.replace();
-          }
+          var loginParam;
+          loginParam = {
+            client_id: $scope.erpSettings.client_id,
+            client_secret: $scope.erpSettings.client_secret,
+            username: $scope.username,
+            password: $scope.password,
+            grant_type: 'password'
+          };
+          return $http({
+            method: "POST",
+            url: $scope.erpSettings.apiHost + '/login/access_token/',
+            data: $.param(loginParam),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          }).success(function(data) {
+            var headers, token, tokenType;
+            console.log(data);
+            token = data.access_token;
+            tokenType = data.token_type;
+            headers = {
+              'token': token,
+              'tokenType': tokenType
+            };
+            security.setHttpHeader(headers);
+            if ($routeParams.query != null) {
+              $location.url(encodeURIComponent($routeParams.query));
+              return $location.replace();
+            } else {
+              $location.url('/home');
+              return $location.replace();
+            }
+          }).error(function() {
+            return console.log('error');
+          });
         }).error(function() {
           return console.log('error');
-        })["finally"](function() {
-          return console.log('finally');
         });
-        return security.saveCookie();
       };
     }
   ]);
@@ -191,3 +228,5 @@
   ]);
 
 }).call(this);
+
+//# sourceMappingURL=controllers.map

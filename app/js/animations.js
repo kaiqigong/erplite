@@ -3,3 +3,5 @@
   angular.module('erpAnimations', ['ngAnimate']);
 
 }).call(this);
+
+//# sourceMappingURL=animations.map

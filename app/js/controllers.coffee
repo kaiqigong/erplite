@@ -72,14 +72,24 @@ erpControllers.controller 'LoginCtrl', ['$scope', '$http', 'security','$routePar
 	$scope.rememberMe = false
 	$scope.login = () ->
 		loginParam =
+			client_id:$scope.erpSettings.client_id
+			client_secret:$scope.erpSettings.client_secret
 			username:$scope.username
 			password:$scope.password
-		$http.post($scope.erpSettings.apiHost+'/login/',loginParam)
+			grant_type:'password'
+		$http
+			method:"POST"
+			url:$scope.erpSettings.apiHost+'/login/access_token/'
+			data:$.param(loginParam)
+			headers:
+				'Content-Type': 'application/x-www-form-urlencoded'
 		.success (data)->
-			console.log data # TODO: crawl the user name in dom html
-			token = data.token
+			console.log data
+			token = data.access_token
+			tokenType=data.token_type
 			headers=
-				'Authorization': token
+				'token': token
+				'tokenType':tokenType
 			security.setHttpHeader headers
 			if $routeParams.query?
 				$location.url(encodeURIComponent($routeParams.query))
@@ -103,17 +113,36 @@ erpControllers.controller 'SignupCtrl', ['$scope', '$http', 'security','$routePa
 		$http.post($scope.erpSettings.apiHost+'/accounts/register',signupParam,{headers: {
 		'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
 		.success ->
-			if $routeParams.query?
-				$location.url(encodeURIComponent($routeParams.query))
-				$location.replace()
-			else
-				$location.url('/home')
-				$location.replace()
+			loginParam =
+				client_id:$scope.erpSettings.client_id
+				client_secret:$scope.erpSettings.client_secret
+				username:$scope.username
+				password:$scope.password
+				grant_type:'password'
+			$http
+				method:"POST"
+				url:$scope.erpSettings.apiHost+'/login/access_token/'
+				data:$.param(loginParam)
+				headers:
+					'Content-Type': 'application/x-www-form-urlencoded'
+			.success (data)->
+				console.log data
+				token = data.access_token
+				tokenType=data.token_type
+				headers=
+					'token': token
+					'tokenType':tokenType
+				security.setHttpHeader headers
+				if $routeParams.query?
+					$location.url(encodeURIComponent($routeParams.query))
+					$location.replace()
+				else
+					$location.url('/home')
+					$location.replace()
+			.error ()->
+				console.log 'error'
 		.error ()->
 			console.log 'error'
-		.finally ()->
-			console.log 'finally'
-		security.saveCookie()
 		# add token to cookie. Need a security service in which can get and set the token.
 	return
 ]
