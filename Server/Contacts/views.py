@@ -30,7 +30,7 @@ from rest_framework_extensions.mixins import DetailSerializerMixin
 
 class ContactViewSet(DetailSerializerMixin, viewsets.ModelViewSet):
 	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
-	# permission_classes = (IsAuthenticated, TokenHasReadWriteScope)
+	permission_classes = (IsAuthenticated,)# TokenHasReadWriteScope)
 
 	queryset = Contacts.objects.all()
 	serializer_class = ContactsListSerializer
@@ -38,7 +38,7 @@ class ContactViewSet(DetailSerializerMixin, viewsets.ModelViewSet):
 
 class ContactTagViewSet(viewsets.ModelViewSet):
 	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
-	permission_classes = (IsAuthenticated)#, TokenHasReadWriteScope)
+	permission_classes = (IsAuthenticated,)#, TokenHasReadWriteScope)
 
 	queryset = ContactTag.objects.all()
 	serializer_class = ContactTagSerializer
@@ -52,7 +52,7 @@ class ContactTagViewSet(viewsets.ModelViewSet):
 
 class ContactDataViewSet(viewsets.ModelViewSet):
 	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
-	permission_classes = (IsAuthenticated)#, TokenHasReadWriteScope)
+	permission_classes = (IsAuthenticated,)#, TokenHasReadWriteScope)
 
 	queryset = ContactData.objects.all()
 	serializer_class = ContactDataSerializer
@@ -66,7 +66,7 @@ class ContactDataViewSet(viewsets.ModelViewSet):
 
 class ContactLinkViewSet(viewsets.ModelViewSet):
 	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
-	permission_classes = (IsAuthenticated)#, TokenHasReadWriteScope)
+	permission_classes = (IsAuthenticated,)#, TokenHasReadWriteScope)
 
 	queryset = ContactLink.objects.all()
 	serializer_class = ContactLinkSerializer
