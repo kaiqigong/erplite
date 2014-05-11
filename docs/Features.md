@@ -40,9 +40,11 @@ User或者Group将用来做权限控制。
 
 #Task
 ##Task Fields
-uid, name, description, due, status, createdby, crteatedtime, updatedby, updatedtime, owner  
-status 为not completed, completed  
-due 完成期限，可以为空。  
+uid, name, description, due, status, priority, owner, createdby, crteatedtime, updatedby, updatedtime
+status 为open, closed
+due 完成期限，可以为空，为空表示没有期限。
+priority 为high, medium, low
 owner可以specified到某个user或者group，每个人登录只能看到自己的task或者自己group的task。  
 ##Task Link
 与Contact Link相同。 Link到相关的Contact, Order...  
+##Task Comments, Tags, Attachments, Assignment 同Contact。
