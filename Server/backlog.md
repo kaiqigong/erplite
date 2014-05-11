@@ -37,4 +37,7 @@ Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 Added FileUpload module.  
 Added url to the media folder in root path. The folder is igonred in github.  
 ```post "files/upload" file:yourfile```  
-File will be saved to media/files/ramdonpath/filename  
+File will be saved to media/files/ramdonpath/filename 
+
+ ###update 2014/05/11
+ add django-oauth2-provider to project
