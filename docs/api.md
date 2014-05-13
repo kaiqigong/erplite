@@ -1,1 +1,15 @@
-Hi, qian, Put API research here.
+1. For AccessControl:  
+	"get access_token": http://localhost:8000/login/access_token/
+
+2. For Accounts Model:  
+	"index": "http://localhost:8000/accounts/"
+	"login": "http://localhost:8000/accounts/login"
+	"register": "http://localhost:8000/accounts/register"
+	“change password”: "http://localhost:8000/accounts/changepwd"
+	
+3. For Contacts Model:  
+	"contactlink": "http://localhost:8000/contactlink/",
+    "contacts": "http://localhost:8000/contacts/",
+    "contacttag": "http://localhost:8000/contacttag/",
+    "contactdata": "http://localhost:8000/contactdata/"
+
