@@ -4,6 +4,7 @@ erpApp = angular.module 'erpApp', [
 	'erpAnimations'
 	'erpDirectives'
 	'angularFileUpload'
+	'calendarModule'
 	'erpControllers'
 	'erpServices'
 	'erpFilters'
@@ -36,18 +37,14 @@ erpApp.config ['$routeProvider', ($routeProvider) ->
 		{templateUrl: 'views/signup.html', controller: 'SignupCtrl'}
 	.when '/404',
 		{templateUrl: 'views/404.html', controller: '404Ctrl'}
+	.when '/calendar',
+		{templateUrl:'Calendar/views/calendar.html',controller:'CalendarCtrl'}
 	.otherwise redirectTo: '/home'
 ]
 
 erpApp.run ['$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangular', 'security',
 	($rootScope, $location, $log, $http, erpSettings, Restangular, security) ->
 		security.restoreToken()
-		$http
-		.get erpSettings.apiHost
-		.success (data)->
-			$rootScope.apimap = data
-		.error (error)->
-			$log.log error
 
 		# Restangular settings
 		Restangular.setBaseUrl(erpSettings.apiHost)
@@ -63,6 +60,13 @@ erpApp.run ['$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangu
 			switch status
 				when '401' then $location.url "/login?path=" + next
 				when '404' then $location.url "/404"
+
+		$http
+		.get erpSettings.apiHost
+		.success (data)->
+			$rootScope.apimap = data
+		.error (error)->
+			$log.log error
 ]
 
 

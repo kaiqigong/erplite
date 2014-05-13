@@ -49,7 +49,7 @@
 {
 "name":"Calendar",
 "iconurl":"./img/128px/calendar_128px.png",
-"link":"#",
+"link":"#/calendar",
 "messages":2
 },
 {

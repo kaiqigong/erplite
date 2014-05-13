@@ -1,0 +1,22 @@
+<div class="coolcalendar" ng-style="calendarStyle">
+  <div class="flex-row header">
+    <div></div>
+    <div class="prev"><a class="calendar-arrow-left"></a></div>
+    <div></div>
+    <div class="title">{{selectedDay | date:'yyyy年M月'}}</div>
+    <div></div>
+    <div class="next"><a class="calendar-arrow-right"></a></div>
+    <div></div>
+  </div>
+  <div class="flex-row weekDays">
+    <div ng-repeat="day in dayNames">{{day}}</div>
+  </div>
+  <div class="flex-column">
+    <div class="flex-row week" ng-repeat="week in weeks" ng-style="rowStyle">
+      <div ng-repeat="weekDay in week" class="weekday"
+           ng-class="{'in-other-month':!weekDay.isInCurrentMonth,'today':weekDay.isToday}">
+        <div class="circle">{{weekDay.day._d | date:'d'}}</div>
+      </div>
+    </div>
+  </div>
+</div>
