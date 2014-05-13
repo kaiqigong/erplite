@@ -24,6 +24,10 @@
 
   document.write('<script src="/app/bower_components/restangular/dist/restangular.min.js"></script>');
 
+  document.write('<script src="/app/bower_components/momentjs/min/moment.min.js"></script>');
+
+  document.write('<script src="/app/bower_components/twix/bin/twix.min.js"></script>');
+
   document.write('<script src="js/animations.js"></script>');
 
   document.write('<script src="js/app.js"></script>');
@@ -43,6 +47,12 @@
   document.write('<script src="Contact/js/contactManagers.js"></script>');
 
   document.write('<script src="Contact/js/contactControllers.js"></script>');
+
+  document.write('<script src="Calendar/js/init.js"></script>');
+
+  document.write('<script src="Calendar/js/calendarControllers.js"></script>');
+
+  document.write('<script src="Calendar/js/calendarDirectives.js"></script>');
 
 }).call(this);
 

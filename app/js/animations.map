@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "animations.js",
+  "sourceRoot": "",
+  "sources": [
+    "animations.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,OAAO,CAAC,MAAR,CAAe,eAAf,EAAgC,CAAC,WAAD,CAAhC,CAAA,CAAA;AAAA"
+}

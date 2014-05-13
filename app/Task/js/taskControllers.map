@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "taskControllers.js",
+  "sourceRoot": "",
+  "sources": [
+    "taskControllers.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA;AAAA"
+}

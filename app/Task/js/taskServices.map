@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "taskServices.js",
+  "sourceRoot": "",
+  "sources": [
+    "taskServices.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA;AAAA"
+}
