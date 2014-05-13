@@ -1,7 +1,7 @@
 1. For AccessControl:  
 	"get access_token": http://localhost:8000/login/access_token/
 
-2. For Accounts Model(web):
+2. For Accounts Model(web):  
 	"index": "http://localhost:8000/accounts/"
 	"login": "http://localhost:8000/accounts/login"
 	"register": "http://localhost:8000/accounts/register"
