@@ -15,6 +15,7 @@ router.register(r'contacttag', contactView.ContactTagViewSet)
 router.register(r'contactdata', contactView.ContactDataViewSet)
 router.register(r'contactlink', contactView.ContactLinkViewSet)
 router.register(r'tasks',taskView.TaskViewSet)
+router.register(r'users', taskView.UserViewSet)
 
 contacts_router = routers.NestedSimpleRouter(router, r'contacts', lookup='contact')
 contacts_router.register(r'contactdata', contactView.ContactDataViewSet)
