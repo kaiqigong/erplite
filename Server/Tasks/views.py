@@ -18,7 +18,7 @@ class TaskViewSet(viewsets.ModelViewSet):#DetailSerializerMixin
 	serializer_class = TaskListSerializer
 	# serializer_detail_class = TaskDatailSerializer
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
 	authentication_classes = (SessionAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)
 
