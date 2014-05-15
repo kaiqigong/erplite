@@ -31,7 +31,7 @@
 {
 "name":"To Do",
 "iconurl":"./img/128px/clipboard_128px.png",
-"link":"#",
+"link":"#/task",
 "messages":0
 },
 {

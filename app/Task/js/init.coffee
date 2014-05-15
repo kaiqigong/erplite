@@ -1,1 +1,1 @@
-angular.module 'taskModule', []
+angular.module 'taskModule', ['erplite.common']

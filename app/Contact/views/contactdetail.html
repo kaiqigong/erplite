@@ -1,157 +1,169 @@
 <div class="content">
-<div class="titlebar">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-8">
-                    	<h2>
-				<a href="{{backUrl}}">
-				<span class="glyphicon glyphicon-chevron-left"></span>
-				</a>
-				<span class="glyphicon glyphicon-user"></span>
-				<input ng-model="title" placeholder="请输入联系人名称"/>
-				</h2>
-                </div>
-                <div class="col-xs-4">
-                    <h2><a ng-click="save()" title="保存" class="pull-right"><span class="glyphicon glyphicon-floppy-save"></span></a></h2>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="toolbar" ng-show="showToolbar">
-	    <div class="container">
-	        <div class="row">
-	            <div class="col-xs-6">
-	            <a ng-click="previousId()" class="icon-btn" title="上一条记录"><span class="glyphicon glyphicon-arrow-left"></span></a>
-	            <a ng-click="nextId()" class="icon-btn" ><span class="glyphicon glyphicon-arrow-right"></span></a>
-	            </div>
-	            <div class="col-xs-6">
-	            <a id="" class="icon-btn pull-right" title="打印"><span class="glyphicon glyphicon-print"></span></a>
-	            </div>
-	        </div>
-	    </div>
-    </div>
-
-    <!-- basic info -->
+  <div class="titlebar">
     <div class="container">
+      <div class="row">
+        <div class="col-xs-8">
+          <h2>
+            <a href="{{backUrl}}">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <span class="glyphicon glyphicon-user"></span>
+            <input ng-model="title" placeholder="请输入联系人名称"/>
+          </h2>
+        </div>
+        <div class="col-xs-4">
+          <h2><a ng-click="save()" popover-placement="left" popover="保存" popover-trigger="mouseenter" title="保存" class="pull-right"><span
+            class="glyphicon glyphicon-floppy-save"></span></a></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="toolbar" ng-show="showToolbar">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <a ng-click="previousId()" class="icon-btn" title="上一条记录"><span class="glyphicon glyphicon-arrow-left"></span></a>
+          <a ng-click="nextId()" class="icon-btn"><span class="glyphicon glyphicon-arrow-right"></span></a>
+        </div>
+        <div class="col-xs-6">
+          <a popover-placement="left" popover="打印" popover-trigger="mouseenter" class="icon-btn pull-right" title="打印"><span class="glyphicon glyphicon-print"></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- basic info -->
+  <div class="container">
     <div class="panel panel-info">
-  <div class="panel-heading">
-    个人信息
-  </div>
-  <div class="panel-body">
+      <div class="panel-heading">
+        个人信息
+      </div>
+      <div class="panel-body">
 
-  <form class="form-horizontal" role="form">
-  <div class="form-group col-xs-12 col-md-6">
-    <a ng-click="onAvatorClick()"><img erp-img-loading ng-src="{{contact.avator}}" class="profile-avator"></a>
-  </div>
-  <div class="form-group col-xs-12 col-md-6" ng-repeat="item in contactDatas">
-    <label for="{{item.key}}" class="col-sm-2 control-label">{{item.key}}</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="{{item.key}}" placeholder="{{item.key}}" ng-model="item.value">
+        <form class="form-horizontal" role="form">
+          <div class="form-group col-xs-12 col-md-6">
+            <a ng-click="onAvatorClick()"><img erp-img-loading ng-src="{{contact.avator}}" class="profile-avator"></a>
+          </div>
+          <div class="form-group col-xs-12 col-md-6" ng-repeat="item in contactDatas">
+            <label for="{{item.key}}" class="col-sm-2 control-label">{{item.key}}</label>
+
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="{{item.key}}" placeholder="{{item.key}}"
+                     ng-model="item.value">
+            </div>
+          </div>
+        </form>
+
+        <form class="col-xs-8 col-sm-8 col-md-8 form-inline">
+          <hr>
+          自定义字段
+          <hr>
+          <div class="form-group">
+            <label class="sr-only" for="newDataKey">Field name</label>
+            <input id="newDataKey" type="text" ng-model="newData.key" placeholder="字段名" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="newDataValue">Field name</label>
+            <input id="newDataValue" type="text" ng-model="newData.value" placeholder="字段值" class="form-control">
+          </div>
+          <a class="icon-btn" ng-click="addData()"><span class="glyphicon glyphicon-plus-sign "></span></a>
+          {{unsetFields | json}}
+        </form>
+
+      </div>
+
     </div>
   </div>
-  </form>
 
-<form class="col-xs-8 col-sm-8 col-md-8 form-inline">
-    <hr>自定义字段<hr>
-    <div class="form-group">
-    <label class="sr-only" for="newDataKey">Field name</label>
-      <input id="newDataKey" type="text" ng-model="newData.key" placeholder="字段名" class="form-control">
-    </div>
-    <div class="form-group">
-       <label class="sr-only" for="newDataValue">Field name</label>
-       <input id="newDataValue" type="text" ng-model="newData.value" placeholder="字段值" class="form-control">
-    </div>
-    <a class="icon-btn" ng-click="addData()"><span class="glyphicon glyphicon-plus-sign "></span></a>
-    {{unsetFields | json}}
-    </form>
+  <!-- references -->
+  <div class="container">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        链接<a ng-show="showRefresh" class="icon-btn pull-right" ng-click="refreshLinks()"><span
+        class="glyphicon glyphicon-refresh"></span></a>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div ng-repeat="item in contact.links" class="col-xs-12 col-sm-12 col-md-6">
+            <a href="#/{{item.type}}/{{item.id}}" class="list-group-item">
+              <span class="{{item.type | type2class}}"></span>
+              <label>{{item.type}}:&nbsp;</label>
+              <label>{{item.name}}</label>
+              <label class="pull-right">{{item.modifiedDate | date:'medium'}}</label>
+            </a>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
 
+          <div class="col-xs-8 col-sm-8 col-md-8">
+            <div class="input-group">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{newLink.type}}
+                  <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a ng-click="changeType('Supplier')">Supplier</a></li>
+                  <li><a ng-click="changeType('Customer')">Customer</a></li>
+                  <li><a ng-click="changeType('Task')">Task</a></li>
+                </ul>
+              </div>
+              <!-- /btn-group -->
+              <input type="text" ng-model="newLink.name" class="form-control">
+            </div>
+            <!-- /input-group -->
+          </div>
+          <a class="icon-btn"><span class="glyphicon glyphicon-search "></span></a>
+          <a class="icon-btn" ng-click="addLink()"><span class="glyphicon glyphicon-plus-sign "></span></a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- comments -->
+  <div class="container">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        评论
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div ng-repeat="item in contact.links" class="col-xs-12 col-sm-12 col-md-6">
+            <a href="#/{{item.type}}/{{item.id}}" class="list-group-item">
+              <span class="{{item.type | type2class}}"></span>
+              <label>{{item.type}}:&nbsp;</label>
+              <label>{{item.name}}</label>
+              <label class="pull-right">{{item.modifiedDate}}</label>
+            </a>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+
+          <div class="col-xs-8 col-sm-8 col-md-8">
+            <div class="input-group">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Type <span
+                  class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="">Supplier</a></li>
+                  <li><a href="">Customer</a></li>
+                  <li><a href="">Task</a></li>
+                </ul>
+              </div>
+              <!-- /btn-group -->
+              <input type="text" class="form-control">
+            </div>
+            <!-- /input-group -->
+          </div>
+          <a class="icon-btn"><span class="glyphicon glyphicon-search "></span></a>
+          <a class="icon-btn"><span class="glyphicon glyphicon-plus-sign "></span></a>
+
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
-    </div>
-
-    <!-- references -->
-    <div class="container">
-    <div class="panel panel-info">
-  <div class="panel-heading">
-    链接<a ng-show="showRefresh" class="icon-btn pull-right" ng-click="refreshLinks()"><span class="glyphicon glyphicon-refresh"></span></a>
-  </div>
-  <div class="panel-body">
-  <div class="row">
-  <div ng-repeat="item in contact.links" class="col-xs-12 col-sm-12 col-md-6">
-		  <a href="#/{{item.type}}/{{item.id}}" class="list-group-item">
-		    <span class="{{item.type | type2class}}"></span>
-		    <label>{{item.type}}:&nbsp;</label>
-		        <label>{{item.name}}</label>
-		        <label class="pull-right">{{item.modifiedDate | date:'medium'}}</label>
-		  </a>
-		  </div>
-		  </div>
-				  <hr>
-		<div class="row">
-
-		  <div class="col-xs-8 col-sm-8 col-md-8">
-		    <div class="input-group">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{newLink.type}} <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li><a ng-click="changeType('Supplier')">Supplier</a></li>
-          <li><a ng-click="changeType('Customer')">Customer</a></li>
-          <li><a ng-click="changeType('Task')">Task</a></li>
-        </ul>
-      </div><!-- /btn-group -->
-      <input type="text" ng-model="newLink.name" class="form-control">
-    </div><!-- /input-group -->
-    </div>
-    <a class="icon-btn"><span class="glyphicon glyphicon-search "></span></a>
-    <a class="icon-btn" ng-click="addLink()"><span class="glyphicon glyphicon-plus-sign "></span></a>
-
-		  </div>
-  </div>
-  </div>
-  </div>
-
-      <!-- comments -->
-    <div class="container">
-    <div class="panel panel-info">
-  <div class="panel-heading">
-    评论
-  </div>
-  <div class="panel-body">
-  <div class="row">
-  <div ng-repeat="item in contact.links" class="col-xs-12 col-sm-12 col-md-6">
-		  <a href="#/{{item.type}}/{{item.id}}" class="list-group-item">
-		    <span class="{{item.type | type2class}}"></span>
-		    <label>{{item.type}}:&nbsp;</label>
-		        <label>{{item.name}}</label>
-		        <label class="pull-right">{{item.modifiedDate}}</label>
-		  </a>
-		  </div>
-		  </div>
-		  <hr>
-		<div class="row">
-
-		  <div class="col-xs-8 col-sm-8 col-md-8">
-		    <div class="input-group">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Type <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li><a href="">Supplier</a></li>
-          <li><a href="">Customer</a></li>
-          <li><a href="">Task</a></li>
-        </ul>
-      </div><!-- /btn-group -->
-      <input type="text" class="form-control">
-    </div><!-- /input-group -->
-    </div>
-    <a class="icon-btn"><span class="glyphicon glyphicon-search "></span></a>
-    <a class="icon-btn"><span class="glyphicon glyphicon-plus-sign "></span></a>
-
-		  </div>
-  </div>
-  </div>
-  </div>
-
-    </div>

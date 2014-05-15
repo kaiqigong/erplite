@@ -8,6 +8,7 @@ erpApp = angular.module 'erpApp', [
 	'erpControllers'
 	'erpServices'
 	'erpFilters'
+	'taskModule'
 	'contactModule'
 	'ui.bootstrap']
 
@@ -39,6 +40,8 @@ erpApp.config ['$routeProvider', ($routeProvider) ->
 		{templateUrl: 'views/404.html', controller: '404Ctrl'}
 	.when '/calendar',
 		{templateUrl:'Calendar/views/calendar.html',controller:'CalendarCtrl'}
+	.when '/task',
+		{templateUrl:'Task/views/tasklist.html',controller:'TaskListCtrl'}
 	.otherwise redirectTo: '/home'
 ]
 

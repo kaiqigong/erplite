@@ -2,7 +2,7 @@
 (function() {
   var erpApp;
 
-  erpApp = angular.module('erpApp', ['ngRoute', 'restangular', 'erpAnimations', 'erpDirectives', 'angularFileUpload', 'calendarModule', 'erpControllers', 'erpServices', 'erpFilters', 'contactModule', 'ui.bootstrap']);
+  erpApp = angular.module('erpApp', ['ngRoute', 'restangular', 'erpAnimations', 'erpDirectives', 'angularFileUpload', 'calendarModule', 'erpControllers', 'erpServices', 'erpFilters', 'taskModule', 'contactModule', 'ui.bootstrap']);
 
   erpApp.constant('erpSettings', {
     apiHost: 'http://localhost:8000',
@@ -42,6 +42,9 @@
       }).when('/calendar', {
         templateUrl: 'Calendar/views/calendar.html',
         controller: 'CalendarCtrl'
+      }).when('/task', {
+        templateUrl: 'Task/views/tasklist.html',
+        controller: 'TaskListCtrl'
       }).otherwise({
         redirectTo: '/home'
       });

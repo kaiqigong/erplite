@@ -1,0 +1,105 @@
+<div class="content">
+  <div class="titlebar">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-8">
+          <h2>
+            <a href="{{backUrl}}">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <span class="glyphicon glyphicon-user"></span>
+            <span>{{title}}</span>
+          </h2>
+
+        </div>
+        <div class="col-xs-4">
+          <h2><a href="#/task/new" id="add" class="pull-right"><span class="glyphicon glyphicon-plus"></span></a>
+          </h2>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="input-group">
+            <span class="input-group-addon">关键词</span>
+            <input type="text" class="form-control" ng-model="query" placeholder="查询">
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <button type="button" ng-click="toggleAdvanceSearch()" class="btn btn-primary">高级查询&nbsp;<span
+            class="caret"></span></button>
+        </div>
+        <div class="col-xs-3">
+          <a id="export" class="icon-btn pull-right"><span class="glyphicon glyphicon-cloud-download"></span></a>
+        </div>
+      </div>
+    </div>
+    <div collapse="isAdvanceSearchCollapsed" class="advanceSearch-block">
+      <div class="container">
+        <div class="row">
+          <div class="criteria col-xs-6">
+            <div class="input-group">
+              <label class="input-group-addon">标题</label><input class="form-control" type="text"/>
+            </div>
+          </div>
+          <div class="criteria col-xs-6">
+            <div class="input-group">
+              <label class="input-group-addon">描述</label><input class="form-control" type="text"/>
+            </div>
+          </div>
+          <div class="criteria col-xs-6">
+            <div class="input-group">
+              <label class="input-group-addon">标签</label><input class="form-control" type="text"/>
+            </div>
+          </div>
+          <div class="criteria col-xs-6">
+            <div class="dropdown">
+              <button class="btn dropdown-toggle">更多&nbsp;<span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a>key1</a>
+                </li>
+                <li>
+                  <a>key2</a>
+                </li>
+                <li>
+                  <a>key3</a>
+                </li>
+                <li>
+                  <a>key4</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="criteria col-xs-6">
+            <button class="btn btn-danger">搜索</button>
+          </div>
+        </div>
+        <div>
+          <button ng-click="toggleAdvanceSearch()" class="advanceSearch-collapse btn btn-primary">^</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="list-group">
+
+      <div ng-repeat="item in items | filter:query" class="col-xs-12 col-sm-12 col-md-6 list-item">
+        <a href="#/task/{{item.id}}" class="list-group-item row list-item">
+          <input type="checkbox" ng-model="item.completed" erp-icheck>
+          <label class="col-xs-2 col-sm-2 col-md-2">{{item.name}}</label>
+          <label class="col-xs-6 col-sm-6 col-md-6">{{item.description}}</label>
+          <label class="col-xs-3 col-sm-3 col-md-3 updatetime-small">{{item.modifiedDate | date:'medium'}}</label>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
