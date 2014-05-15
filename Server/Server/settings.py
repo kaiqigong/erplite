@@ -138,6 +138,7 @@ INSTALLED_APPS = (
 	'provider',
 	'provider.oauth2',
 	# 'oauth2_provider',
+	'Tasks',
 )
 
 REST_FRAMEWORK = {

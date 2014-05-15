@@ -29,7 +29,7 @@ from rest_framework_extensions.mixins import DetailSerializerMixin
 
 
 class ContactViewSet(DetailSerializerMixin, viewsets.ModelViewSet):
-	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	authentication_classes = (OAuth2Authentication,SessionAuthentication)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)# TokenHasReadWriteScope)
 
 	queryset = Contacts.objects.all()
@@ -37,7 +37,7 @@ class ContactViewSet(DetailSerializerMixin, viewsets.ModelViewSet):
 	serializer_detail_class = ContactsDetailSerializer
 
 class ContactTagViewSet(viewsets.ModelViewSet):
-	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	authentication_classes = (OAuth2Authentication,SessionAuthentication)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)#, TokenHasReadWriteScope)
 
 	queryset = ContactTag.objects.all()
@@ -51,7 +51,7 @@ class ContactTagViewSet(viewsets.ModelViewSet):
 		return super(ContactTagViewSet, self).get_queryset()
 
 class ContactDataViewSet(viewsets.ModelViewSet):
-	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	authentication_classes = (OAuth2Authentication,SessionAuthentication)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)#, TokenHasReadWriteScope)
 
 	queryset = ContactData.objects.all()
@@ -65,7 +65,7 @@ class ContactDataViewSet(viewsets.ModelViewSet):
 		return super(ContactDataViewSet, self).get_queryset()
 
 class ContactLinkViewSet(viewsets.ModelViewSet):
-	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	authentication_classes = (OAuth2Authentication,SessionAuthentication)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)#, TokenHasReadWriteScope)
 
 	queryset = ContactLink.objects.all()

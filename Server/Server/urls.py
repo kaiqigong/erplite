@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from Contacts import views
+from Contacts import views as contactView
+from Tasks import views as taskView
 from rest_framework.routers import DefaultRouter
 from rest_framework_nested import routers
 
@@ -9,14 +10,16 @@ admin.autodiscover()
 # router = routers.SimpleRouter()
 
 router = DefaultRouter()
-router.register(r'contacts', views.ContactViewSet)
-router.register(r'contacttag', views.ContactTagViewSet)
-router.register(r'contactdata', views.ContactDataViewSet)
-router.register(r'contactlink', views.ContactLinkViewSet)
+router.register(r'contacts', contactView.ContactViewSet)
+router.register(r'contacttag', contactView.ContactTagViewSet)
+router.register(r'contactdata', contactView.ContactDataViewSet)
+router.register(r'contactlink', contactView.ContactLinkViewSet)
+router.register(r'tasks',taskView.TaskViewSet)
+router.register(r'users', taskView.UserViewSet)
 
 contacts_router = routers.NestedSimpleRouter(router, r'contacts', lookup='contact')
-contacts_router.register(r'contactdata', views.ContactDataViewSet)
-contacts_router.register(r'contacttag', views.ContactTagViewSet)
+contacts_router.register(r'contactdata', contactView.ContactDataViewSet)
+contacts_router.register(r'contacttag', contactView.ContactTagViewSet)
 
 
 urlpatterns = patterns('',
