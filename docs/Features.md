@@ -48,3 +48,13 @@ owner可以specified到某个user或者group，每个人登录只能看到自己
 ##Task Link
 与Contact Link相同。 Link到相关的Contact, Order...  
 ##Task Comments, Tags, Attachments, Assignment 同Contact。
+
+#Tag
+##Create new tags
+System should record all the tags input and provide suggestions, like auto complete, when user typing.  
+Finish typing the tag by press enter/tab/out of focus. Cancel typing by press esc.  
+##Can delete or edit the tags
+##Query by tags
+List all the popular tags, and once click the tag, will quick filter the items.
+
+
