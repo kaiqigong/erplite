@@ -22,8 +22,8 @@ class Tasks(models.Model):
 	priority = models.CharField(choices=PRIORITY,
 								default='low',
 								max_length=100)
-	owner = models.ForeignKey('auth.User', related_name='task_owner',null=True, blank=True)
-	assignedUser = models.ManyToManyField('auth.User', null=True, blank=True)#,through='TaskAssignedUserDetail',
+	owner = models.ForeignKey('auth.User', related_name='tasksBelongToMe',null=True, blank=True)
+	assignedUser = models.ManyToManyField('auth.User', related_name='tasksAssignedToMe', null=True, blank=True)#,through='TaskAssignedUserDetail',
 	assignedGroup = models.ManyToManyField('auth.Group', null=True, blank=True)# through='TaskAssignedGroupDetail',
 	createdDate = models.DateTimeField(auto_now_add=True)
 	createdBy = models.CharField(max_length=100)

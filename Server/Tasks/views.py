@@ -18,11 +18,13 @@ class TaskViewSet(viewsets.ModelViewSet):#DetailSerializerMixin
 	serializer_class = TaskListSerializer
 	# serializer_detail_class = TaskDatailSerializer
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
+class UserViewSet(viewsets.ModelViewSet):
 	authentication_classes = (SessionAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)
 
-	queryset = User.objects.all()
+	model = User
+	# queryset = User.objects.all()
 	serializer_class = UserSerializer
 
-
+	def get_queryset(self):
+		return User.objects.filter(username=self.request.user.username)
