@@ -39,15 +39,72 @@
         return weeks;
       };
     }
+  ]).factory('eventsOfDay', [
+    function() {
+      return function(currentMoment, eventSource) {
+        var event, events, _i, _len;
+        events = [];
+        if (eventSource != null) {
+          for (_i = 0, _len = eventSource.length; _i < _len; _i++) {
+            event = eventSource[_i];
+            if (moment(event.start).isSame(currentMoment, 'day')) {
+              events.push(event);
+            }
+          }
+        }
+        return events;
+      };
+    }
+  ]).factory('bindEvents', [
+    'eventsOfDay', function(eventsOfDay) {
+      return function(eventSource, weeks) {
+        var day, week, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = weeks.length; _i < _len; _i++) {
+          week = weeks[_i];
+          _results.push((function() {
+            var _j, _len1, _results1;
+            _results1 = [];
+            for (_j = 0, _len1 = week.length; _j < _len1; _j++) {
+              day = week[_j];
+              day.events = eventsOfDay(day.day, eventSource);
+              _results1.push(day.hasEvents = day.events.length > 0 ? true : false);
+            }
+            return _results1;
+          })());
+        }
+        return _results;
+      };
+    }
+  ]).factory('findDayInWeeks', [
+    function() {
+      return function(date, weeks) {
+        var day, week, _i, _j, _len, _len1;
+        for (_i = 0, _len = weeks.length; _i < _len; _i++) {
+          week = weeks[_i];
+          for (_j = 0, _len1 = week.length; _j < _len1; _j++) {
+            day = week[_j];
+            if (day.day.isSame(date)) {
+              return day;
+            }
+          }
+        }
+      };
+    }
   ]).directive('coolCalendar', [
-    '$log', 'coolCalendarConfig', 'weeksOfMonth', function($log, coolCalendarConfig, weeksOfMonth) {
+    '$log', 'coolCalendarConfig', 'weeksOfMonth', 'eventsOfDay', 'bindEvents', 'findDayInWeeks', function($log, coolCalendarConfig, weeksOfMonth, eventsOfDay, bindEvents, findDayInWeeks) {
       return {
         restrict: 'EA',
         replace: true,
         templateUrl: coolCalendarConfig.templateUrl,
-        scope: true,
-        link: function($scope, $element, $attrs) {
-          var sunday;
+        scope: {
+          'height': '=calendarHeight',
+          'eventSource': '=eventSource',
+          'selectedDay': '=selectedDay',
+          'dayClickHandler': '=dayClick'
+        },
+        link: function($scope, $element) {
+          var handles, lastChosen, sunday;
           $scope.coolCalendarConfig = coolCalendarConfig;
           if ($scope.coolCalendarConfig.useIsoweek) {
             $scope.dayNames = angular.copy($scope.coolCalendarConfig.dayNames);
@@ -63,8 +120,105 @@
           $scope.rowStyle = {
             "height": ($scope.height - 60) / 5 + "px"
           };
-          $scope.selectedDay = new Date();
-          return $scope.weeks = weeksOfMonth($scope.selectedDay);
+          $scope.$watch('height', function(newValue, oldValue) {
+            if ((newValue != null) && newValue !== oldValue) {
+              $scope.calendarStyle = {
+                "height": newValue + "px"
+              };
+              return $scope.rowStyle = {
+                "height": (newValue - 60) / 5 + "px"
+              };
+            }
+          });
+          handles = [];
+          $scope.selectedDay = moment()._d;
+          $scope.weeks = weeksOfMonth($scope.selectedDay);
+          $scope.$watch('selectedDay', function(newValue, oldValue) {
+            var handle, _i, _len;
+            if ((newValue != null) && newValue !== oldValue) {
+              $scope.weeks = weeksOfMonth(newValue);
+              bindEvents($scope.eventSource, $scope.weeks);
+              for (_i = 0, _len = handles.length; _i < _len; _i++) {
+                handle = handles[_i];
+                handle();
+              }
+              return handles = [];
+            }
+          });
+          bindEvents($scope.eventSource, $scope.weeks);
+          $scope.$watchCollection('eventSource', function(newValue, oldValue) {
+            if ((newValue != null) && newValue !== oldValue) {
+              return bindEvents($scope.eventSource, $scope.weeks);
+            }
+          });
+          lastChosen = {};
+          $scope.dayClick = function(weekDay, $event) {
+            var cordinate, day, week, x, y, _i, _j, _len, _len1, _ref;
+            if (!weekDay.isInCurrentMonth) {
+              $scope.selectedDay = moment($scope.selectedDay).year(weekDay.day.year()).month(weekDay.day.month())._d;
+              handles.push(function() {
+                var cordinate, day, week, x, y, _i, _j, _len, _len1, _ref;
+                weekDay = findDayInWeeks(weekDay.day, $scope.weeks);
+                lastChosen.isChosen = false;
+                weekDay.isChosen = true;
+                lastChosen = weekDay;
+                if ($scope.dayClickHandler != null) {
+                  cordinate = {};
+                  y = 0;
+                  _ref = $scope.weeks;
+                  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                    week = _ref[_i];
+                    y++;
+                    x = 0;
+                    for (_j = 0, _len1 = week.length; _j < _len1; _j++) {
+                      day = week[_j];
+                      x++;
+                      if (day.day.isSame(weekDay.day)) {
+                        cordinate.x = x;
+                        cordinate.y = y;
+                        break;
+                      }
+                    }
+                  }
+                  cordinate.cellHeight = ($scope.height - 60) / 5;
+                  cordinate.cellWidth = $element.find(".weekday")[0].clientWidth;
+                  return $scope.dayClickHandler(weekDay, $event, cordinate);
+                }
+              });
+              return;
+            }
+            lastChosen.isChosen = false;
+            weekDay.isChosen = true;
+            lastChosen = weekDay;
+            if ($scope.dayClickHandler != null) {
+              cordinate = {};
+              y = 0;
+              _ref = $scope.weeks;
+              for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                week = _ref[_i];
+                y++;
+                x = 0;
+                for (_j = 0, _len1 = week.length; _j < _len1; _j++) {
+                  day = week[_j];
+                  x++;
+                  if (day.day.isSame(weekDay.day)) {
+                    cordinate.x = x;
+                    cordinate.y = y;
+                    break;
+                  }
+                }
+              }
+              cordinate.cellHeight = ($scope.height - 60) / 5;
+              cordinate.cellWidth = $element.find(".weekday")[0].clientWidth;
+              return $scope.dayClickHandler(weekDay, $event, cordinate);
+            }
+          };
+          $scope.prevClick = function() {
+            return $scope.selectedDay = moment($scope.selectedDay).add('months', -1)._d;
+          };
+          return $scope.nextClick = function() {
+            return $scope.selectedDay = moment($scope.selectedDay).add('months', 1)._d;
+          };
         }
       };
     }

@@ -7,52 +7,59 @@
       events = [
         {
           title: "event1",
-          start: new Date(),
+          start: moment()._d,
           end: new Date(),
           allDay: false
         }, {
           title: "event1",
-          start: new Date(),
+          start: moment().add("days", 3)._d,
           end: new Date(),
           allDay: false
         }, {
           title: "event1",
-          start: new Date(),
+          start: moment().add("days", -3)._d,
           end: new Date(),
           allDay: false
         }, {
           title: "event1",
-          start: new Date(),
+          start: moment().add("weeks", 1)._d,
           end: new Date(),
           allDay: false
         }, {
           title: "event1",
-          start: new Date(),
+          start: moment().add("weeks", -1)._d,
           end: new Date(),
           allDay: false
         }
       ];
-      $scope.eventSource = [events];
-      $scope.dayClick = function(date, dayEvents, jsEvent) {
-        $scope.dayEvents = dayEvents;
-        $log.log(jsEvent);
-        return $log.log(date);
+      $scope.eventSource = events;
+      $scope.dayClick = function(date, jsEvent) {
+        $log.log(date);
+        return $log.log(jsEvent);
       };
       $scope.dayHover = function(date, dayEvents, jsEvent) {
         $scope.dayEvents = dayEvents;
         $log.log(jsEvent);
         return $log.log(date);
       };
+      $scope.selectedDay = new Date();
+      $scope.calendarHeight = 350;
+      $scope.changeHeight = function() {
+        return $scope.calendarHeight = 800 - $scope.calendarHeight;
+      };
+      $scope.changeDate = function() {
+        return $scope.selectedDay = moment($scope.selectedDay).add('months', 1)._d;
+      };
       $scope.removeEvent = function(event) {
         if (events.indexOf(event) > -1) {
           return events.slice(events.indexOf(event), 0);
         }
       };
-      return $scope.addEvent = function(title, start, end) {
+      return $scope.addEvent = function() {
         return events.push({
-          start: start,
-          end: end,
-          title: title,
+          title: "event1",
+          start: moment().add("days", 5)._d,
+          end: new Date(),
           allDay: false
         });
       };

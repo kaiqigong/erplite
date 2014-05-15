@@ -95,8 +95,15 @@
   padding: 2px;
   border: 3px transparent solid;
   border-radius: 100px;
+  cursor: pointer;
 }
 .coolcalendar .week .circle:hover {
+  border: 3px #1387C0 solid;
+}
+.coolcalendar .week .has-events .circle {
+  border: 3px #1387C0 solid;
+}
+.coolcalendar .week .is-chosen .circle {
   border: 3px #1387C0 solid;
 }
 .coolcalendar .week .today .circle {
