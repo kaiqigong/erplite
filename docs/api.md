@@ -13,3 +13,6 @@
     "contacttag": "http://localhost:8000/contacttag/",  
     "contactdata": "http://localhost:8000/contactdata/"  
 
+4. For Tasks Model:  
+	"user": "http://localhost:8000/user/"
+	"tasks": "http://localhost:8000/tasks/"
