@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from Tasks.models import Tasks#, TaskAssignedUserDetail, TaskAssignedGroupDetail
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 
 # class AssignedUserSerializer(serializers.ModelSerializer):
 # 	assignedUser = serializers.Field(source='User.username')
@@ -30,3 +31,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = User
 		fields = ('tasksBelongToMe', 'tasksAssignedToMe')
+
+class GroupSerializer(serializers.HyperlinkedModelSerializer):
+	tasksAssignedToMyGroup = serializers.HyperlinkedRelatedField(many=True, view_name='tasks-detail')
+
+	class Meta:
+		model = Group
+		fields = ('tasksAssignedToMyGroup',)
