@@ -24,7 +24,7 @@ class Tasks(models.Model):
 								max_length=100)
 	owner = models.ForeignKey('auth.User', related_name='tasksBelongToMe',null=True, blank=True)
 	assignedUser = models.ManyToManyField('auth.User', related_name='tasksAssignedToMe', null=True, blank=True)#,through='TaskAssignedUserDetail',
-	assignedGroup = models.ManyToManyField('auth.Group', related_name='tasksAssignedToMyGroup', null=True, blank=True)# through='TaskAssignedGroupDetail',
+	assignedGroup = models.ManyToManyField('auth.Group', related_name='tasksAssignedToGroup', null=True, blank=True)# through='TaskAssignedGroupDetail',
 	createdDate = models.DateTimeField(auto_now_add=True)
 	createdBy = models.CharField(max_length=100)
 	modifiedDate = models.DateTimeField(auto_now=True)

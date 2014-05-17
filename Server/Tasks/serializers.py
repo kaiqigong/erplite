@@ -33,8 +33,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 		fields = ('tasksBelongToMe', 'tasksAssignedToMe')
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
-	tasksAssignedToMyGroup = serializers.HyperlinkedRelatedField(many=True, view_name='tasks-detail')
+	tasksAssignedToGroup = serializers.HyperlinkedRelatedField(many=True, view_name='tasks-detail')
 
 	class Meta:
 		model = Group
-		fields = ('tasksAssignedToMyGroup',)
+		fields = ('name','tasksAssignedToGroup',)

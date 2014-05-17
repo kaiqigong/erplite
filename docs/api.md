@@ -14,5 +14,6 @@
     "contactdata": "http://localhost:8000/contactdata/"  
 
 4. For Tasks Model:  
-	"user": "http://localhost:8000/user/"
-	"tasks": "http://localhost:8000/tasks/"
+	"tasks assigned to current user": "http://localhost:8000/user/"  
+	"tasks assigned to current user group": "http://localhost:8000/groups/"  
+	"tasks": "http://localhost:8000/tasks/"  
