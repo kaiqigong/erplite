@@ -15,12 +15,17 @@ router.register(r'contacttag', contactView.ContactTagViewSet)
 router.register(r'contactdata', contactView.ContactDataViewSet)
 router.register(r'contactlink', contactView.ContactLinkViewSet)
 router.register(r'tasks',taskView.TaskViewSet)
+router.register(r'tasktag',taskView.TaskTagViewSet)
+router.register(r'tasklink',taskView.TaskLinkViewSet)
 router.register(r'users', taskView.UserViewSet)
 router.register(r'groups', taskView.GroupViewSet)
 
 contacts_router = routers.NestedSimpleRouter(router, r'contacts', lookup='contact')
 contacts_router.register(r'contactdata', contactView.ContactDataViewSet)
 contacts_router.register(r'contacttag', contactView.ContactTagViewSet)
+
+tasks_router = routers.NestedSimpleRouter(router, r'tasks', lookup='task')
+tasks_router.register(r'tasktag', taskView.TaskTagViewSet)
 
 
 urlpatterns = patterns('',
@@ -31,6 +36,7 @@ urlpatterns = patterns('',
     # url(r'^', include('Contacts.urls')),
     url(r'^', include(router.urls)),
     url(r'^', include(contacts_router.urls)),
+    url(r'^', include(tasks_router.urls)),
     url(r'^accounts/', include('Accounts.urls')),
     url(r'^files/', include('FileUpload.urls')),
     # url(r'^login/', 'rest_framework.authtoken.views.obtain_auth_token'),

@@ -30,7 +30,6 @@ class ContactTagSerializer(serializers.ModelSerializer):
 
 class ContactLinkSerializer(serializers.ModelSerializer):
 	contactname = serializers.Field(source='contact.name')
-	entityname = serializers.Field(source='entity.name')
 	class Meta:
 		model = ContactLink
-		fields = ('contact','contactname','entityType', 'entity','entityname', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')
+		fields = ('contact','contactname','entityType', 'entityId', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')

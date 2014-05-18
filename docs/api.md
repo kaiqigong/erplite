@@ -8,12 +8,47 @@
 	“change password”: "http://localhost:8000/accounts/changepwd"  
 	
 3. For Contacts Model:  
-	"contactlink": "http://localhost:8000/contactlink/",  
-    "contacts": "http://localhost:8000/contacts/",  
-    "contacttag": "http://localhost:8000/contacttag/",  
-    "contactdata": "http://localhost:8000/contactdata/"  
+	^contacts/$ [name='contacts-list']  
+	^contacts/\.(?P<format>[a-z0-9]+)$ [name='contacts-list']  
+	^contacts/(?P<pk>[^/]+)/$ [name='contacts-detail']  
+	^contacts/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='contacts-detail']  
+	^contacttag/$ [name='contacttag-list']  
+	^contacttag/\.(?P<format>[a-z0-9]+)$ [name='contacttag-list']  
+	^contacttag/(?P<pk>[^/]+)/$ [name='contacttag-detail']  
+	^contacttag/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='contacttag-detail']  
+	^contactdata/$ [name='contactdata-list']  
+	^contactdata/\.(?P<format>[a-z0-9]+)$ [name='contactdata-list']  
+	^contactdata/(?P<pk>[^/]+)/$ [name='contactdata-detail']  
+	^contactdata/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='contactdata-detail']  
+	^contactlink/$ [name='contactlink-list']  
+	^contactlink/\.(?P<format>[a-z0-9]+)$ [name='contactlink-list']  
+	^contactlink/(?P<pk>[^/]+)/$ [name='contactlink-detail']  
+	^contactlink/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='contactlink-detail']  
+	^contacts/(?P<contact_pk>[^/]+)/contactdata/$ [name='contactdata-list']  
+	^contacts/(?P<contact_pk>[^/]+)/contactdata/(?P<pk>[^/]+)/$ [name='contactdata-detail']  
+	^contacts/(?P<contact_pk>[^/]+)/contacttag/$ [name='contacttag-list']  
+	^contacts/(?P<contact_pk>[^/]+)/contacttag/(?P<pk>[^/]+)/$ [name='contacttag-detail']  
 
 4. For Tasks Model:  
-	"tasks assigned to current user": "http://localhost:8000/user/"  
-	"tasks assigned to current user group": "http://localhost:8000/groups/"  
-	"tasks": "http://localhost:8000/tasks/"  
+	^tasks/$ [name='tasks-list']  
+	^tasks/\.(?P<format>[a-z0-9]+)$ [name='tasks-list']  
+	^tasks/(?P<pk>[^/]+)/$ [name='tasks-detail']  
+	^tasks/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='tasks-detail']  
+	^tasktag/$ [name='tasktag-list']  
+	^tasktag/\.(?P<format>[a-z0-9]+)$ [name='tasktag-list']  
+	^tasktag/(?P<pk>[^/]+)/$ [name='tasktag-detail']  
+	^tasktag/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='tasktag-detail']  
+	^tasklink/$ [name='tasklink-list']  
+	^tasklink/\.(?P<format>[a-z0-9]+)$ [name='tasklink-list']  
+	^tasklink/(?P<pk>[^/]+)/$ [name='tasklink-detail']  
+	^tasklink/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='tasklink-detail']  
+
+5. For User and Group:  
+	^users/$ [name='user-list']  
+	^users/\.(?P<format>[a-z0-9]+)$ [name='user-list']  
+	^users/(?P<pk>[^/]+)/$ [name='user-detail']  
+	^users/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='user-detail']  
+	^groups/$ [name='group-list']  
+	^groups/\.(?P<format>[a-z0-9]+)$ [name='group-list']  
+	^groups/(?P<pk>[^/]+)/$ [name='group-detail']  
+	^groups/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='group-detail']  

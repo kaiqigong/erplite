@@ -33,6 +33,29 @@ class Tasks(models.Model):
 	def __unicode__(self):
 		return '%s' % (self.name)
 
+class TaskTag(models.Model):
+	task = models.ForeignKey('Tasks', related_name='tags')
+	tag = models.CharField(max_length=100)
+	createdDate = models.DateTimeField(auto_now_add=True)
+	createdBy = models.CharField(max_length=100)
+	modifiedDate = models.DateTimeField(auto_now=True)
+	modifiedBy = models.CharField(max_length=100)
+
+	def __unicode__(self):
+		return '%s' % (self.tag)
+
+class TaskLink(models.Model):
+	task = models.ForeignKey('Tasks', related_name='links')
+	entityType = models.TextField()
+	entityId = models.CharField(max_length=255)
+	createdDate = models.DateTimeField(auto_now_add=True)
+	createdBy = models.CharField(max_length=100)
+	modifiedDate = models.DateTimeField(auto_now=True)
+	modifiedBy = models.CharField(max_length=100)
+
+	def __unicode__(self):
+		return '%s: %s' % (self.entityType, self.entityId)
+
 # class TaskAssignedUserDetail(models.Model):
 # 	task = models.ForeignKey(Tasks)
 # 	assignedUser = models.ForeignKey(User)
