@@ -53,14 +53,14 @@ class ContactData(models.Model):
 class ContactLink(models.Model):
 	contact = models.ForeignKey('Contacts', related_name='links')
 	entityType = models.TextField()
-	entity = models.ForeignKey('Entity')
+	entityId = models.CharField(max_length=255)
 	createdDate = models.DateTimeField(auto_now_add=True)
 	createdBy = models.CharField(max_length=100)
 	modifiedDate = models.DateTimeField(auto_now=True)
 	modifiedBy = models.CharField(max_length=100)
 
 	def __unicode__(self):
-		return '%s: %s' % (self.entityType, self.entity)
+		return '%s: %s' % (self.entityType, self.entityId)
 
 
 # class ContactComment(models.Model):
@@ -74,12 +74,12 @@ class ContactLink(models.Model):
 
 
 
-class Entity(models.Model):
-	name = models.TextField()
-	createdDate = models.DateTimeField(auto_now_add=True)
-	createdBy = models.CharField(max_length=100)
-	modifiedDate = models.DateTimeField(auto_now=True)
-	modifiedBy = models.CharField(max_length=100)
+# class Entity(models.Model):
+# 	name = models.TextField()
+# 	createdDate = models.DateTimeField(auto_now_add=True)
+# 	createdBy = models.CharField(max_length=100)
+# 	modifiedDate = models.DateTimeField(auto_now=True)
+# 	modifiedBy = models.CharField(max_length=100)
 
-	def __unicode__(self):
-		return '%s' % self.name
+# 	def __unicode__(self):
+# 		return '%s' % self.name
