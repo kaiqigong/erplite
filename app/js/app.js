@@ -52,7 +52,7 @@
   ]);
 
   erpApp.run([
-    '$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangular', 'security', function($rootScope, $location, $log, $http, erpSettings, Restangular, security) {
+    '$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangular', 'security', 'erplite.utils', function($rootScope, $location, $log, $http, erpSettings, Restangular, security, utils) {
       security.restoreToken();
       Restangular.setBaseUrl(erpSettings.apiHost);
       Restangular.setRestangularFields({
@@ -70,8 +70,11 @@
       });
       return $http.get(erpSettings.apiHost).success(function(data) {
         return $rootScope.apimap = data;
-      }).error(function(error) {
-        return $log.log(error);
+      }).error(function(error, status) {
+        return utils.HttpHandle({
+          status: status,
+          data: error
+        });
       });
     }
   ]);

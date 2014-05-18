@@ -45,8 +45,8 @@ erpApp.config ['$routeProvider', ($routeProvider) ->
 	.otherwise redirectTo: '/home'
 ]
 
-erpApp.run ['$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangular', 'security',
-	($rootScope, $location, $log, $http, erpSettings, Restangular, security) ->
+erpApp.run ['$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangular', 'security','erplite.utils',
+	($rootScope, $location, $log, $http, erpSettings, Restangular, security,utils) ->
 		security.restoreToken()
 
 		# Restangular settings
@@ -68,8 +68,8 @@ erpApp.run ['$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangu
 		.get erpSettings.apiHost
 		.success (data)->
 			$rootScope.apimap = data
-		.error (error)->
-			$log.log error
+		.error (error,status)->
+			utils.HttpHandle({status:status,data:error})
 ]
 
 
