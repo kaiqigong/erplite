@@ -20,7 +20,7 @@ class TaskViewSet(DetailSerializerMixin, viewsets.ModelViewSet):#
 	serializer_detail_class = TaskDatailSerializer
 
 class TaskTagViewSet(viewsets.ModelViewSet):
-	authentication_classes = (OAuth2Authentication,SessionAuthentication)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)#, TokenHasReadWriteScope)
 
 	queryset = TaskTag.objects.all()
@@ -33,7 +33,7 @@ class TaskTagViewSet(viewsets.ModelViewSet):
 		return super(TaskTagViewSet, self).get_queryset()
 
 class TaskLinkViewSet(viewsets.ModelViewSet):
-	authentication_classes = (OAuth2Authentication,SessionAuthentication)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)#, TokenHasReadWriteScope)
 
 	queryset = TaskLink.objects.all()
