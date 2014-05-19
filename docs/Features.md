@@ -57,4 +57,13 @@ Finish typing the tag by press enter/tab/out of focus. Cancel typing by press es
 ##Query by tags
 List all the popular tags, and once click the tag, will quick filter the items.
 
+#Event
+##Event Fields
+uid, name, description, location, start, end, originator, attendee, recurrence, tag, link, comment, attachment
+description nullable
+location nullable
+attendee  参与者，1对多，所有参与者可以看到该event。不可以修改删除。可以自己退出该event
+originator  发起人，1:1，发起人可以邀请参与者。可以删除，修改event
+recurrence nullable 一种数据格式，如果有值，表示此event为定期事件。"RRULE:FREQ=WEEKLY;UNTIL=20110701T100000-07:00"
+##Mimic [Google Calendar api](https://developers.google.com/google-apps/calendar/)
 
