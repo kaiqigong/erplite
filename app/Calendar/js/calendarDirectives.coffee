@@ -1,6 +1,7 @@
 angular.module 'calendarModule'
 .constant 'coolCalendarConfig', {
 	useIsoweek: true
+	headerHeight: 60
 	height: 360
 	dayNames: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 	templateUrl: 'Calendar/views/calendarTpl.html'
@@ -30,6 +31,7 @@ angular.module 'calendarModule'
 				weekDay.day = day
 				weekDay.isInCurrentMonth = if day.month() is selectedDay.month() then true else false
 				weekDay.isToday = if day.isSame(moment(), 'day') then true else false
+				weekDay.isSelected = if day.isSame(date,'day') then true else false
 				week.push weekDay
 			weeks.push week
 		return weeks
@@ -67,34 +69,38 @@ angular.module 'calendarModule'
 			'eventSource': '=eventSource'
 			'selectedDay': '=selectedDay'
 			'dayClickHandler': '=dayClick'
-		link: ($scope,$element)->
+			'headerHeight': '@headerHeight'
+		link: ($scope, $element)->
 			#config useIsoweek and dayNames, change this config in app.config
-			$scope.coolCalendarConfig = coolCalendarConfig
-			if $scope.coolCalendarConfig.useIsoweek
-				$scope.dayNames = angular.copy($scope.coolCalendarConfig.dayNames)
+			if coolCalendarConfig.useIsoweek
+				$scope.dayNames = angular.copy(coolCalendarConfig.dayNames)
 			else
-				$scope.dayNames = angular.copy($scope.coolCalendarConfig.dayNames)
+				$scope.dayNames = angular.copy(coolCalendarConfig.dayNames)
 				sunday = $scope.dayNames.pop()
 				$scope.dayNames.unshift(sunday)
 
 			# watch height
-			$scope.height = $scope.coolCalendarConfig.height;
+			if not $scope.height?
+				$scope.height = coolCalendarConfig.height;
+
+			if not $scope.headerHeight?
+				$scope.headerHeight = coolCalendarConfig.headerHeight
 			$scope.calendarStyle = {"height": $scope.height + "px"}
-			$scope.rowStyle = {"height": ($scope.height - 60) / 5 + "px"}
-
+			$scope.calendarHeaderStyle = {"height":$scope.headerHeight / 2 + "px"}
+			$scope.rowStyle = {"height": (if ($scope.height - $scope.headerHeight) / 5 > 24 then ($scope.height - $scope.headerHeight) / 5 else 24) + "px"}
 			$scope.$watch 'height', (newValue, oldValue)->
-				if newValue? and newValue isnt oldValue
+				if newValue?
 					$scope.calendarStyle = {"height": newValue + "px"}
-					$scope.rowStyle = {"height": (newValue - 60) / 5 + "px"}
-
+					$scope.rowStyle = {"height": (if (newValue - $scope.headerHeight) / 5 > 24 then (newValue - $scope.headerHeight) / 5 else 24) + "px" }
 			handles = []
 
 			# watch selectedDay, change weeks and re-bind events
-			$scope.selectedDay = moment()._d
+			if not $scope.selectedDay?
+				$scope.selectedDay = moment()._d
 			$scope.weeks = weeksOfMonth($scope.selectedDay)
 
 			$scope.$watch 'selectedDay', (newValue, oldValue)->
-				if newValue? and newValue isnt oldValue
+				if newValue?
 					$scope.weeks = weeksOfMonth(newValue)
 					bindEvents($scope.eventSource, $scope.weeks)
 					for handle in handles
@@ -104,7 +110,7 @@ angular.module 'calendarModule'
 			# bind event source, and watch eventSource, when the eventSource changes, re-bind
 			bindEvents($scope.eventSource, $scope.weeks)
 			$scope.$watchCollection 'eventSource', (newValue, oldValue)->
-				if newValue? and newValue isnt oldValue
+				if newValue?
 					bindEvents($scope.eventSource, $scope.weeks)
 
 
@@ -121,7 +127,7 @@ angular.module 'calendarModule'
 						if $scope.dayClickHandler?
 							#calculate cordinate
 							cordinate = {}
-							y=0
+							y = 0
 							for week in $scope.weeks
 								y++
 								x = 0
@@ -131,7 +137,7 @@ angular.module 'calendarModule'
 										cordinate.x = x
 										cordinate.y = y
 										break;
-							cordinate.cellHeight = ($scope.height - 60) / 5
+							cordinate.cellHeight = ($scope.height - $scope.headerHeight) / 5
 							cordinate.cellWidth = $element.find(".weekday")[0].clientWidth
 							$scope.dayClickHandler(weekDay, $event, cordinate)
 					return
@@ -141,7 +147,7 @@ angular.module 'calendarModule'
 				if $scope.dayClickHandler?
 					#calculate cordinate
 					cordinate = {}
-					y=0
+					y = 0
 					for week in $scope.weeks
 						y++
 						x = 0
@@ -152,7 +158,7 @@ angular.module 'calendarModule'
 								cordinate.y = y
 								break;
 
-					cordinate.cellHeight = ($scope.height - 60) / 5
+					cordinate.cellHeight = ($scope.height - $scope.headerHeight) / 5
 					cordinate.cellWidth = $element.find(".weekday")[0].clientWidth
 					$scope.dayClickHandler(weekDay, $event, cordinate)
 

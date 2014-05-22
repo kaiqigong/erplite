@@ -1,12 +1,36 @@
-<div class="content">
+<div class="content task-list">
   <div ng-include="'Common/views/listTitleBar.html'"></div>
 
   <div ng-include="'Common/views/listToolBar.html'"></div>
 
   <div class="container">
+    <a ng-click="isNewTaskPanelShow = true">+ 添加任务</a>
+
+    <div class="create-task" ng-show="isNewTaskPanelShow">
+      <div>
+        <input ng-model="newTask.name" class="input edit" ng-click="isCalOpen = false"/>
+
+        <div class="cal">
+          <div class="dropdown-toggle">
+            <input class="dateDisplay input" ng-click="isCalOpen = true"
+                   ng-model="newTaskDueStr" placeholder="no due date"/>
+            <i class="fa fa-calendar" ng-click="isCalOpen = !isCalOpen"></i>
+          </div>
+          <div class="timeEditor" ng-show="isCalOpen">
+            <div cool-calendar day-click="dayClick" header-height="50"
+                 calendar-height="calendarHeight" event-source="eventSource" selected-day="selectedDay">
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <a ng-click="isNewTaskPanelShow = false; confirmAdd(newTask)" class="button mid blue">确定</a>
+          <a ng-click="isNewTaskPanelShow = false" class="button cancel">取消</a>
+        </div>
+      </div>
+    </div>
     <div class="list-group">
 
-      <div ng-repeat="item in items | filter:query" class="col-xs-12 col-sm-12 col-md-6 list-item">
+      <div ng-repeat="item in tasks | filter:query" class="col-xs-12 col-sm-12 col-md-6 list-item">
         <a href="#/task/{{item.id}}" class="list-group-item row list-item">
           <input type="checkbox" ng-model="item.completed" erp-icheck>
           <label class="col-xs-2 col-sm-2 col-md-2">{{item.name}}</label>

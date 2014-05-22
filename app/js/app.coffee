@@ -39,14 +39,14 @@ erpApp.config ['$routeProvider', ($routeProvider) ->
 	.when '/404',
 		{templateUrl: 'views/404.html', controller: '404Ctrl'}
 	.when '/calendar',
-		{templateUrl:'Calendar/views/calendar.html',controller:'CalendarCtrl'}
+		{templateUrl: 'Calendar/views/calendar.html', controller: 'CalendarCtrl'}
 	.when '/task',
-		{templateUrl:'Task/views/tasklist.html',controller:'TaskListCtrl'}
+		{templateUrl: 'Task/views/tasklist.html', controller: 'TaskListCtrl'}
 	.otherwise redirectTo: '/home'
 ]
 
-erpApp.run ['$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangular', 'security','erplite.utils',
-	($rootScope, $location, $log, $http, erpSettings, Restangular, security,utils) ->
+erpApp.run ['$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangular', 'security', 'erplite.utils',
+	($rootScope, $location, $log, $http, erpSettings, Restangular, security, utils) ->
 		security.restoreToken()
 
 		# Restangular settings
@@ -64,12 +64,14 @@ erpApp.run ['$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangu
 				when '401' then $location.url "/login?path=" + next
 				when '404' then $location.url "/404"
 
+		$rootScope.$utils = utils
+
 		$http
 		.get erpSettings.apiHost
 		.success (data)->
 			$rootScope.apimap = data
-		.error (error,status)->
-			utils.HttpHandle({status:status,data:error})
+		.error (error, status)->
+			utils.HttpHandle({status: status, data: error})
 ]
 
 

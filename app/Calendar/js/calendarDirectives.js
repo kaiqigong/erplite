@@ -2,6 +2,7 @@
 (function() {
   angular.module('calendarModule').constant('coolCalendarConfig', {
     useIsoweek: true,
+    headerHeight: 60,
     height: 360,
     dayNames: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     templateUrl: 'Calendar/views/calendarTpl.html'
@@ -32,6 +33,7 @@
             weekDay.day = day;
             weekDay.isInCurrentMonth = day.month() === selectedDay.month() ? true : false;
             weekDay.isToday = day.isSame(moment(), 'day') ? true : false;
+            weekDay.isSelected = day.isSame(date, 'day') ? true : false;
             week.push(weekDay);
           }
           weeks.push(week);
@@ -101,41 +103,51 @@
           'height': '=calendarHeight',
           'eventSource': '=eventSource',
           'selectedDay': '=selectedDay',
-          'dayClickHandler': '=dayClick'
+          'dayClickHandler': '=dayClick',
+          'headerHeight': '@headerHeight'
         },
         link: function($scope, $element) {
           var handles, lastChosen, sunday;
-          $scope.coolCalendarConfig = coolCalendarConfig;
-          if ($scope.coolCalendarConfig.useIsoweek) {
-            $scope.dayNames = angular.copy($scope.coolCalendarConfig.dayNames);
+          if (coolCalendarConfig.useIsoweek) {
+            $scope.dayNames = angular.copy(coolCalendarConfig.dayNames);
           } else {
-            $scope.dayNames = angular.copy($scope.coolCalendarConfig.dayNames);
+            $scope.dayNames = angular.copy(coolCalendarConfig.dayNames);
             sunday = $scope.dayNames.pop();
             $scope.dayNames.unshift(sunday);
           }
-          $scope.height = $scope.coolCalendarConfig.height;
+          if ($scope.height == null) {
+            $scope.height = coolCalendarConfig.height;
+          }
+          if ($scope.headerHeight == null) {
+            $scope.headerHeight = coolCalendarConfig.headerHeight;
+          }
           $scope.calendarStyle = {
             "height": $scope.height + "px"
           };
+          $scope.calendarHeaderStyle = {
+            "height": $scope.headerHeight / 2 + "px"
+          };
           $scope.rowStyle = {
-            "height": ($scope.height - 60) / 5 + "px"
+            "height": (($scope.height - $scope.headerHeight) / 5 > 24 ? ($scope.height - $scope.headerHeight) / 5 : 24) + "px"
           };
           $scope.$watch('height', function(newValue, oldValue) {
-            if ((newValue != null) && newValue !== oldValue) {
+            if (newValue != null) {
               $scope.calendarStyle = {
                 "height": newValue + "px"
               };
               return $scope.rowStyle = {
-                "height": (newValue - 60) / 5 + "px"
+                "height": ((newValue - $scope.headerHeight) / 5 > 24 ? (newValue - $scope.headerHeight) / 5 : 24) + "px"
               };
             }
           });
           handles = [];
-          $scope.selectedDay = moment()._d;
+          if ($scope.selectedDay == null) {
+            $scope.selectedDay = moment()._d;
+          }
           $scope.weeks = weeksOfMonth($scope.selectedDay);
           $scope.$watch('selectedDay', function(newValue, oldValue) {
             var handle, _i, _len;
-            if ((newValue != null) && newValue !== oldValue) {
+            if (newValue != null) {
               $scope.weeks = weeksOfMonth(newValue);
               bindEvents($scope.eventSource, $scope.weeks);
               for (_i = 0, _len = handles.length; _i < _len; _i++) {
@@ -147,7 +159,7 @@
           });
           bindEvents($scope.eventSource, $scope.weeks);
           $scope.$watchCollection('eventSource', function(newValue, oldValue) {
-            if ((newValue != null) && newValue !== oldValue) {
+            if (newValue != null) {
               return bindEvents($scope.eventSource, $scope.weeks);
             }
           });
@@ -180,7 +192,7 @@
                       }
                     }
                   }
-                  cordinate.cellHeight = ($scope.height - 60) / 5;
+                  cordinate.cellHeight = ($scope.height - $scope.headerHeight) / 5;
                   cordinate.cellWidth = $element.find(".weekday")[0].clientWidth;
                   return $scope.dayClickHandler(weekDay, $event, cordinate);
                 }
@@ -208,7 +220,7 @@
                   }
                 }
               }
-              cordinate.cellHeight = ($scope.height - 60) / 5;
+              cordinate.cellHeight = ($scope.height - $scope.headerHeight) / 5;
               cordinate.cellWidth = $element.find(".weekday")[0].clientWidth;
               return $scope.dayClickHandler(weekDay, $event, cordinate);
             }

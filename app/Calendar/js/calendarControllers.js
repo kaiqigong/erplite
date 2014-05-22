@@ -34,8 +34,7 @@
       ];
       $scope.eventSource = events;
       $scope.dayClick = function(date, jsEvent) {
-        $log.log(date);
-        return $log.log(jsEvent);
+        return $log.log(date);
       };
       $scope.dayHover = function(date, dayEvents, jsEvent) {
         $scope.dayEvents = dayEvents;
@@ -52,7 +51,7 @@
       };
       $scope.removeEvent = function(event) {
         if (events.indexOf(event) > -1) {
-          return events.slice(events.indexOf(event), 0);
+          return events.splice(events.indexOf(event), 1);
         }
       };
       return $scope.addEvent = function() {

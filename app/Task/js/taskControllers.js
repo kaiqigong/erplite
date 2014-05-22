@@ -2,6 +2,7 @@
 (function() {
   angular.module('taskModule').controller('TaskListCtrl', [
     '$scope', '$rootScope', '$http', '$log', 'Restangular', 'erplite.utils', function($scope, $rootScope, $http, $log, Restangular, utils) {
+      var validate;
       $scope.title = "任务";
       $scope.backUrl = "#/home";
       $scope.isAdvanceSearchCollapsed = true;
@@ -13,9 +14,11 @@
         }
       };
       $scope.currentPage = 1;
+      $scope.calendarHeight = 220;
+      $scope.newTask = {};
       $scope.progressBar.start();
       $scope.progressBar.set(50);
-      return Restangular.all('tasks').getList().then(function(tasks) {
+      Restangular.all('tasks').getList().then(function(tasks) {
         $scope.tasks = tasks;
         return $scope.progressBar.end();
       }, function(reason) {
@@ -24,6 +27,32 @@
       }, function() {
         return $scope.progressBar.end();
       });
+      $scope.dayClick = function(date, jsevent, cordinator) {
+        console.log(date);
+        $scope.newTask.due = date.day.format('YYYY-MM-DD');
+        $scope.newTaskDueStr = date.day.format('YYYY-MM-DD');
+        return $scope.isCalOpen = false;
+      };
+      validate = function(task) {
+        return true;
+      };
+      return $scope.confirmAdd = function(newTask) {
+        $scope.progressBar.start();
+        newTask.createdBy = 'admin';
+        newTask.modifiedBy = 'admin';
+        if (!newTask.owner) {
+          newTask.owner = 'admin';
+        }
+        if (validate(newTask)) {
+          $scope.tasks.post(newTask).then(function(data) {
+            return $scope.tasks.push(data);
+          }, function(reason) {
+            utils.HttpHandle(reason);
+            return $scope.progressBar.end();
+          }, function() {});
+          return $scope.progressBar.end();
+        }
+      };
     }
   ]);
 

@@ -1,0 +1,35 @@
+.task-list {
+	overflow: visible;
+	.edit{
+		width:250px;
+	}
+	.actions{
+		margin-top:6px;
+	}
+	.cal {
+		position: relative;
+		width: 130px;
+		display: inline-block;
+		.dateDisplay{
+			width:105px;
+			display:inline-block;
+		}
+		.timeEditor {
+			position: absolute;
+			z-index: 100;
+			width: 218px;
+			border: 1px solid #1387C0;
+			.coolcalendar {
+				.prev {
+					width: 100% / 6
+				}
+				.title {
+					width: 2 * 100% / 3
+				}
+				.next {
+					width: 100% / 6
+				}
+			}
+		}
+	}
+}

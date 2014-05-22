@@ -6,8 +6,8 @@
 
   erpApp.constant('erpSettings', {
     apiHost: 'http://localhost:8000',
-    client_id: '6f5eda9670e48e6b4c97',
-    client_secret: '93f7d72e077c1f749377bd3c069909a81a0df02c'
+    client_id: '24777dd22781c6e783a6',
+    client_secret: '5abb4a5bd64e98cf720ac97985482dd374ae73d5'
   });
 
   erpApp.config([
@@ -68,6 +68,7 @@
             return $location.url("/404");
         }
       });
+      $rootScope.$utils = utils;
       return $http.get(erpSettings.apiHost).success(function(data) {
         return $rootScope.apimap = data;
       }).error(function(error, status) {
