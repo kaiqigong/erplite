@@ -47,3 +47,6 @@ class EventAttachment(models.Model):
 	createdBy = models.CharField(max_length=100)
 	modifiedDate = models.DateTimeField(auto_now=True)
 	modifiedBy = models.CharField(max_length=100)
+
+	def __unicode__(self):
+		return '%s' % (self.filename)
