@@ -10,7 +10,7 @@ class ContactsListSerializer(serializers.HyperlinkedModelSerializer):
 class ContactsDetailSerializer(serializers.HyperlinkedModelSerializer):
 	tags = serializers.HyperlinkedRelatedField(many=True,view_name='contacttag-detail')
 	# data = serializers.RelatedField(many=False)
-	data = serializers.HyperlinkedRelatedField(many=False, view_name='contactdata-detail')
+	data = serializers.HyperlinkedRelatedField(many=True, view_name='contactdata-detail')
 	links = serializers.HyperlinkedRelatedField(many=True, view_name='contactlink-detail')
 	class Meta:
 		model = Contacts
