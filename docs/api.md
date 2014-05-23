@@ -11,23 +11,32 @@
 	^contacts/$ [name='contacts-list']  
 	^contacts/\.(?P<format>[a-z0-9]+)$ [name='contacts-list']  
 	^contacts/(?P<pk>[^/]+)/$ [name='contacts-detail']  
-	^contacts/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='contacts-detail']  
-	^contacttag/$ [name='contacttag-list']  
-	^contacttag/\.(?P<format>[a-z0-9]+)$ [name='contacttag-list']  
-	^contacttag/(?P<pk>[^/]+)/$ [name='contacttag-detail']  
-	^contacttag/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='contacttag-detail']  
-	^contactdata/$ [name='contactdata-list']  
-	^contactdata/\.(?P<format>[a-z0-9]+)$ [name='contactdata-list']  
-	^contactdata/(?P<pk>[^/]+)/$ [name='contactdata-detail']  
-	^contactdata/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='contactdata-detail']  
-	^contactlink/$ [name='contactlink-list']  
-	^contactlink/\.(?P<format>[a-z0-9]+)$ [name='contactlink-list']  
-	^contactlink/(?P<pk>[^/]+)/$ [name='contactlink-detail']  
-	^contactlink/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='contactlink-detail']  
-	^contacts/(?P<contact_pk>[^/]+)/contactdata/$ [name='contactdata-list']  
-	^contacts/(?P<contact_pk>[^/]+)/contactdata/(?P<pk>[^/]+)/$ [name='contactdata-detail']  
+	^contacts/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='contacts-detail']    
+	^contacts/(?P<contact_pk>[^/]+)/contactdata/1/  
 	^contacts/(?P<contact_pk>[^/]+)/contacttag/$ [name='contacttag-list']  
 	^contacts/(?P<contact_pk>[^/]+)/contacttag/(?P<pk>[^/]+)/$ [name='contacttag-detail']  
+	^contacts/(?P<contact_pk>[^/]+)/contactlink/$ [name='contactlink-list']  
+	^contacts/(?P<contact_pk>[^/]+)/contactlink/(?P<pk>[^/]+)/$ [name='contactlink-detail']  
+
+	filter:  
+	^contacts?tags=  
+	^contacts?surname=  
+	^contacts?givenname=  
+	^contacts?department=  
+	^contacts?title=  
+	^contacts?phone=  
+	^contacts?mobile=  
+	^contacts?fax=  
+	^contacts?origin=  
+	^contacts?email=  
+	^contacts?address=  
+	^contacts?birthday=  
+	^contacts?region=  
+	^contacts?website=  
+	^contacts?qq=  
+	^contacts?weibo=  
+	^contacts?im=  
+	^contacts?description=  
 
 4. For Tasks Model:  
 	^tasks/$ [name='tasks-list']  
