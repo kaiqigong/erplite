@@ -35,6 +35,7 @@ class ContactViewSet(DetailSerializerMixin, viewsets.ModelViewSet):
 	queryset = Contacts.objects.all()
 	serializer_class = ContactsListSerializer
 	serializer_detail_class = ContactsDetailSerializer
+	filter_class = ContactsFilter
 
 class ContactTagViewSet(viewsets.ModelViewSet):
 	authentication_classes = (OAuth2Authentication,SessionAuthentication)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)

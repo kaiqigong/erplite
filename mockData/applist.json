@@ -1,6 +1,6 @@
 [{
 "name":"Contacts",
-"iconurl":"./img/128px/layers_128px.png",
+"iconurl":"./img/128px/contacts.png",
 "link":"#/contact",
 "messages":1
 },
@@ -30,7 +30,7 @@
 },
 {
 "name":"To Do",
-"iconurl":"./img/128px/clipboard_128px.png",
+"iconurl":"./img/128px/event.png",
 "link":"#/task",
 "messages":0
 },
@@ -48,7 +48,7 @@
 },
 {
 "name":"Calendar",
-"iconurl":"./img/128px/calendar_128px.png",
+"iconurl":"./img/128px/calendar.png",
 "link":"#/calendar",
 "messages":2
 },
@@ -60,7 +60,7 @@
 },
 {
 "name":"Message",
-"iconurl":"./img/128px/chat_128px.png",
+"iconurl":"./img/128px/message.png",
 "link":"#",
 "messages":235
 }]

@@ -6,8 +6,8 @@
 
   erpApp.constant('erpSettings', {
     apiHost: 'http://localhost:8000',
-    client_id: '24777dd22781c6e783a6',
-    client_secret: '5abb4a5bd64e98cf720ac97985482dd374ae73d5'
+    client_id: '1b69e642e6cd7663b906',
+    client_secret: '858ef81b97c03fb3dc70b7eef43f224f63d4e48f'
   });
 
   erpApp.config([
