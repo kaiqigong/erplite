@@ -21,6 +21,7 @@
 	^contacts/(?P<contact_pk>[^/]+)/contactlink/(?P<pk>[^/]+)/$ [name='contactlink-detail']  
 
 	filter:  
+	^contact?search=  
 	^contacttag?search=  
 	^contactdata?search=  
 
