@@ -12,7 +12,7 @@ from rest_framework import viewsets
 from rest_framework_extensions.mixins import DetailSerializerMixin
 
 class TaskViewSet(DetailSerializerMixin, viewsets.ModelViewSet):#
-	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	authentication_classes = (OAuth2Authentication,SessionAuthentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)# TokenHasReadWriteScope)
 
 	queryset = Tasks.objects.all()
@@ -20,7 +20,7 @@ class TaskViewSet(DetailSerializerMixin, viewsets.ModelViewSet):#
 	serializer_detail_class = TaskDatailSerializer
 
 class TaskTagViewSet(viewsets.ModelViewSet):
-	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	authentication_classes = (OAuth2Authentication,SessionAuthentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)#, TokenHasReadWriteScope)
 
 	queryset = TaskTag.objects.all()
@@ -33,14 +33,14 @@ class TaskTagViewSet(viewsets.ModelViewSet):
 		return super(TaskTagViewSet, self).get_queryset()
 
 class TaskLinkViewSet(viewsets.ModelViewSet):
-	authentication_classes = (OAuth2Authentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
+	authentication_classes = (OAuth2Authentication,SessionAuthentication,)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)#, TokenHasReadWriteScope)
 
 	queryset = TaskLink.objects.all()
 	serializer_class = TaskLinkSerializer
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
-	authentication_classes = (OAuth2Authentication,)
+	authentication_classes = (OAuth2Authentication,SessionAuthentication,)
 	permission_classes = (IsAuthenticated,)
 
 	model = User
@@ -50,7 +50,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 		return User.objects.filter(username=self.request.user.username)
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
-	authentication_classes = (OAuth2Authentication,)
+	authentication_classes = (OAuth2Authentication,SessionAuthentication,)
 	permission_classes = (IsAuthenticated,)
 
 	model = Group
