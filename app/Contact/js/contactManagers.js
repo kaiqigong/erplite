@@ -25,7 +25,6 @@
           var scope;
           scope = this;
           Restangular.one('contacts', id).get().then(function(contact) {
-            console.log(contact);
             if (contact.data != null) {
               return Restangular.oneUrl('contactdata', contact.data).get().then(function(contactData) {
                 contact.dataObj = contactData;
@@ -121,3 +120,5 @@
   ]);
 
 }).call(this);
+
+//# sourceMappingURL=contactManagers.map

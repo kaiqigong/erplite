@@ -3,6 +3,7 @@ angular.module 'taskModule'
 ($scope, $rootScope, $http, $log, Restangular, utils)->
 	$scope.title = "任务"
 	$scope.backUrl = "#/home"
+	$scope.addUrl = '#/task/new'
 	$scope.isAdvanceSearchCollapsed = true
 	$scope.toggleAdvanceSearch = ->
 		if $scope.isAdvanceSearchCollapsed

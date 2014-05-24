@@ -18,7 +18,6 @@ angular.module 'contactModule'
 	_load: (id, deferred) ->
 		scope = this
 		Restangular.one('contacts',id).get().then (contact)->
-			console.log contact
 			if contact.data?
 				Restangular.oneUrl('contactdata',contact.data).get().then (contactData)->
 					contact.dataObj=contactData

@@ -5,6 +5,7 @@
       var validate;
       $scope.title = "任务";
       $scope.backUrl = "#/home";
+      $scope.addUrl = '#/task/new';
       $scope.isAdvanceSearchCollapsed = true;
       $scope.toggleAdvanceSearch = function() {
         if ($scope.isAdvanceSearchCollapsed) {
