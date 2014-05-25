@@ -16,17 +16,17 @@ class ContactsDetailSerializer(serializers.HyperlinkedModelSerializer):
 		model = Contacts
 		fields = ('id', 'name', 'avator', 'tags', 'data', 'links', 'description', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')
 
-class ContactDataDetailSerializer(serializers.ModelSerializer):
+class ContactDataSerializer(serializers.ModelSerializer):
 	contactname = serializers.Field(source='contact.name')
 	class Meta:
 		model = ContactData
 		fields = ('id', 'contact','contactname','surname','givenname','company','department','title','phone','mobile','fax','origin','email','address','birthday','region','website','qq','weibo','im', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')
 
-class ContactDataListSerializer(serializers.ModelSerializer):
-	contactname = serializers.Field(source='contact.name')
-	class Meta:
-		model = ContactData
-		fields = ('id', 'contact','contactname')
+# class ContactDataListSerializer(serializers.ModelSerializer):
+# 	contactname = serializers.Field(source='contact.name')
+# 	class Meta:
+# 		model = ContactData
+# 		fields = ('id', 'contact','contactname')
 
 class ContactTagSerializer(serializers.ModelSerializer):
 	contactname = serializers.Field(source='contact.name')

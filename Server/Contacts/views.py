@@ -6,7 +6,7 @@ from rest_framework import generics
 from rest_framework.reverse import reverse
 
 from Contacts.models import Contacts, ContactTag, ContactData, ContactLink
-from Contacts.serializers import ContactsListSerializer, ContactsDetailSerializer, ContactTagSerializer, ContactDataDetailSerializer, ContactDataListSerializer, ContactLinkSerializer
+from Contacts.serializers import ContactsListSerializer, ContactsDetailSerializer, ContactTagSerializer, ContactDataSerializer, ContactLinkSerializer
 from Contacts.filters import ContactsFilter
 
 from rest_framework.authentication import TokenAuthentication, BasicAuthentication, SessionAuthentication, OAuth2Authentication
@@ -58,13 +58,13 @@ class ContactTagViewSet(viewsets.ModelViewSet):
 			return ContactTag.objects.filter(contact=contact_id)
 		return super(ContactTagViewSet, self).get_queryset()
 
-class ContactDataViewSet(DetailSerializerMixin, viewsets.ModelViewSet):
+class ContactDataViewSet(viewsets.ModelViewSet):
 	authentication_classes = (OAuth2Authentication,SessionAuthentication)#(SessionAuthentication, TokenAuthentication, BasicAuthentication)
 	permission_classes = (IsAuthenticated,)#, TokenHasReadWriteScope)
 
 	queryset = ContactData.objects.all()
-	serializer_class = ContactDataListSerializer
-	serializer_detail_class = ContactDataDetailSerializer
+	serializer_class = ContactDataSerializer
+	# serializer_detail_class = ContactDataDetailSerializer
 
 	filter_backends = (filters.SearchFilter,)
 	search_fields = ('surname','givenname','department','title','company')
