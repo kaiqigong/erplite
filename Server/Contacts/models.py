@@ -10,6 +10,9 @@ class Contacts(models.Model):
 	modifiedDate = models.DateTimeField(auto_now=True)
 	modifiedBy = models.CharField(max_length=100)
 
+	class Meta:
+		ordering = ['name']
+
 	def __unicode__(self):
 		return '%s' % (self.name)
 

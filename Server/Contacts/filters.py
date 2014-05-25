@@ -29,3 +29,4 @@ class ContactsFilter(django_filters.FilterSet):
 	class Meta:
 		model = Contacts
 		fields = ('name','description','tags','createdDate','createdBy','modifiedDate','modifiedBy',)
+		order_by = ['name']

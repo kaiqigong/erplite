@@ -9,6 +9,8 @@
 	
 3. For Contacts Model:  
 	^contacts/$ [name='contacts-list']  
+	^contacts?order=-name  
+	^contacts?page=  
 	^contacts/\.(?P<format>[a-z0-9]+)$ [name='contacts-list']  
 	^contacts/(?P<pk>[^/]+)/$ [name='contacts-detail']  
 	^contacts/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='contacts-detail']    
@@ -19,24 +21,9 @@
 	^contacts/(?P<contact_pk>[^/]+)/contactlink/(?P<pk>[^/]+)/$ [name='contactlink-detail']  
 
 	filter:  
-	^contacts?tags=  
-	^contacts?surname=  
-	^contacts?givenname=  
-	^contacts?department=  
-	^contacts?title=  
-	^contacts?phone=  
-	^contacts?mobile=  
-	^contacts?fax=  
-	^contacts?origin=  
-	^contacts?email=  
-	^contacts?address=  
-	^contacts?birthday=  
-	^contacts?region=  
-	^contacts?website=  
-	^contacts?qq=  
-	^contacts?weibo=  
-	^contacts?im=  
-	^contacts?description=  
+	^contact?search=  
+	^contacttag?search=  
+	^contactdata?search=  
 
 4. For Tasks Model:  
 	^tasks/$ [name='tasks-list']  
