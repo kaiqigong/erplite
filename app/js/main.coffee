@@ -6,6 +6,7 @@ document.write '<script src="/app/bower_components/angular/angular.min.js"></scr
 document.write '<script src="/app/bower_components/danialfarid-angular-file-upload/dist/angular-file-upload.min.js"></script>'
 document.write '<script src="/app/bower_components/angular-route/angular-route.min.js"></script>'
 document.write '<script src="/app/bower_components/angular-cookies/angular-cookies.min.js"></script>'
+document.write '<script src="/app/bower_components/angular-cache/dist/angular-cache.min.js"></script>'
 document.write '<script src="/app/bower_components/iCheck/icheck.min.js"></script>'
 document.write '<script src="/app/bower_components/angular-animate/angular-animate.min.js"></script>'
 document.write '<script src="/app/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>'

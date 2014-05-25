@@ -14,8 +14,8 @@ erpApp = angular.module 'erpApp', [
 
 erpApp.constant 'erpSettings', {
 	apiHost: 'http://localhost:8000'
-	client_id: '24777dd22781c6e783a6'
-	client_secret: '5abb4a5bd64e98cf720ac97985482dd374ae73d5'
+	client_id: '8389f350ee86e1eac562'
+	client_secret: 'bc421ecd94575e8614ec0e4dd28da7f8c9b7186f'
 }
 
 erpApp.config ['$routeProvider', ($routeProvider) ->
@@ -44,7 +44,15 @@ erpApp.config ['$routeProvider', ($routeProvider) ->
 		{templateUrl: 'Task/views/tasklist.html', controller: 'TaskListCtrl'}
 	.otherwise redirectTo: '/home'
 ]
-
+erpApp.config (RestangularProvider) ->
+	# add a response intereceptor
+	RestangularProvider.addResponseInterceptor (data, operation, what, url, response, deferred) ->
+		extractedData
+		if operation is "getList"
+			extractedData = data.results;
+		else
+			extractedData = data;
+		return extractedData
 erpApp.run ['$rootScope', '$location', '$log', '$http', 'erpSettings', 'Restangular', 'security', 'erplite.utils',
 	($rootScope, $location, $log, $http, erpSettings, Restangular, security, utils) ->
 		security.restoreToken()

@@ -1,7 +1,7 @@
 angular.module 'contactModule'
-.controller 'ContactListCtrl', ['$scope', '$http', '$location', 'contactManager', '$log', 'ModelBase', 'Restangular',
+.controller 'ContactListCtrl', ['$scope', '$http', '$location', '$log', 'ModelBase', 'Restangular',
 								'$rootScope',
-	($scope, $http, $location, contactManager, $log, ModelBase, Restangular, $rootScope) ->
+	($scope, $http, $location, $log, ModelBase, Restangular, $rootScope) ->
 		$scope.title = "联系人"
 		$scope.icon = "./img/128px/layers_128px.png"
 		$scope.backUrl = "#/home"
@@ -24,14 +24,12 @@ angular.module 'contactModule'
 
 		$scope.progressBar.start()
 		$scope.progressBar.set 50
-		promise = contactManager.loadContactList()
 
-		promise.then (contacts) ->
-			$scope.items = contacts
-			$log.log(contacts)
+		Restangular.all('contacts').getList()
+		.then (data) ->
+			$scope.items = data
 			$scope.progressBar.end()
 		, (reason)->
-			$scope.progressBar.end()
 			if reason.status is 404
 				$rootScope.$broadcast 'errorHappened', reason.status, $location.url()
 			else if reason.status is 401 or reason.status is 403
@@ -39,12 +37,13 @@ angular.module 'contactModule'
 				$location.replace()
 			else
 				$log.log("Error Code: " + reason.status + ", Message: " + reason.data)
-		, null
+			$scope.progressBar.end()
+
 
 ]
-.controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', 'contactManager', '$location', '$log',
+.controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', '$location', '$log',
 								  'ModelBase', 'Restangular', '$upload', '$modal', '$rootScope',
-	($scope, $http, $q, $routeParams, contactManager, $location, $log, ModelBase, Restangular, $upload, $modal, $rootScope) ->
+	($scope, $http, $q, $routeParams, $location, $log, ModelBase, Restangular, $upload, $modal, $rootScope) ->
 		$scope.progressBar.start()
 		$scope.progressBar.set 50
 		$scope.backUrl = "#/contact"
@@ -54,14 +53,6 @@ angular.module 'contactModule'
 		$scope.newLink =
 			type: "Supplier"
 			name: ""
-		# used to bind the data fields to view
-		$scope.contactDatas = []
-
-		# vaild data fields
-		dataFields = []
-
-		# unset data fields
-		$scope.unsetFields = []
 
 		$scope.changeType = (type) ->
 			$scope.newLink.type = type
@@ -81,53 +72,28 @@ angular.module 'contactModule'
 			$scope.contactDatas.push newData
 
 		$scope.save = () ->
-			fields = ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile', 'fax', 'origin',
-					  'email', 'address', 'birthday', 'region', 'website', 'qq', 'weibo', 'im' ]
 			$scope.progressBar.start()
 			$scope.progressBar.set(20)
 			$scope.contact.name = $scope.title
 			# update data
-			if not $scope.contact.data?
-				$scope.contact.dataObj = {}
-				$scope.contact.dataObj.createdBy = 'Cage'
-				$scope.contact.dataObj.modifiedBy = 'Cage' # Todo: auto generate in DB
-			for contactData in $scope.contactDatas when contactData.key in fields
-				do (contactData) ->
-					$scope.contact.dataObj[contactData.key] = contactData.value
-			if not $scope.contact.data?
+			if not $scope.contactData.id?
+				$scope.contactData.createdBy = 'Cage'
+				$scope.contactData.modifiedBy = 'Cage' # Todo: auto generate in DB
 				#post then put
-				$scope.contact.dataObj.contact = $scope.contact.id
+				$scope.contactData.contact = $scope.contact.id
 				Restangular.one('contacts', $scope.contact.id)
-				.all('contactdata').post($scope.contact.dataObj)
+				.all('contactdata').post($scope.contactData)
 				.then (contactdata)->
+					console.log contactdata
 					$scope.contact.put().then $scope.reload
 			else
 				#put then put
-				$scope.contact.dataObj.put().then (contactData)->
+				$scope.contactData.put().then ()->
 					$scope.contact.put().then $scope.reload
 
 		$scope.reload = () ->
-			promise = contactManager.loadContact $routeParams.id
-			promise.then (contact) ->
+			Restangular.one('contacts', $routeParams.id).get().then (contact)->
 				$scope.contact = contact
-				$scope.contactDatas = []
-				$scope.unsetFields = []
-				dataFields = []
-				for own propName, propValue of contact.dataObj when propName in ['surname', 'givenname', 'company',
-																				 'department', 'title', 'phone',
-																				 'mobile',
-																				 'fax', 'origin', 'email', 'address',
-																				 'birthday', 'region', 'website', 'qq',
-																				 'weibo', 'im' ]
-					dataFields.push propName
-					if propValue? and propValue isnt ""
-						$scope.contactDatas.push {key: propName, value: propValue}
-					else
-						$scope.unsetFields.push propName
-				if not contact.dataObj
-					$scope.unsetFields = ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile',
-										  'fax', 'origin', 'email', 'address', 'birthday', 'region', 'website', 'qq',
-										  'weibo', 'im' ]
 				$scope.title = contact.name
 				$scope.progressBar.end()
 			, (reason) ->
@@ -139,6 +105,9 @@ angular.module 'contactModule'
 				else
 					$log.log "Error Code: " + reason.status + ", Message: " + reason.data
 			, null
+			Restangular.one('contacts',$routeParams.id).all('contactdata').getList().then (contactData)->
+				if contactData.length > 0
+					$scope.contactData = contactData[0]
 
 		# TODO: disable the button before data is retrieved.
 		$scope.previousId = ->
@@ -183,15 +152,6 @@ angular.module 'contactModule'
 			type: "Supplier"
 			name: ""
 
-		$scope.contactDatas = []
-
-		# vaild data fields
-		dataFields = []
-
-		# unset data fields
-		$scope.unsetFields = ['surname', 'givenname', 'company', 'department', 'title', 'phone', 'mobile', 'fax',
-							  'origin',
-							  'email', 'address', 'birthday', 'region', 'website', 'qq', 'weibo', 'im' ]
 
 		$scope.changeType = (type) ->
 			$scope.newLink.type = type
@@ -203,12 +163,6 @@ angular.module 'contactModule'
 			$scope.newLink =
 				type: "Supplier"
 				name: ""
-
-		$scope.addData = () ->
-			newData = angular.copy $scope.newData
-			$scope.newData.key = ""
-			$scope.newData.value = ""
-			$scope.contactDatas.push newData
 
 		$scope.onAvatorClick = ->
 			modalInstance = $modal.open({
@@ -226,27 +180,18 @@ angular.module 'contactModule'
 			$scope.progressBar.set(20)
 
 			# update data
-			$scope.contact.dataObj = {}
-			$scope.contact.dataObj.createdBy = 'Cage'
-			$scope.contact.dataObj.modifiedBy = 'Cage' # Todo: auto generate in DB
-			for contactData in $scope.contactDatas when contactData.key in ['surname', 'givenname', 'company',
-																			'department',
-																			'title', 'phone', 'mobile', 'fax', 'origin',
-																			'email', 'address', 'birthday', 'region',
-																			'website', 'qq', 'weibo', 'im' ]
-				do (contactData) ->
-					$scope.contact.dataObj[contactData.key] = contactData.value
+			$scope.contactData.createdBy = 'Cage'
+			$scope.contactData.modifiedBy = 'Cage' # Todo: auto generate in DB
 			# post
-			$scope.contact.dataObj.contact = $scope.contact.id
 			$scope.contact.createdBy = 'Cage'
 			$scope.contact.modifiedBy = 'Cage'
 			$scope.contact.name = $scope.title
 			Restangular.all('contacts').post($scope.contact).then (contact)->
-				$scope.contact.dataObj.contact = contact.id
-				Restangular.one('contacts', $scope.contact.id)
-				.all('contactdata').post($scope.contact.dataObj).then (contactData)->
+				$scope.contactData.contact = contact.id
+				Restangular.one('contacts', contact.id)
+				.all('contactdata').post($scope.contactData).then (contactData)->
 					console.log contactData
-					$location.url("/contact/#{$scope.contact.id}")
+					$location.url("/contact/#{contact.id}")
 					$scope.progressBar.end()
 
 

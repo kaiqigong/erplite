@@ -14,6 +14,8 @@
 
   document.write('<script src="/app/bower_components/angular-cookies/angular-cookies.min.js"></script>');
 
+  document.write('<script src="/app/bower_components/angular-cache/dist/angular-cache.min.js"></script>');
+
   document.write('<script src="/app/bower_components/iCheck/icheck.min.js"></script>');
 
   document.write('<script src="/app/bower_components/angular-animate/angular-animate.min.js"></script>');
