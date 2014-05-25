@@ -2,7 +2,7 @@
   overflow: visible;
 }
 .task-list .edit {
-  width: 250px;
+  width: 350px;
 }
 .task-list .actions {
   margin-top: 6px;
@@ -30,4 +30,64 @@
 }
 .task-list .cal .timeEditor .coolcalendar .next {
   width: 16.66666667%;
+}
+.task-list .item {
+  display: inline-block;
+  width: 50%;
+  min-width: 515px;
+  /* fit iphone */
+  vertical-align: top;
+}
+.task-list .listview .task {
+  display: inline-block;
+  margin-top: 15px;
+}
+.task-list .listview .task > div {
+  display: inline-block;
+}
+.task-list .listview .task .task-check {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  background: #fff;
+  font-size: 18px;
+}
+.task-list .listview .task .task-check.checked {
+  background: #3276b1;
+}
+.task-list .listview .task .actions {
+  display: block;
+  margin-left: 24px;
+}
+.task-list .listview .task .task-name {
+  width: 300px;
+  padding: 5px;
+  border-bottom: 1px solid #eee;
+  -webkit-transition: all 0.15s;
+  -moz-transition: all 0.15s;
+  -ms-transition: all 0.15s;
+  -o-transition: all 0.15s;
+  transition: all 0.15s;
+}
+.task-list .listview .task .task-name-editing {
+  width: 300px;
+}
+.task-list .listview .task .task-due {
+  width: 60px;
+  font-size: 10px;
+  font-weight: 100;
+  color: #888888;
+  padding-right: 0;
+  padding-left: 0;
+  margin: 0;
+}
+.task-list .listview .task .dateInput {
+  width: 100px;
+}
+.task-list .listview .task .task-more {
+  color: #888888;
+  cursor: pointer;
+}
+.task-list .listview .task:hover .task-name {
+  border-bottom: 1px solid #53ADEC;
 }

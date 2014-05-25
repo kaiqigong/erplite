@@ -1,7 +1,7 @@
 .task-list {
 	overflow: visible;
 	.edit{
-		width:250px;
+		width:350px;
 	}
 	.actions{
 		margin-top:6px;
@@ -28,6 +28,70 @@
 				}
 				.next {
 					width: 100% / 6
+				}
+			}
+		}
+	}
+	.item{
+		display: inline-block;
+		width: 50%;
+		min-width: 515px;
+		/* fit iphone */
+		vertical-align: top;
+	}
+	.listview{
+		.task {
+			display: inline-block;
+			margin-top: 15px;
+			>div{
+				display: inline-block;
+			}
+			.task-check{
+				width:15px;
+				height: 15px;
+				vertical-align: middle;
+				background: #fff;
+				font-size: 18px;
+				&.checked{
+					background: #3276b1;
+				}
+			}
+			.actions{
+				display: block;
+				margin-left: 24px;
+			}
+			.task-name {
+				width:300px;
+				padding: 5px;
+				border-bottom: 1px solid #eee;
+				-webkit-transition: all 0.15s;
+				-moz-transition: all 0.15s;
+				-ms-transition: all 0.15s;
+				-o-transition: all 0.15s;
+				transition: all 0.15s;
+			}
+			.task-name-editing{
+				width:300px;
+			}
+			.task-due{
+				width:60px;
+				font-size: 10px;
+				font-weight: 100;
+				color: #888888;
+				padding-right: 0;
+				padding-left: 0;
+				margin: 0;
+			}
+			.dateInput{
+				width:100px;
+			}
+			.task-more{
+				color: #888888;
+				cursor:pointer;
+			}
+			&:hover{
+				.task-name {
+					border-bottom: 1px solid #53ADEC;
 				}
 			}
 		}

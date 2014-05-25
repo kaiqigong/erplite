@@ -45,10 +45,45 @@ angular.module 'taskModule'
 		if validate(newTask)
 			$scope.tasks.post(newTask).then (data)->
 				$scope.tasks.push data
+				$scope.newTask = {}
+				$scope.progressBar.end()
 			, (reason)->
 				utils.HttpHandle(reason)
 				$scope.progressBar.end()
-			, ()->
-			$scope.progressBar.end()
+			, null
 
+	$scope.beginEditing = (task)->
+		$scope.isNewTaskPanelShow = false
+		if $scope.currentEditingTask?
+			$scope.currentEditingTask.editing  = false
+		$scope.currentEditingTask = task
+		$scope.currentEditingTask.editing = true
+		if task.due?
+			task.dueDate = moment(task.due)._d
+	$scope.open = ($event, task) ->
+		$event.preventDefault()
+		$event.stopPropagation()
+		task.opened = true
+
+	$scope.dateOptions =
+		formatYear: 'yy'
+		startingDay: 1
+
+	$scope.openMore = ($event,task)->
+		$event.preventDefault()
+		$event.stopPropagation()
+
+	$scope.confirmEdit = (task)->
+		task.editing = false
+		if task.dueDate?
+			task.due = moment(task.dueDate).format 'YYYY-MM-DD'
+		task.put()
+	$scope.cancelEdit = (task)->
+		task.get().then (oldTask)->
+			angular.extend task, oldTask
+	$scope.changeStatus = ($event, task)->
+		task.status = if task.status is 'closed' then 'open' else 'closed'
+		task.put()
+		$event.preventDefault()
+		$event.stopPropagation()
 ]

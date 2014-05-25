@@ -4,7 +4,7 @@
   <div ng-include="'Common/views/listToolBar.html'"></div>
 
   <div class="container">
-    <a ng-click="isNewTaskPanelShow = true">+ 添加任务</a>
+    <a ng-click="isNewTaskPanelShow = true;currentEditingTask.editing  = false">+ 添加任务</a>
 
     <div class="create-task" ng-show="isNewTaskPanelShow">
       <div>
@@ -26,17 +26,44 @@
           <a ng-click="isNewTaskPanelShow = false; confirmAdd(newTask)" class="button mid blue">确定</a>
           <a ng-click="isNewTaskPanelShow = false" class="button cancel">取消</a>
         </div>
+        <hr/>
       </div>
     </div>
-    <div class="list-group">
+    <div class="listview">
 
-      <div ng-repeat="item in tasks | filter:query" class="col-xs-12 col-sm-12 col-md-6 list-item">
-        <a href="#/task/{{item.id}}" class="list-group-item row list-item">
-          <input type="checkbox" ng-model="item.completed" erp-icheck>
-          <label class="col-xs-2 col-sm-2 col-md-2">{{item.name}}</label>
-          <label class="col-xs-6 col-sm-6 col-md-6">{{item.description}}</label>
-          <label class="col-xs-3 col-sm-3 col-md-3 updatetime-small">{{item.modifiedDate | date:'medium'}}</label>
-        </a>
+      <div ng-repeat="task in tasks | filter:query" class="item">
+        <div ng-switch="task.editing">
+          <div ng-switch-when="false">
+            <div class="task" ng-click="beginEditing(task)">
+              <div class="task-check fa" ng-class="{'fa-check-square-o':task.status == 'closed','fa-square-o':task.status=='open'}" ng-click="changeStatus($event, task)"></div>
+              <div class="task-name">{{task.name}}</div>
+              <div class="task-due">{{task.due | date:'yyyy-M-d'}}</div>
+              <a ng-click="openMore($event, task)" class="task-more">...</a>
+            </div>
+          </div>
+          <div ng-switch-when="true">
+            <div class="task">
+              <div class="task-check fa" ng-class="{'fa-check-square-o':task.status == 'closed','fa-square-o':task.status=='open'}" ng-click="changeStatus($event, task)"></div>
+              <input class="input task-name-editing" ng-model="task.name"/>
+              <input type="text" class="input dateInput" datepicker-popup="yyyy-MM-dd" ng-click="open($event,task)"
+                     datepicker-options="dateOptions" ng-model="task.dueDate" is-open="task.opened"/>
+              <a ng-click="openMore($event,task)" class="task-more">...</a>
+
+              <div class="actions">
+                <a ng-click="confirmEdit(task)" class="button mid blue">确定</a>
+                <a ng-click="cancelEdit(task);task.editing = false" class="button cancel">取消</a>
+              </div>
+            </div>
+          </div>
+          <div ng-switch-default>
+            <div class="task" ng-click="beginEditing(task)">
+              <div class="task-check fa" ng-class="{'fa-check-square-o':task.status == 'closed','fa-square-o':task.status=='open'}" ng-click="changeStatus($event, task)"></div>
+              <div class="task-name">{{task.name}}</div>
+              <div class="task-due">{{task.due | date:'yyyy-M-d'}}</div>
+              <a ng-click="openMore($event, task)" class="task-more">...</a>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>

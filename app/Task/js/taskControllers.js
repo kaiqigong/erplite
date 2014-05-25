@@ -37,7 +37,7 @@
       validate = function(task) {
         return true;
       };
-      return $scope.confirmAdd = function(newTask) {
+      $scope.confirmAdd = function(newTask) {
         $scope.progressBar.start();
         newTask.createdBy = 'admin';
         newTask.modifiedBy = 'admin';
@@ -45,14 +45,57 @@
           newTask.owner = 'admin';
         }
         if (validate(newTask)) {
-          $scope.tasks.post(newTask).then(function(data) {
-            return $scope.tasks.push(data);
+          return $scope.tasks.post(newTask).then(function(data) {
+            $scope.tasks.push(data);
+            $scope.newTask = {};
+            return $scope.progressBar.end();
           }, function(reason) {
             utils.HttpHandle(reason);
             return $scope.progressBar.end();
-          }, function() {});
-          return $scope.progressBar.end();
+          }, null);
         }
+      };
+      $scope.beginEditing = function(task) {
+        $scope.isNewTaskPanelShow = false;
+        if ($scope.currentEditingTask != null) {
+          $scope.currentEditingTask.editing = false;
+        }
+        $scope.currentEditingTask = task;
+        $scope.currentEditingTask.editing = true;
+        if (task.due != null) {
+          return task.dueDate = moment(task.due)._d;
+        }
+      };
+      $scope.open = function($event, task) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        return task.opened = true;
+      };
+      $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+      };
+      $scope.openMore = function($event, task) {
+        $event.preventDefault();
+        return $event.stopPropagation();
+      };
+      $scope.confirmEdit = function(task) {
+        task.editing = false;
+        if (task.dueDate != null) {
+          task.due = moment(task.dueDate).format('YYYY-MM-DD');
+        }
+        return task.put();
+      };
+      $scope.cancelEdit = function(task) {
+        return task.get().then(function(oldTask) {
+          return angular.extend(task, oldTask);
+        });
+      };
+      return $scope.changeStatus = function($event, task) {
+        task.status = task.status === 'closed' ? 'open' : 'closed';
+        task.put();
+        $event.preventDefault();
+        return $event.stopPropagation();
       };
     }
   ]);
