@@ -38,7 +38,8 @@
               <div class="task-check fa" ng-class="{'fa-check-square-o':task.status == 'closed','fa-square-o':task.status=='open'}" ng-click="changeStatus($event, task)"></div>
               <div class="task-name">{{task.name}}</div>
               <div class="task-due">{{task.due | date:'yyyy-M-d'}}</div>
-              <a ng-click="openMore($event, task)" class="task-more">...</a>
+              <a ng-click="openMore($event,task)" class="task-icon fa fa-bars"></a>
+              <a ng-click="deleteTask($event,task)" class="task-icon fa fa-times"></a>
             </div>
           </div>
           <div ng-switch-when="true">
@@ -47,8 +48,8 @@
               <input class="input task-name-editing" ng-model="task.name"/>
               <input type="text" class="input dateInput" datepicker-popup="yyyy-MM-dd" ng-click="open($event,task)"
                      datepicker-options="dateOptions" ng-model="task.dueDate" is-open="task.opened"/>
-              <a ng-click="openMore($event,task)" class="task-more">...</a>
-
+              <a ng-click="openMore($event,task)" class="task-icon fa fa-bars"></a>
+              <a ng-click="deleteTask($event,task)" class="task-icon fa fa-times"></a>
               <div class="actions">
                 <a ng-click="confirmEdit(task)" class="button mid blue">确定</a>
                 <a ng-click="cancelEdit(task);task.editing = false" class="button cancel">取消</a>
@@ -60,7 +61,8 @@
               <div class="task-check fa" ng-class="{'fa-check-square-o':task.status == 'closed','fa-square-o':task.status=='open'}" ng-click="changeStatus($event, task)"></div>
               <div class="task-name">{{task.name}}</div>
               <div class="task-due">{{task.due | date:'yyyy-M-d'}}</div>
-              <a ng-click="openMore($event, task)" class="task-more">...</a>
+              <a ng-click="openMore($event,task)" class="task-icon fa fa-bars"></a>
+              <a ng-click="deleteTask($event,task)" class="task-icon fa fa-times"></a>
             </div>
           </div>
         </div>

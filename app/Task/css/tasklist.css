@@ -84,7 +84,7 @@
 .task-list .listview .task .dateInput {
   width: 100px;
 }
-.task-list .listview .task .task-more {
+.task-list .listview .task .task-icon {
   color: #888888;
   cursor: pointer;
 }

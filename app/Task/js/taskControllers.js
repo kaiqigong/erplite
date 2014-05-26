@@ -79,6 +79,13 @@
         $event.preventDefault();
         return $event.stopPropagation();
       };
+      $scope.deleteTask = function($event, task) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        return task.remove().then(function() {
+          return $scope.tasks.splice($scope.tasks.indexOf(task), 1);
+        });
+      };
       $scope.confirmEdit = function(task) {
         task.editing = false;
         if (task.dueDate != null) {

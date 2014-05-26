@@ -72,6 +72,11 @@ angular.module 'taskModule'
 	$scope.openMore = ($event,task)->
 		$event.preventDefault()
 		$event.stopPropagation()
+	$scope.deleteTask = ($event, task)->
+		$event.preventDefault()
+		$event.stopPropagation()
+		task.remove().then ()->
+			$scope.tasks.splice $scope.tasks.indexOf(task),1
 
 	$scope.confirmEdit = (task)->
 		task.editing = false
