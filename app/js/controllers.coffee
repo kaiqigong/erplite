@@ -151,7 +151,7 @@ erpControllers.controller '404Ctrl', ['$scope', '$http', ($scope, $http) ->
 	return
 ]
 
-erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload', ($scope, $modalInstance,$upload) ->
+erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload','erpSettings', ($scope, $modalInstance,$upload,erpSettings) ->
 	$scope.avator =""
 	$scope.step = "Please Choose a Picture"
 	files = null
@@ -171,7 +171,7 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 		# $files: an array of files selected, each file has name, size, and type.
 		for file in files
 			$scope.upload = $upload.upload
-				url: '/files/upload/', #upload.php script, node.js route, or servlet url
+				url:erpSettings.apiHost + '/files/upload/', #upload.php script, node.js route, or servlet url
 				# method: POST or PUT,
 				# headers: {'header-key': 'header-value'},
 				# withCredentials: true,

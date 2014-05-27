@@ -177,7 +177,7 @@
   erpControllers.controller('404Ctrl', ['$scope', '$http', function($scope, $http) {}]);
 
   erpControllers.controller('ImgProcessCtrl', [
-    '$scope', '$modalInstance', '$upload', function($scope, $modalInstance, $upload) {
+    '$scope', '$modalInstance', '$upload', 'erpSettings', function($scope, $modalInstance, $upload, erpSettings) {
       var files;
       $scope.avator = "";
       $scope.step = "Please Choose a Picture";
@@ -203,7 +203,7 @@
         for (_i = 0, _len = files.length; _i < _len; _i++) {
           file = files[_i];
           _results.push($scope.upload = $upload.upload({
-            url: '/files/upload/',
+            url: erpSettings.apiHost + '/files/upload/',
             data: {
               myObj: $scope.myModelObj
             },
