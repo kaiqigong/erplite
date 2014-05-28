@@ -212,7 +212,7 @@
           }).progress(function(evt) {
             return console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
           }).success(function(data, status, headers, config) {
-            $scope.avator = '/' + data;
+            $scope.avator = erpSettings.apiHost + '/' + data;
             return $modalInstance.close($scope.avator);
           }).error(function(response) {
             console.log(response);
