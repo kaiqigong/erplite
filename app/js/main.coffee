@@ -14,6 +14,8 @@ document.write '<script src="/app/bower_components/lodash/dist/lodash.min.js"></
 document.write '<script src="/app/bower_components/restangular/dist/restangular.min.js"></script>'
 document.write '<script src="/app/bower_components/momentjs/min/moment.min.js"></script>'
 document.write '<script src="/app/bower_components/twix/bin/twix.min.js"></script>'
+document.write '<script src="/app/bower_components/firebase/firebase.js"></script>'
+document.write '<script src="/app/bower_components/angularfire/angularfire.js"></script>'
 
 #my scripts
 
@@ -35,3 +37,6 @@ document.write '<script src="Calendar/js/calendarControllers.js"></script>'
 document.write '<script src="Calendar/js/calendarDirectives.js"></script>'
 document.write '<script src="Task/js/init.js"></script>'
 document.write '<script src="Task/js/taskControllers.js"></script>'
+document.write '<script src="Message/js/init.js"></script>'
+document.write '<script src="Message/js/messageControllers.js"></script>'
+

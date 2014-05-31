@@ -185,7 +185,7 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 				console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 			.success (data, status, headers, config) ->
 				# file is uploaded successfully
-				$scope.avator = erpSettings.apiHost + '/'+data
+				$scope.avator = erpSettings.apiHost + '/' + data
 				$modalInstance.close($scope.avator)
 			.error (response)->
 				console.log response

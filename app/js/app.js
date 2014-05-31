@@ -2,12 +2,12 @@
 (function() {
   var erpApp;
 
-  erpApp = angular.module('erpApp', ['ngRoute', 'restangular', 'erpAnimations', 'erpDirectives', 'angularFileUpload', 'calendarModule', 'erpControllers', 'erpServices', 'erpFilters', 'taskModule', 'contactModule', 'ui.bootstrap']);
+  erpApp = angular.module('erpApp', ['ngRoute', 'restangular', 'erpAnimations', 'erpDirectives', 'angularFileUpload', 'calendarModule', 'erpControllers', 'erpServices', 'erpFilters', 'taskModule', 'contactModule', 'messageModule', 'ui.bootstrap']);
 
   erpApp.constant('erpSettings', {
     apiHost: 'http://localhost:8000',
-    client_id: '1b69e642e6cd7663b906',
-    client_secret: '858ef81b97c03fb3dc70b7eef43f224f63d4e48f'
+    client_id: '8389f350ee86e1eac562',
+    client_secret: 'bc421ecd94575e8614ec0e4dd28da7f8c9b7186f'
   });
 
   erpApp.config([
@@ -45,6 +45,9 @@
       }).when('/task', {
         templateUrl: 'Task/views/tasklist.html',
         controller: 'TaskListCtrl'
+      }).when('/message', {
+        templateUrl: 'Message/views/message.html',
+        controller: 'MessageCtrl'
       }).otherwise({
         redirectTo: '/home'
       });
@@ -94,5 +97,3 @@
   ]);
 
 }).call(this);
-
-//# sourceMappingURL=app.map

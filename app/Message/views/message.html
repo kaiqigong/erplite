@@ -1,0 +1,30 @@
+<div>
+  <div ng-repeat="(key,q) in question">
+    <h2>{{q.header}}</h2>
+    <div ng-repeat='option in q.body'>
+      <label>{{option.option}}</label>
+      <label>{{option.content}}</label>
+      <button ng-click='addAnswer(option.option)'>Choose</button>
+    </div>
+    <button ng-click='deleteQuestion(key)'>Delete</button>
+  </div>
+  <div>
+    <hr />
+    New Question:
+    <input ng-model='header' />
+    <div ng-repeat='option in options'>
+      <div>{{option.option}}</div>
+      <input ng-model='option.content' />
+    </div>
+    <input type='button' ng-click='addQuestion()' value='Send'/>
+  </div>
+  <hr />
+  <div>
+    结果：
+    A:{{A}}
+    B:{{B}}
+    C:{{C}}
+    D:{{D}}
+  </div>
+  <button ng-click='resetAnswers()'>Reset</button>
+</div>

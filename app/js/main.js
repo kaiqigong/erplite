@@ -30,6 +30,10 @@
 
   document.write('<script src="/app/bower_components/twix/bin/twix.min.js"></script>');
 
+  document.write('<script src="/app/bower_components/firebase/firebase.js"></script>');
+
+  document.write('<script src="/app/bower_components/angularfire/angularfire.js"></script>');
+
   document.write('<script src="Common/js/init.js"></script>');
 
   document.write('<script src="Common/js/factories.js"></script>');
@@ -64,6 +68,8 @@
 
   document.write('<script src="Task/js/taskControllers.js"></script>');
 
-}).call(this);
+  document.write('<script src="Message/js/init.js"></script>');
 
-//# sourceMappingURL=main.map
+  document.write('<script src="Message/js/messageControllers.js"></script>');
+
+}).call(this);

@@ -10,6 +10,7 @@ erpApp = angular.module 'erpApp', [
 	'erpFilters'
 	'taskModule'
 	'contactModule'
+	'messageModule'
 	'ui.bootstrap']
 
 erpApp.constant 'erpSettings', {
@@ -42,6 +43,8 @@ erpApp.config ['$routeProvider', ($routeProvider) ->
 		{templateUrl: 'Calendar/views/calendar.html', controller: 'CalendarCtrl'}
 	.when '/task',
 		{templateUrl: 'Task/views/tasklist.html', controller: 'TaskListCtrl'}
+	.when '/message',
+		{templateUrl: 'Message/views/message.html', controller: 'MessageCtrl'}
 	.otherwise redirectTo: '/home'
 ]
 erpApp.config (RestangularProvider) ->

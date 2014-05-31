@@ -61,6 +61,6 @@
 {
 "name":"Message",
 "iconurl":"./img/128px/message.png",
-"link":"#",
-"messages":235
+"link":"#/message",
+"messages":2
 }]
