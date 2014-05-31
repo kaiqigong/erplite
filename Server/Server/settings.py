@@ -96,7 +96,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
 	'django.middleware.common.CommonMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
-	'django.middleware.csrf.CsrfViewMiddleware',
+	# 'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	# Uncomment the next line for simple clickjacking protection:
@@ -139,13 +139,14 @@ INSTALLED_APPS = (
 	'provider.oauth2',
 	# 'oauth2_provider',
 	'Tasks',
+	'Account',
 )
 
 REST_FRAMEWORK = {
 	'DEFAULT_AUTHENTICATION_CLASSES': (
 		# 'rest_framework.authentication.TokenAuthentication',
 		# 'rest_framework.authentication.SessionAuthentication',  # optional
-		'rest_framework.authentication.OAuth2Authentication',
+		# 'rest_framework.authentication.OAuth2Authentication',
 		# 'oauth2_provider.ext.rest_framework.OAuth2Authentication',
 	),
 
@@ -159,7 +160,7 @@ REST_FRAMEWORK = {
 	),
 
 	'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
     ),
     'EXCEPTION_HANDLER': 'Server.utils.custom_exception_handler',
     'PAGINATE_BY': 10,                 # Default to 10
