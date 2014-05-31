@@ -6,6 +6,7 @@
 	"login": "http://localhost:8000/accounts/login"  
 	"register": "http://localhost:8000/accounts/register"  
 	“change password”: "http://localhost:8000/accounts/changepwd"  
+
 	
 3. For Contacts Model:  
 	^contacts/$ [name='contacts-list']  
@@ -48,3 +49,8 @@
 	^groups/\.(?P<format>[a-z0-9]+)$ [name='group-list']  
 	^groups/(?P<pk>[^/]+)/$ [name='group-detail']  
 	^groups/(?P<pk>[^/]+)/\.(?P<format>[a-z0-9]+)$ [name='group-detail']  
+
+6. For Accounts Model(API):   
+	"register": "http://localhost:8000/accounts/register"  POST "username","email","password"
+	“change password”: "http://localhost:8000/accounts/changepwd"  	POST "oldpassword","newpassword" Header:"Authorization":"Bearer <Access_Token>"
+

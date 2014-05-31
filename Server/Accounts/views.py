@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from forms import RegisterForm,LoginForm,ChangepwdForm
 # from rest_framework.authtoken.models import Token
 from provider.oauth2 import models as oauth2
+# from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
 	'''首页视图'''
@@ -99,4 +100,13 @@ def changepwd(request):
 				return render_to_response('accounts/changepwd.html', RequestContext(request, {'form': form,'oldpassword_is_wrong':True}))
 		else:
 			return render_to_response('accounts/changepwd.html', RequestContext(request, {'form': form,}))
+
+
+
+
+
+
+
+
+
 
