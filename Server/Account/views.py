@@ -40,7 +40,6 @@ def changePwd(request):
 	oldpassword = request.DATA.get('oldpassword', '')
 	print username
 	user = authenticate(username=username, password=oldpassword)
-	print user
 	if user is not None and user.is_active:
 		newpassword = request.POST.get('newpassword', '')
 		user.set_password(newpassword)
