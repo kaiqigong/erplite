@@ -67,3 +67,18 @@ originator  发起人，1:1，发起人可以邀请参与者。可以删除，�
 recurrence nullable 一种数据格式，如果有值，表示此event为定期事件。"RRULE:FREQ=WEEKLY;UNTIL=20110701T100000-07:00"
 ##Mimic [Google Calendar api](https://developers.google.com/google-apps/calendar/)
 
+#Product
+根据行业细分，此处以旅游行业。 
+##Product Fields
+uid, name, description, category, provider, duration (days), destination, departure, detail  
+
+##Stocking
+Product 1-n Stocking
+uid, productId, quantity, price, departureDate, isAdult, combo
+
+#Sales
+##Order
+uid, customerId, orderTime, isConfirmed, isPaid, isDelivered, isAppraised, rates, comments  
+##OrderItem
+uid, orderId, productId,productName,productDescription, quantity, price, departureDate, isAdult
+
