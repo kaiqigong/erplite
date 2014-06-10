@@ -1,0 +1,541 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A84007751942F60B00F22BE0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84007741942F60B00F22BE0 /* MainViewController.swift */; };
+		A8400782194443A300F22BE0 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = A8400781194443A300F22BE0 /* Constants.m */; };
+		A8CE32D3193ADD65001D83A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CE32D2193ADD65001D83A7 /* Foundation.framework */; };
+		A8CE32D5193ADD65001D83A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CE32D4193ADD65001D83A7 /* CoreGraphics.framework */; };
+		A8CE32D7193ADD65001D83A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CE32D6193ADD65001D83A7 /* UIKit.framework */; };
+		A8CE32DD193ADD65001D83A7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8CE32DB193ADD65001D83A7 /* InfoPlist.strings */; };
+		A8CE32DF193ADD65001D83A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CE32DE193ADD65001D83A7 /* main.m */; };
+		A8CE32E3193ADD65001D83A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CE32E2193ADD65001D83A7 /* AppDelegate.m */; };
+		A8CE32E6193ADD65001D83A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8CE32E4193ADD65001D83A7 /* Main.storyboard */; };
+		A8CE32EB193ADD65001D83A7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8CE32EA193ADD65001D83A7 /* Images.xcassets */; };
+		A8CE32F2193ADD65001D83A7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CE32F1193ADD65001D83A7 /* XCTest.framework */; };
+		A8CE32F3193ADD65001D83A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CE32D2193ADD65001D83A7 /* Foundation.framework */; };
+		A8CE32F4193ADD65001D83A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CE32D6193ADD65001D83A7 /* UIKit.framework */; };
+		A8CE32FC193ADD65001D83A7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8CE32FA193ADD65001D83A7 /* InfoPlist.strings */; };
+		A8CE32FE193ADD65001D83A7 /* ERPLiteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CE32FD193ADD65001D83A7 /* ERPLiteTests.m */; };
+		A8D140EFBE0145909CE5471B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0BAA9D33F45B683FA1C33 /* libPods.a */; };
+		A8F675F2193B39590084447D /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F675F1193B39590084447D /* loginViewController.m */; };
+		A8F675F5193B530C0084447D /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F675F4193B530C0084447D /* RegisterViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A8CE32F5193ADD65001D83A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8CE32C7193ADD65001D83A7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8CE32CE193ADD65001D83A7;
+			remoteInfo = ERPLite;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		275EA216198B4850867235CF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		2CC0BAA9D33F45B683FA1C33 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A84007731942F60B00F22BE0 /* ERPLite-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ERPLite-Bridging-Header.h"; sourceTree = "<group>"; };
+		A84007741942F60B00F22BE0 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A84007801944436E00F22BE0 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		A8400781194443A300F22BE0 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		A8CE32CF193ADD65001D83A7 /* ERPLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ERPLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8CE32D2193ADD65001D83A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A8CE32D4193ADD65001D83A7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A8CE32D6193ADD65001D83A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A8CE32DA193ADD65001D83A7 /* ERPLite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ERPLite-Info.plist"; sourceTree = "<group>"; };
+		A8CE32DC193ADD65001D83A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A8CE32DE193ADD65001D83A7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A8CE32E0193ADD65001D83A7 /* ERPLite-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ERPLite-Prefix.pch"; sourceTree = "<group>"; };
+		A8CE32E1193ADD65001D83A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A8CE32E2193ADD65001D83A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A8CE32E5193ADD65001D83A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A8CE32EA193ADD65001D83A7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A8CE32F0193ADD65001D83A7 /* ERPLiteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ERPLiteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8CE32F1193ADD65001D83A7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A8CE32F9193ADD65001D83A7 /* ERPLiteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ERPLiteTests-Info.plist"; sourceTree = "<group>"; };
+		A8CE32FB193ADD65001D83A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A8CE32FD193ADD65001D83A7 /* ERPLiteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ERPLiteTests.m; sourceTree = "<group>"; };
+		A8F675F0193B39590084447D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		A8F675F1193B39590084447D /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
+		A8F675F3193B530C0084447D /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		A8F675F4193B530C0084447D /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A8CE32CC193ADD65001D83A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8CE32D5193ADD65001D83A7 /* CoreGraphics.framework in Frameworks */,
+				A8CE32D7193ADD65001D83A7 /* UIKit.framework in Frameworks */,
+				A8CE32D3193ADD65001D83A7 /* Foundation.framework in Frameworks */,
+				A8D140EFBE0145909CE5471B /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8CE32ED193ADD65001D83A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8CE32F2193ADD65001D83A7 /* XCTest.framework in Frameworks */,
+				A8CE32F4193ADD65001D83A7 /* UIKit.framework in Frameworks */,
+				A8CE32F3193ADD65001D83A7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A8CE32C6193ADD65001D83A7 = {
+			isa = PBXGroup;
+			children = (
+				A8CE32D8193ADD65001D83A7 /* ERPLite */,
+				A8CE32F7193ADD65001D83A7 /* ERPLiteTests */,
+				A8CE32D1193ADD65001D83A7 /* Frameworks */,
+				A8CE32D0193ADD65001D83A7 /* Products */,
+				275EA216198B4850867235CF /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		A8CE32D0193ADD65001D83A7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A8CE32CF193ADD65001D83A7 /* ERPLite.app */,
+				A8CE32F0193ADD65001D83A7 /* ERPLiteTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A8CE32D1193ADD65001D83A7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A8CE32D2193ADD65001D83A7 /* Foundation.framework */,
+				A8CE32D4193ADD65001D83A7 /* CoreGraphics.framework */,
+				A8CE32D6193ADD65001D83A7 /* UIKit.framework */,
+				A8CE32F1193ADD65001D83A7 /* XCTest.framework */,
+				2CC0BAA9D33F45B683FA1C33 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A8CE32D8193ADD65001D83A7 /* ERPLite */ = {
+			isa = PBXGroup;
+			children = (
+				A8F675F0193B39590084447D /* LoginViewController.h */,
+				A8F675F1193B39590084447D /* loginViewController.m */,
+				A8CE32E1193ADD65001D83A7 /* AppDelegate.h */,
+				A8CE32E2193ADD65001D83A7 /* AppDelegate.m */,
+				A8CE32E4193ADD65001D83A7 /* Main.storyboard */,
+				A84007741942F60B00F22BE0 /* MainViewController.swift */,
+				A8F675F3193B530C0084447D /* RegisterViewController.h */,
+				A8F675F4193B530C0084447D /* RegisterViewController.m */,
+				A8CE32EA193ADD65001D83A7 /* Images.xcassets */,
+				A8CE32D9193ADD65001D83A7 /* Supporting Files */,
+				A84007731942F60B00F22BE0 /* ERPLite-Bridging-Header.h */,
+				A84007801944436E00F22BE0 /* Constants.h */,
+				A8400781194443A300F22BE0 /* Constants.m */,
+			);
+			path = ERPLite;
+			sourceTree = "<group>";
+		};
+		A8CE32D9193ADD65001D83A7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A8CE32DA193ADD65001D83A7 /* ERPLite-Info.plist */,
+				A8CE32DB193ADD65001D83A7 /* InfoPlist.strings */,
+				A8CE32DE193ADD65001D83A7 /* main.m */,
+				A8CE32E0193ADD65001D83A7 /* ERPLite-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A8CE32F7193ADD65001D83A7 /* ERPLiteTests */ = {
+			isa = PBXGroup;
+			children = (
+				A8CE32FD193ADD65001D83A7 /* ERPLiteTests.m */,
+				A8CE32F8193ADD65001D83A7 /* Supporting Files */,
+			);
+			path = ERPLiteTests;
+			sourceTree = "<group>";
+		};
+		A8CE32F8193ADD65001D83A7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A8CE32F9193ADD65001D83A7 /* ERPLiteTests-Info.plist */,
+				A8CE32FA193ADD65001D83A7 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A8CE32CE193ADD65001D83A7 /* ERPLite */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A8CE3301193ADD65001D83A7 /* Build configuration list for PBXNativeTarget "ERPLite" */;
+			buildPhases = (
+				41A0AF3D90C74AE38B409E8C /* Check Pods Manifest.lock */,
+				A8CE32CB193ADD65001D83A7 /* Sources */,
+				A8CE32CC193ADD65001D83A7 /* Frameworks */,
+				A8CE32CD193ADD65001D83A7 /* Resources */,
+				F555B549B167423BAB06D121 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ERPLite;
+			productName = ERPLite;
+			productReference = A8CE32CF193ADD65001D83A7 /* ERPLite.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A8CE32EF193ADD65001D83A7 /* ERPLiteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A8CE3304193ADD65001D83A7 /* Build configuration list for PBXNativeTarget "ERPLiteTests" */;
+			buildPhases = (
+				A8CE32EC193ADD65001D83A7 /* Sources */,
+				A8CE32ED193ADD65001D83A7 /* Frameworks */,
+				A8CE32EE193ADD65001D83A7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A8CE32F6193ADD65001D83A7 /* PBXTargetDependency */,
+			);
+			name = ERPLiteTests;
+			productName = ERPLiteTests;
+			productReference = A8CE32F0193ADD65001D83A7 /* ERPLiteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A8CE32C7193ADD65001D83A7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = RInz;
+				TargetAttributes = {
+					A8CE32EF193ADD65001D83A7 = {
+						TestTargetID = A8CE32CE193ADD65001D83A7;
+					};
+				};
+			};
+			buildConfigurationList = A8CE32CA193ADD65001D83A7 /* Build configuration list for PBXProject "ERPLite" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A8CE32C6193ADD65001D83A7;
+			productRefGroup = A8CE32D0193ADD65001D83A7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A8CE32CE193ADD65001D83A7 /* ERPLite */,
+				A8CE32EF193ADD65001D83A7 /* ERPLiteTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A8CE32CD193ADD65001D83A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8CE32EB193ADD65001D83A7 /* Images.xcassets in Resources */,
+				A8CE32DD193ADD65001D83A7 /* InfoPlist.strings in Resources */,
+				A8CE32E6193ADD65001D83A7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8CE32EE193ADD65001D83A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8CE32FC193ADD65001D83A7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		41A0AF3D90C74AE38B409E8C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F555B549B167423BAB06D121 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A8CE32CB193ADD65001D83A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8CE32E3193ADD65001D83A7 /* AppDelegate.m in Sources */,
+				A8F675F2193B39590084447D /* loginViewController.m in Sources */,
+				A8CE32DF193ADD65001D83A7 /* main.m in Sources */,
+				A8F675F5193B530C0084447D /* RegisterViewController.m in Sources */,
+				A84007751942F60B00F22BE0 /* MainViewController.swift in Sources */,
+				A8400782194443A300F22BE0 /* Constants.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8CE32EC193ADD65001D83A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8CE32FE193ADD65001D83A7 /* ERPLiteTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A8CE32F6193ADD65001D83A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8CE32CE193ADD65001D83A7 /* ERPLite */;
+			targetProxy = A8CE32F5193ADD65001D83A7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A8CE32DB193ADD65001D83A7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A8CE32DC193ADD65001D83A7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A8CE32E4193ADD65001D83A7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A8CE32E5193ADD65001D83A7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A8CE32FA193ADD65001D83A7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A8CE32FB193ADD65001D83A7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A8CE32FF193ADD65001D83A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A8CE3300193ADD65001D83A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A8CE3302193ADD65001D83A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 275EA216198B4850867235CF /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ERPLite/ERPLite-Prefix.pch";
+				INFOPLIST_FILE = "ERPLite/ERPLite-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ERPLite/ERPLite-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A8CE3303193ADD65001D83A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 275EA216198B4850867235CF /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ERPLite/ERPLite-Prefix.pch";
+				INFOPLIST_FILE = "ERPLite/ERPLite-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ERPLite/ERPLite-Bridging-Header.h";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A8CE3305193ADD65001D83A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ERPLite.app/ERPLite";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ERPLite/ERPLite-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ERPLiteTests/ERPLiteTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		A8CE3306193ADD65001D83A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ERPLite.app/ERPLite";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ERPLite/ERPLite-Prefix.pch";
+				INFOPLIST_FILE = "ERPLiteTests/ERPLiteTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A8CE32CA193ADD65001D83A7 /* Build configuration list for PBXProject "ERPLite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8CE32FF193ADD65001D83A7 /* Debug */,
+				A8CE3300193ADD65001D83A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A8CE3301193ADD65001D83A7 /* Build configuration list for PBXNativeTarget "ERPLite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8CE3302193ADD65001D83A7 /* Debug */,
+				A8CE3303193ADD65001D83A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A8CE3304193ADD65001D83A7 /* Build configuration list for PBXNativeTarget "ERPLiteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8CE3305193ADD65001D83A7 /* Debug */,
+				A8CE3306193ADD65001D83A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A8CE32C7193ADD65001D83A7 /* Project object */;
+}
