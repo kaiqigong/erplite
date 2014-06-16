@@ -1,17 +1,10 @@
 #Erplite
-This is a ERP for small business.
+This is a ERP for small business.  
 
-Use AngularJS for frontend MVC.
-Use Bootstrap for responsive design.
+Use AngularJS for frontend MVC.  
+Use Bootstrap for responsive design.  
 
-Use REST api for backend.
-
-Run Client Demo with mock data:
-
-cd erplite
-node scripts/web-server.js
-
-open localhost:8000/app/index.html
+Use REST api for backend.  
 
 ##Start django server<br>
 create database in mysql <br>
@@ -23,15 +16,16 @@ python Server/manage.py syncdb
 python Server/manage.py runserver
 ```
 
-##Start Client
+##Start Web Client
 ###Install
 We use bower to manage vendor libs
 ```
-cd erplite
+cd erplite/webapp
 npm install
 bower install
+http-server
 ```
-open localhost:8000/app/index.html
+open localhost:8081/index.html
 ###Run test
 ###Build
 
