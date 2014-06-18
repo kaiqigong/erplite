@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ContactsDetailViewController.h"
 
 @implementation AppDelegate
 

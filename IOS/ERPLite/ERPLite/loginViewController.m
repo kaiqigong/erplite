@@ -38,7 +38,7 @@ BOOL _isBack = NO;
         NSString *access_token = [userDefaultes stringForKey:@"access_token"];
         NSString *accessToken = [NSString stringWithFormat:@"Bearer %@", access_token];
     
-        NSURL *url_login = [NSURL URLWithString:@"http://54.255.168.161"];
+        NSURL *url_login = [NSURL URLWithString:kRootURL];
         ASIHTTPRequest *requestLogin = [ASIHTTPRequest requestWithURL:url_login];
         [requestLogin addRequestHeader:@"Authorization" value:accessToken];
         [SVProgressHUD show];
@@ -73,15 +73,15 @@ BOOL _isBack = NO;
         RegisterViewController *registerViewController = [navigationController viewControllers][0];
         registerViewController.delegate = self;
     }
-    if ([segue.identifier isEqualToString:@"login"]) {
-        UINavigationController *navigationController = segue.destinationViewController;
-        MainViewController *mainViewController = [navigationController viewControllers][0];
-    }
+//    if ([segue.identifier isEqualToString:@"login"]) {
+//        UINavigationController *navigationController = segue.destinationViewController;
+//        MainViewController *mainViewController = [navigationController viewControllers][0];
+//    }
 }
 
 
 - (IBAction)Login:(UIButton *)sender {
-    NSURL *url_access_token = [NSURL URLWithString:@"http://54.255.168.161/login/access_token/"];
+    NSURL *url_access_token = [NSURL URLWithString:kAccessURL];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url_access_token];
     [request setPostValue:username.text forKey:@"username"];
     [request setPostValue:password.text forKey:@"password"];

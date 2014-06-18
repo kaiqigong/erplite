@@ -1,4 +1,9 @@
 //
-//  Use this file to import your target's public headers that you would like to expose to Swift.
+//  ERPLite-Bridging-Header.h
+//  ERPLite
 //
+//  Created by RInz on 14-6-14.
+//  Copyright (c) 2014年 RInz. All rights reserved.
+//
+#import "ContactsViewController.h"
 

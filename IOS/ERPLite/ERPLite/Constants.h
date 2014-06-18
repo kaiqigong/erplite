@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const kLogInURL;
 extern NSString * const kClientID;
 extern NSString * const kClientSecrect;
+extern NSString * const kAccessURL;
+extern NSString * const kRootURL;
+extern NSString * const kContactListURL;
 
 @interface Constants : NSObject {
     

@@ -36,6 +36,12 @@
 #define COCOAPODS_VERSION_MINOR_ASIHTTPRequest_S3 8
 #define COCOAPODS_VERSION_PATCH_ASIHTTPRequest_S3 2
 
+// FXForms
+#define COCOAPODS_POD_AVAILABLE_FXForms
+#define COCOAPODS_VERSION_MAJOR_FXForms 1
+#define COCOAPODS_VERSION_MINOR_FXForms 1
+#define COCOAPODS_VERSION_PATCH_FXForms 6
+
 // HexColors
 #define COCOAPODS_POD_AVAILABLE_HexColors
 #define COCOAPODS_VERSION_MAJOR_HexColors 2
@@ -66,29 +72,17 @@
 #define COCOAPODS_VERSION_MINOR_Reachability 1
 #define COCOAPODS_VERSION_PATCH_Reachability 1
 
-// ReactiveCocoa
-#define COCOAPODS_POD_AVAILABLE_ReactiveCocoa
-#define COCOAPODS_VERSION_MAJOR_ReactiveCocoa 2
-#define COCOAPODS_VERSION_MINOR_ReactiveCocoa 3
-#define COCOAPODS_VERSION_PATCH_ReactiveCocoa 1
+// SDWebImage
+#define COCOAPODS_POD_AVAILABLE_SDWebImage
+#define COCOAPODS_VERSION_MAJOR_SDWebImage 3
+#define COCOAPODS_VERSION_MINOR_SDWebImage 6
+#define COCOAPODS_VERSION_PATCH_SDWebImage 0
 
-// ReactiveCocoa/Core
-#define COCOAPODS_POD_AVAILABLE_ReactiveCocoa_Core
-#define COCOAPODS_VERSION_MAJOR_ReactiveCocoa_Core 2
-#define COCOAPODS_VERSION_MINOR_ReactiveCocoa_Core 3
-#define COCOAPODS_VERSION_PATCH_ReactiveCocoa_Core 1
-
-// ReactiveCocoa/UI
-#define COCOAPODS_POD_AVAILABLE_ReactiveCocoa_UI
-#define COCOAPODS_VERSION_MAJOR_ReactiveCocoa_UI 2
-#define COCOAPODS_VERSION_MINOR_ReactiveCocoa_UI 3
-#define COCOAPODS_VERSION_PATCH_ReactiveCocoa_UI 1
-
-// ReactiveCocoa/no-arc
-#define COCOAPODS_POD_AVAILABLE_ReactiveCocoa_no_arc
-#define COCOAPODS_VERSION_MAJOR_ReactiveCocoa_no_arc 2
-#define COCOAPODS_VERSION_MINOR_ReactiveCocoa_no_arc 3
-#define COCOAPODS_VERSION_PATCH_ReactiveCocoa_no_arc 1
+// SDWebImage/Core
+#define COCOAPODS_POD_AVAILABLE_SDWebImage_Core
+#define COCOAPODS_VERSION_MAJOR_SDWebImage_Core 3
+#define COCOAPODS_VERSION_MINOR_SDWebImage_Core 6
+#define COCOAPODS_VERSION_PATCH_SDWebImage_Core 0
 
 // SVProgressHUD
 #define COCOAPODS_POD_AVAILABLE_SVProgressHUD
@@ -107,4 +101,10 @@
 #define COCOAPODS_VERSION_MAJOR_TSMessages 0
 #define COCOAPODS_VERSION_MINOR_TSMessages 9
 #define COCOAPODS_VERSION_PATCH_TSMessages 9
+
+// UIActivityIndicator-for-SDWebImage
+#define COCOAPODS_POD_AVAILABLE_UIActivityIndicator_for_SDWebImage
+#define COCOAPODS_VERSION_MAJOR_UIActivityIndicator_for_SDWebImage 1
+#define COCOAPODS_VERSION_MINOR_UIActivityIndicator_for_SDWebImage 0
+#define COCOAPODS_VERSION_PATCH_UIActivityIndicator_for_SDWebImage 5
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A8004DDD194C93C3003EFCD9 /* Contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = A8004DDC194C93C3003EFCD9 /* Contacts.m */; };
+		A81886E1194B2DD600CF8059 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A81886E0194B2DD600CF8059 /* ContactsViewController.m */; };
 		A84007751942F60B00F22BE0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84007741942F60B00F22BE0 /* MainViewController.swift */; };
 		A8400782194443A300F22BE0 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = A8400781194443A300F22BE0 /* Constants.m */; };
 		A8CE32D3193ADD65001D83A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CE32D2193ADD65001D83A7 /* Foundation.framework */; };
@@ -23,6 +25,8 @@
 		A8CE32FC193ADD65001D83A7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8CE32FA193ADD65001D83A7 /* InfoPlist.strings */; };
 		A8CE32FE193ADD65001D83A7 /* ERPLiteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CE32FD193ADD65001D83A7 /* ERPLiteTests.m */; };
 		A8D140EFBE0145909CE5471B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0BAA9D33F45B683FA1C33 /* libPods.a */; };
+		A8E22FC0195061A500C52E65 /* ContactsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E22FBF195061A500C52E65 /* ContactsDetailViewController.m */; };
+		A8E22FC319506C1200C52E65 /* ContactsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E22FC219506C1200C52E65 /* ContactsForm.m */; };
 		A8F675F2193B39590084447D /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F675F1193B39590084447D /* loginViewController.m */; };
 		A8F675F5193B530C0084447D /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F675F4193B530C0084447D /* RegisterViewController.m */; };
 /* End PBXBuildFile section */
@@ -40,10 +44,14 @@
 /* Begin PBXFileReference section */
 		275EA216198B4850867235CF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		2CC0BAA9D33F45B683FA1C33 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		A84007731942F60B00F22BE0 /* ERPLite-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ERPLite-Bridging-Header.h"; sourceTree = "<group>"; };
-		A84007741942F60B00F22BE0 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		A84007801944436E00F22BE0 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		A8400781194443A300F22BE0 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		A8004DD8194BF0E6003EFCD9 /* ERPLite-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ERPLite-Bridging-Header.h"; sourceTree = "<group>"; };
+		A8004DDB194C93C3003EFCD9 /* Contacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Contacts.h; path = ERPLite/Contacts.h; sourceTree = "<group>"; };
+		A8004DDC194C93C3003EFCD9 /* Contacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Contacts.m; path = ERPLite/Contacts.m; sourceTree = "<group>"; };
+		A81886DF194B2DD600CF8059 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsViewController.h; path = ERPLite/ContactsViewController.h; sourceTree = "<group>"; };
+		A81886E0194B2DD600CF8059 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsViewController.m; path = ERPLite/ContactsViewController.m; sourceTree = "<group>"; };
+		A84007741942F60B00F22BE0 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ERPLite/MainViewController.swift; sourceTree = "<group>"; };
+		A84007801944436E00F22BE0 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ERPLite/Constants.h; sourceTree = "<group>"; };
+		A8400781194443A300F22BE0 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = ERPLite/Constants.m; sourceTree = "<group>"; };
 		A8CE32CF193ADD65001D83A7 /* ERPLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ERPLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8CE32D2193ADD65001D83A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A8CE32D4193ADD65001D83A7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -61,10 +69,14 @@
 		A8CE32F9193ADD65001D83A7 /* ERPLiteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ERPLiteTests-Info.plist"; sourceTree = "<group>"; };
 		A8CE32FB193ADD65001D83A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A8CE32FD193ADD65001D83A7 /* ERPLiteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ERPLiteTests.m; sourceTree = "<group>"; };
-		A8F675F0193B39590084447D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		A8F675F1193B39590084447D /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
-		A8F675F3193B530C0084447D /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
-		A8F675F4193B530C0084447D /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		A8E22FBE195061A400C52E65 /* ContactsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsDetailViewController.h; path = ERPLite/ContactsDetailViewController.h; sourceTree = "<group>"; };
+		A8E22FBF195061A500C52E65 /* ContactsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsDetailViewController.m; path = ERPLite/ContactsDetailViewController.m; sourceTree = "<group>"; };
+		A8E22FC119506C1200C52E65 /* ContactsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsForm.h; path = ERPLite/ContactsForm.h; sourceTree = "<group>"; };
+		A8E22FC219506C1200C52E65 /* ContactsForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsForm.m; path = ERPLite/ContactsForm.m; sourceTree = "<group>"; };
+		A8F675F0193B39590084447D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ERPLite/LoginViewController.h; sourceTree = "<group>"; };
+		A8F675F1193B39590084447D /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = loginViewController.m; path = ERPLite/loginViewController.m; sourceTree = "<group>"; };
+		A8F675F3193B530C0084447D /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisterViewController.h; path = ERPLite/RegisterViewController.h; sourceTree = "<group>"; };
+		A8F675F4193B530C0084447D /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterViewController.m; path = ERPLite/RegisterViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +104,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A8004DD9194C9293003EFCD9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A84007801944436E00F22BE0 /* Constants.h */,
+				A8400781194443A300F22BE0 /* Constants.m */,
+				A8004DDB194C93C3003EFCD9 /* Contacts.h */,
+				A8004DDC194C93C3003EFCD9 /* Contacts.m */,
+			);
+			name = Models;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		A8004DDA194C92A4003EFCD9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A81AB41F1951CA0500828560 /* Contacts */,
+			);
+			name = Views;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		A81AB41F1951CA0500828560 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				A8E22FBE195061A400C52E65 /* ContactsDetailViewController.h */,
+				A8E22FBF195061A500C52E65 /* ContactsDetailViewController.m */,
+				A8F675F0193B39590084447D /* LoginViewController.h */,
+				A8F675F1193B39590084447D /* loginViewController.m */,
+				A81886DF194B2DD600CF8059 /* ContactsViewController.h */,
+				A81886E0194B2DD600CF8059 /* ContactsViewController.m */,
+				A84007741942F60B00F22BE0 /* MainViewController.swift */,
+				A8F675F3193B530C0084447D /* RegisterViewController.h */,
+				A8F675F4193B530C0084447D /* RegisterViewController.m */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
 		A8CE32C6193ADD65001D83A7 = {
 			isa = PBXGroup;
 			children = (
@@ -127,19 +176,15 @@
 		A8CE32D8193ADD65001D83A7 /* ERPLite */ = {
 			isa = PBXGroup;
 			children = (
-				A8F675F0193B39590084447D /* LoginViewController.h */,
-				A8F675F1193B39590084447D /* loginViewController.m */,
+				A8004DD8194BF0E6003EFCD9 /* ERPLite-Bridging-Header.h */,
+				A8E22FC419506C7B00C52E65 /* Forms */,
+				A8004DDA194C92A4003EFCD9 /* Views */,
+				A8004DD9194C9293003EFCD9 /* Models */,
 				A8CE32E1193ADD65001D83A7 /* AppDelegate.h */,
 				A8CE32E2193ADD65001D83A7 /* AppDelegate.m */,
 				A8CE32E4193ADD65001D83A7 /* Main.storyboard */,
-				A84007741942F60B00F22BE0 /* MainViewController.swift */,
-				A8F675F3193B530C0084447D /* RegisterViewController.h */,
-				A8F675F4193B530C0084447D /* RegisterViewController.m */,
 				A8CE32EA193ADD65001D83A7 /* Images.xcassets */,
 				A8CE32D9193ADD65001D83A7 /* Supporting Files */,
-				A84007731942F60B00F22BE0 /* ERPLite-Bridging-Header.h */,
-				A84007801944436E00F22BE0 /* Constants.h */,
-				A8400781194443A300F22BE0 /* Constants.m */,
 			);
 			path = ERPLite;
 			sourceTree = "<group>";
@@ -171,6 +216,16 @@
 				A8CE32FA193ADD65001D83A7 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A8E22FC419506C7B00C52E65 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				A8E22FC119506C1200C52E65 /* ContactsForm.h */,
+				A8E22FC219506C1200C52E65 /* ContactsForm.m */,
+			);
+			name = Forms;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,6 +363,10 @@
 				A8CE32E3193ADD65001D83A7 /* AppDelegate.m in Sources */,
 				A8F675F2193B39590084447D /* loginViewController.m in Sources */,
 				A8CE32DF193ADD65001D83A7 /* main.m in Sources */,
+				A81886E1194B2DD600CF8059 /* ContactsViewController.m in Sources */,
+				A8E22FC319506C1200C52E65 /* ContactsForm.m in Sources */,
+				A8004DDD194C93C3003EFCD9 /* Contacts.m in Sources */,
+				A8E22FC0195061A500C52E65 /* ContactsDetailViewController.m in Sources */,
 				A8F675F5193B530C0084447D /* RegisterViewController.m in Sources */,
 				A84007751942F60B00F22BE0 /* MainViewController.swift in Sources */,
 				A8400782194443A300F22BE0 /* Constants.m in Sources */,

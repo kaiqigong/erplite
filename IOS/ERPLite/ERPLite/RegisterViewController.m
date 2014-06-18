@@ -128,16 +128,12 @@ CGSize scrollViewOriginalSize;
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    //
 }
-*/
+
 
 - (IBAction)Back:(id)sender {
     [self.delegate RegisterViewControllerDidBack:self];
@@ -145,7 +141,7 @@ CGSize scrollViewOriginalSize;
 
 - (IBAction)Register:(UIButton *)sender {
     if ([password1.text isEqualToString:password2.text]) {
-        NSURL *url_register = [NSURL URLWithString:@"http://54.255.168.161/account/register/"];
+        NSURL *url_register = [NSURL URLWithString:@"http://54.255.168.161/account/register"];
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url_register];
         [request setPostValue:username.text forKey:@"username"];
         [request setPostValue:password1.text forKey:@"password"];
@@ -162,6 +158,7 @@ CGSize scrollViewOriginalSize;
     NSDictionary *result = [jd objectWithData:responseData];
     if ([[result objectForKey:@"status_code"] isEqualToString:@"201"]) {
         [SVProgressHUD showSuccessWithStatus:[result objectForKey:@"detail"]];
+        [self performSegueWithIdentifier:@"loginAfterRegister" sender:self];
     }else if ([[result objectForKey:@"status_code"] isEqualToString:@"400"]){
         [SVProgressHUD showErrorWithStatus:[result objectForKey:@"detail"]];
     }else if ([[result objectForKey:@"status_code"] isEqualToString:@"409"]){
