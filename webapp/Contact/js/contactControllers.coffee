@@ -105,7 +105,7 @@ angular.module 'contactModule'
 				else
 					$log.log "Error Code: " + reason.status + ", Message: " + reason.data
 			, null
-			Restangular.one('contacts',$routeParams.id).all('contactdata').getList().then (contactData)->
+			Restangular.one('contacts', $routeParams.id).all('contactdata').getList().then (contactData)->
 				if contactData.length > 0
 					$scope.contactData = contactData[0]
 
@@ -127,7 +127,7 @@ angular.module 'contactModule'
 
 		$scope.onAvatorClick = ->
 			modalInstance = $modal.open({
-				templateUrl: '../app/views/imageprocess.html',
+				templateUrl: '../views/imageprocess.html',
 				controller: "ImgProcessCtrl"})
 
 			modalInstance.result.then (avatorUrl) ->
@@ -166,7 +166,7 @@ angular.module 'contactModule'
 
 		$scope.onAvatorClick = ->
 			modalInstance = $modal.open({
-				templateUrl: '../app/views/imageprocess.html',
+				templateUrl: 'views/imageprocess.html',
 				controller: "ImgProcessCtrl"})
 
 			modalInstance.result.then (avatorUrl) ->
