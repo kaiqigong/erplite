@@ -4,4 +4,5 @@ from Accounts import views
 
 urlpatterns = patterns('FileUpload.views',
 	url(r'^upload/$', 'upload_file',name="upload_file"),
+	url(r'^uploadToken/$', 'get_qiniu_uptoken',name="get_qiniu_uptoken")
 )

@@ -7,3 +7,4 @@ django-filter
 drf-nested-routers
 drf-extensions
 django-oauth2-provider
+qiniu

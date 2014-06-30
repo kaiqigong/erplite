@@ -37,3 +37,16 @@ import string
 import random
 def id_generator(size=8,chars=string.ascii_uppercase + string.digits):
 	return ''.join(random.choice(chars) for _ in range(size))
+
+# qiniu uploadToken
+import qiniu.conf
+
+qiniu.conf.ACCESS_KEY = "PR0t5xIyMRIWCLgeLFbtOND57bnTIpp7CGRMWMCI"
+qiniu.conf.SECRET_KEY = "DsWayvJtPhFyg-NzJNKFnOuEO5I67ZCZyG8NOyYJ"
+
+import qiniu.rs
+def get_qiniu_uptoken(request):
+	policy = qiniu.rs.PutPolicy('erplite')
+	uptoken = policy.token()
+	return HttpResponse(uptoken, content_type="application/json")
+
