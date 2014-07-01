@@ -41,3 +41,20 @@ File will be saved to media/files/ramdonpath/filename
 
  ###update 2014/05/11
  add django-oauth2-provider to project
+
+###update 2014/07/01
+####Added two apis in files module.  
++ get `files/uploadToken`  
+`{"randomFolderName": "UB5Y90IU", "uptoken": "PR0t5xIyMRIWCLgeLFbtOND57bnTIpp7CGRMWMCI:sfL2Mtai-dAZAvSyeCRJjRkAO6s=:eyJzY29wZSI6ImVycGxpdGUiLCJkZWFkbGluZSI6MTQwNDIyNTM0Nn0="}`  
+return a upload info which allows you to upload file to `erplite.qiniudn.com`  
+`randomFolderName`: the random folder in which you should put your file.  
+`uptoken`: one time upload token, which expires in 1 minute
++ get `files/getSignedUrl/?base_url={base_url}`  
+`http://erplite.qiniudn.com/temp/test.mp4?e=1404226845&token=PR0t5xIyMRIWCLgeLFbtOND57bnTIpp7CGRMWMCI:aVN45jlb6sV_Q-4Q4aU0IzXLYk8=`  
+return the signed url of private 7niu url  
+
+####The Qiniu Security info
+TODO: put the `ACCESS_KEY` and `SECRET_KEY` to config file.  
+
+
+
