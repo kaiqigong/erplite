@@ -1,5 +1,5 @@
 module.exports = (grunt) ->
-	apps = 'Calendar,Common,Contact,Message,Task'
+	apps = 'Calendar,Common,Contact,Message,Task,Finder'
 	grunt.initConfig
 		pkg: grunt.file.readJSON('package.json'),
 
@@ -84,6 +84,7 @@ module.exports = (grunt) ->
 					  '.tmp/js/Task/js/taskControllers.js'
 					  '.tmp/js/Message/js/init.js'
 					  '.tmp/js/Message/js/messageControllers.js'
+					  '.tmp/js/Finder/js/finderCtrl.js'
 				]
 				dest: '.tmp/js/main.js'
 

@@ -19,3 +19,18 @@ erpFilters.filter 'type2class', () ->
 			else
 				result = "glyphicon glyphicon-link"
 		result
+
+.filter 'sign7nUrl',['$http','erpSettings',($http, erpSettings) ->
+	data = null
+	serviceInvoked = false
+	(input) ->
+		if data is null
+			if !serviceInvoked
+				serviceInvoked = true
+				$http.get(erpSettings.apiHost + '/files/getSignedUrl/' + '?base_url=' + input)
+				.success (signedUrl)->
+					data = signedUrl
+			return input
+		else
+			return data
+]

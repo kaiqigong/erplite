@@ -151,7 +151,7 @@ erpControllers.controller '404Ctrl', ['$scope', '$http', ($scope, $http) ->
 	return
 ]
 
-erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload','erpSettings', ($scope, $modalInstance,$upload,erpSettings) ->
+erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload','erpSettings','$http', ($scope, $modalInstance,$upload,erpSettings,$http) ->
 	$scope.avator =""
 	$scope.step = "Please Choose a Picture"
 	files = null
@@ -170,28 +170,31 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 			return
 		# $files: an array of files selected, each file has name, size, and type.
 		for file in files
-			$scope.upload = $upload.upload
-				url:erpSettings.apiHost + '/files/upload/', #upload.php script, node.js route, or servlet url
-				# method: POST or PUT,
-				# headers: {'header-key': 'header-value'},
-				# withCredentials: true,
-				data: {myObj: $scope.myModelObj},
-				file: file
-				# set the file formData name ('Content-Desposition'). Default is 'file'
-				fileFormDataName: 'file', # or a list of names for multiple files (html5).
-				# customize how data is added to formData. See #40#issuecomment-28612000 for sample code
-				# formDataAppender: function(formData, key, val){}
-			.progress (evt)->
-				console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-			.success (data, status, headers, config) ->
-				# file is uploaded successfully
-				$scope.avator = erpSettings.apiHost + '/' + data
-				$modalInstance.close($scope.avator)
-			.error (response)->
-				console.log response
-				$scope.step = response
-			#.then(success, error, progress);
-			#.xhr(function(xhr){xhr.upload.addEventListener(...)})// access and attach any event listener to XMLHttpRequest.
+			# get upload token
+			$http.get(erpSettings.apiHost + '/files/uploadToken/')
+			.success (uploadToken)->
+				qiniuParam =
+					'key':uploadToken.randomFolderName + '/' + $scope.fileToUpload.name
+					'token':uploadToken.uptoken
+					'fileName': $scope.fileToUpload.name
+				$scope.upload = $upload.upload
+					url: erpSettings.qiniuApiHost
+					method: 'POST'
+					data: qiniuParam
+					withCredentials: false
+					file: file
+					fileFormDataName: 'file'
+				.progress (evt)->
+					console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+				.success (data) ->
+					# file is uploaded successfully
+					$scope.avator = erpSettings.qiniuBucketDoman + '/' + data.key
+					$modalInstance.close($scope.avator)
+				.error (response)->
+					console.log response
+					$scope.step = response
+				#.then(success, error, progress);
+				#.xhr(function(xhr){xhr.upload.addEventListener(...)})// access and attach any event listener to XMLHttpRequest.
 
 	$scope.cancel = ->
 		$modalInstance.dismiss 'cancel'

@@ -43,7 +43,7 @@
 {
 "name":"Finder",
 "iconurl":"./img/128px/folder_128px.png",
-"link":"#",
+"link":"#/finder",
 "messages":0
 },
 {
