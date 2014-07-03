@@ -23,6 +23,8 @@ We use bower to manage vendor libs
 cd erplite/webapp
 npm install
 bower install
+grunt build
+cd dist
 http-server
 ```
 open localhost:8081/index.html
