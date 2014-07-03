@@ -27,7 +27,7 @@ grunt build
 cd dist
 http-server
 ```
-open localhost:8081/index.html
+open localhost:8080/index.html
 ###Run test
 ###Build
 
