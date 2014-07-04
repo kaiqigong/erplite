@@ -7,7 +7,6 @@ from rest_framework.reverse import reverse
 
 from Contacts.models import Contacts, ContactTag, ContactData, ContactLink
 from Contacts.serializers import ContactsListSerializer, ContactsDetailSerializer, ContactTagSerializer, ContactDataSerializer, ContactLinkSerializer
-from Contacts.filters import ContactsFilter
 
 from rest_framework.authentication import TokenAuthentication, BasicAuthentication, SessionAuthentication, OAuth2Authentication
 from rest_framework.permissions import IsAuthenticated
