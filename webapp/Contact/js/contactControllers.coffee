@@ -130,8 +130,9 @@ angular.module 'contactModule'
 				templateUrl: '../views/imageprocess.html',
 				controller: "ImgProcessCtrl"})
 
-			modalInstance.result.then (avatorUrl) ->
-				$scope.contact.avator = avatorUrl
+			modalInstance.result.then (result) ->
+				$scope.contact.avator = result[0]
+				$scope.contact.thumbnail = result[1]
 			, () ->
 				$log.info('Modal dismissed')
 
@@ -169,8 +170,10 @@ angular.module 'contactModule'
 				templateUrl: 'views/imageprocess.html',
 				controller: "ImgProcessCtrl"})
 
-			modalInstance.result.then (avatorUrl) ->
-				$scope.contact.avator = avatorUrl
+			modalInstance.result.then (result) ->
+				$scope.contact.avator = result[0]
+				$scope.contact.thumbnail = result[1]
+
 			, () ->
 				$log.info('Modal dismissed')
 

@@ -20,17 +20,24 @@ erpFilters.filter 'type2class', () ->
 				result = "glyphicon glyphicon-link"
 		result
 
-.filter 'sign7nUrl',['$http','erpSettings',($http, erpSettings) ->
-	data = null
-	serviceInvoked = false
+.filter 'sign7nUrl', ['$http', 'erpSettings', ($http, erpSettings) ->
+	dict = {}
 	(input) ->
-		if data is null
-			if !serviceInvoked
-				serviceInvoked = true
-				$http.get(erpSettings.apiHost + '/files/getSignedUrl/' + '?base_url=' + input)
-				.success (signedUrl)->
-					data = signedUrl
+		if not input?
+			return input
+		key = ''
+		if input.indexOf('&token') > 0
 			return input
 		else
-			return data
+			key = encodeURIComponent(input)
+
+		if !dict[key] or dict[key] is ''
+			if dict[key] isnt ''
+				dict[key] = ''
+				$http.get(erpSettings.apiHost + '/files/getSignedUrl/' + '?base_url=' + input)
+				.success (signedUrl)->
+					dict[key] = signedUrl
+			return input
+		else
+			return dict[key]
 ]

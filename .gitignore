@@ -31,3 +31,4 @@ webapp/bower_components
 .idea
 app.settings
 IOS/ERPLite/Pods
+dist

@@ -14,14 +14,14 @@ erpApp = angular.module 'erpApp', [
 	'ui.bootstrap']
 
 erpApp.constant 'erpSettings', {
-	apiHost: 'http://54.255.168.161'
-	#apiHost: 'http://localhost:8000'
-	client_id: 'd7609ff38fb81d5e6410'
+	#apiHost: 'http://54.255.168.161'
+	apiHost: 'http://localhost:8000'
+	client_id: '9addd54d140b6262d909'
 	#client_id:'8389f350ee86e1eac562'
-	client_secret: '6db99c7a73597f1b41e2432ec2529c37948a6f00'
+	client_secret: '76ce2a11810c35f742c824d1f1e197ce3f5f21ab'
 	#client_secret: 'bc421ecd94575e8614ec0e4dd28da7f8c9b7186f'
 	qiniuApiHost:'http://up.qiniu.com'
-	qiniuBucketDoman:'http://erplite.qiniudn.com/'
+	qiniuBucketDoman:'http://erplite.qiniudn.com'
 }
 
 erpApp.config ['$routeProvider', ($routeProvider) ->

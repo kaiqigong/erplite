@@ -171,12 +171,14 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 		# $files: an array of files selected, each file has name, size, and type.
 		for file in files
 			# get upload token
+			console.log file
 			$http.get(erpSettings.apiHost + '/files/uploadToken/')
 			.success (uploadToken)->
+				console.log uploadToken
 				qiniuParam =
-					'key':uploadToken.randomFolderName + '/' + $scope.fileToUpload.name
-					'token':uploadToken.uptoken
-					'fileName': $scope.fileToUpload.name
+					'key': uploadToken.randomFolderName + '/' + ['avatar', file.name.split('.').pop()].join('.')
+					'token': uploadToken.uptoken
+					'fileName': file.name
 				$scope.upload = $upload.upload
 					url: erpSettings.qiniuApiHost
 					method: 'POST'
@@ -188,8 +190,9 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 					console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 				.success (data) ->
 					# file is uploaded successfully
-					$scope.avator = erpSettings.qiniuBucketDoman + '/' + data.key
-					$modalInstance.close($scope.avator)
+					$scope.avator = erpSettings.qiniuBucketDoman + '/' + data.key + '?imageView2/1/w/400/h/400'
+					$scope.thumbnail = erpSettings.qiniuBucketDoman + '/' + data.key + '?imageView2/1/w/64/h/64'
+					$modalInstance.close([$scope.avator,$scope.thumbnail])
 				.error (response)->
 					console.log response
 					$scope.step = response

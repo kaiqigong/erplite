@@ -64,6 +64,7 @@ module.exports = (grunt) ->
 					  'bower_components/twix/bin/twix.min.js'
 					  'bower_components/firebase/firebase.js'
 					  'bower_components/angularfire/angularfire.js'
+					  'bower_components/js-base64/base64.min.js'
 
 					  '.tmp/js/Common/js/init.js'
 					  '.tmp/js/Common/js/factories.js'

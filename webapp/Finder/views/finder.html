@@ -1,6 +1,9 @@
 <div class="finder">
+  <button ng-click="getUploadToken()">get token</button>
   token:<input class="input" type="text" ng-model="uptoken"/>
+  <input ng-model="input"/><button ng-click="encode(input)">encode</button><div>{{encodedUri}}</div>
   <input type="file" ng-file-select="onFileSelected($files)"/>
   key:<input class="input" type="text" ng-model="key"/>
+  fops:<input class="input" type="text" ng-model="process"/>
   <input type="button" ng-click="upload()" value="submit"/>
 </div>
