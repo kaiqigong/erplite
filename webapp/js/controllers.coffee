@@ -165,6 +165,16 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 		$scope.step = "Please Resize the Picture and Save"
 		files = $files
 
+	$scope.imgCropped = (cropInfo)->
+		console.log cropInfo
+		if cropInfo and cropInfo.result
+			#double
+			scale = parseInt(cropInfo.result.ratio * 200,10) + 'p'
+			cropSize = cropInfo.result.cropSize.width * 2 + 'x' + cropInfo.result.cropSize.height * 2
+			offset = 'a' + cropInfo.result.offset.x * 2 + 'a' + cropInfo.result.offset.y * 2
+			processingUrl = 'imageMogr2/auto-orient/strip/thumbnail/!' + scale + '/crop/!' + cropSize + offset
+			$scope.processingUrl = processingUrl
+			console.log processingUrl
 	$scope.save = ()->
 		if not files?
 			return
@@ -190,14 +200,12 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 					console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 				.success (data) ->
 					# file is uploaded successfully
-					$scope.avator = erpSettings.qiniuBucketDoman + '/' + data.key + '?imageView2/1/w/400/h/400'
-					$scope.thumbnail = erpSettings.qiniuBucketDoman + '/' + data.key + '?imageView2/1/w/64/h/64'
+					$scope.avator = erpSettings.qiniuBucketDoman + '/' + data.key + '?' + $scope.processingUrl
+					$scope.thumbnail = erpSettings.qiniuBucketDoman + '/' + data.key + '?' + $scope.processingUrl + '/imageView2/1/w/64/h/64'
 					$modalInstance.close([$scope.avator,$scope.thumbnail])
 				.error (response)->
 					console.log response
 					$scope.step = response
-				#.then(success, error, progress);
-				#.xhr(function(xhr){xhr.upload.addEventListener(...)})// access and attach any event listener to XMLHttpRequest.
 
 	$scope.cancel = ->
 		$modalInstance.dismiss 'cancel'

@@ -2,8 +2,8 @@
   <h3>{{step}}</h3>
 </div>
 <div class="modal-body">
-  <img erp-img-loading ng-src="{{avator}}" class="profile-avator">
-  <input type="file" ng-file-select="onFileSelect($files)" multiple="multiple">
+  <avatar-crop raw-url="{{avator}}" img-cropped="imgCropped(cropInfo)"></avatar-crop>
+  <input type="file" ng-file-select="onFileSelect($files)" multiple="multiple" >
 </div>
 <div class="modal-footer">
   <button class="btn btn-primary" ng-click="save($files)">OK</button>

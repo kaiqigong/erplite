@@ -1,0 +1,23 @@
+<div class="avatar-crop">
+
+  <div class="board" style="width:320px;
+    height:320px;
+    background-color:#ccc;
+    position:relative;
+    overflow:hidden;
+    cursor:move;">
+    <img style="position: absolute;"
+         ng-style="imgsrcStyle" class="imgsrc" ng-src="{{rawUrl}}" draggable="true"/>
+
+    <div class="overlay" style="position: absolute;
+    top: 0;
+    left: 0;
+    width:320px;
+    height:320px;
+    opacity: 0.5;
+    -webkit-box-shadow: inset 0 0 0 60px black;
+    box-shadow: inset 0 0 0 60px black;" ng-mousedown="mousedownOnOverlay($event)" ng-mousemove="mousemoveOnOverlay($event)" ng-mouseup="mouseupOnOverlay($event)"></div>
+  </div>
+  <input type="range" min="{{ratioMin||0.1}}" max="{{ratioMax||1}}" ng-model="ratio"
+         step="{{ratio / 100}}" style="width:300px;margin:10px"/>
+</div>
