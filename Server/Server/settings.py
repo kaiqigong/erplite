@@ -191,7 +191,14 @@ OAUTH_DELETE_EXPIRED = True
 OAUTH_EXPIRE_DELTA = datetime.timedelta(seconds=60*60)
 # OAUTH_ENFORCE_SECURE = True
 # OAUTH_SINGLE_ACCESS_TOKEN = True
-#-----------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------
+
+#-----qiniu settings------------------------------------------------------------------------
+QINIU_ACCESS_KEY = 'PR0t5xIyMRIWCLgeLFbtOND57bnTIpp7CGRMWMCI'
+QINIU_SECRET_KEY = 'DsWayvJtPhFyg-NzJNKFnOuEO5I67ZCZyG8NOyYJ'
+QINIU_NAME = 'erplite'
+QINIU_BASE_URL = 'erplite.qiniudn.com'
+#----------------------------------------------------------------------------------------------
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

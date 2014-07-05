@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 class Contacts(models.Model):
 	name = models.CharField(max_length=255)
-	avator = models.CharField(max_length=100, blank=True)
-	thumbnail = models.CharField(max_length=100, blank=True)
+	avatar = models.CharField(max_length=255, blank=True)
+	thumbnail = models.CharField(max_length=255, blank=True)
 	description = models.TextField(blank=True)
 	createdDate = models.DateTimeField(auto_now_add=True)
 	createdBy = models.CharField(max_length=100)

@@ -5,7 +5,7 @@ class ContactsListSerializer(serializers.HyperlinkedModelSerializer):
 	tags = serializers.RelatedField(many=True)
 	class Meta:
 		model = Contacts
-		fields = ('id','url', 'name', 'avator', 'thumbnail', 'tags', 'description', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')
+		fields = ('id','url', 'name', 'avatar', 'thumbnail', 'tags', 'description', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')
 
 class ContactsDetailSerializer(serializers.HyperlinkedModelSerializer):
 	tags = serializers.HyperlinkedRelatedField(many=True,view_name='contacttag-detail')
@@ -14,7 +14,7 @@ class ContactsDetailSerializer(serializers.HyperlinkedModelSerializer):
 	links = serializers.HyperlinkedRelatedField(many=True, view_name='contactlink-detail')
 	class Meta:
 		model = Contacts
-		fields = ('id', 'name', 'avator', 'thumbnail', 'tags', 'data', 'links', 'description', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')
+		fields = ('id', 'name', 'avatar', 'thumbnail', 'tags', 'data', 'links', 'description', 'createdDate', 'createdBy', 'modifiedDate', 'modifiedBy')
 
 class ContactDataSerializer(serializers.ModelSerializer):
 	contactname = serializers.Field(source='contact.name')
