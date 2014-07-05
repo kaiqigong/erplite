@@ -186,8 +186,8 @@ module.exports = (grunt) ->
 	#compile only
 	grunt.registerTask('compile', ['less', 'coffee', 'concat', 'copy']); #'exec',
 
-	#build to dist
-	grunt.registerTask('build', ['less', 'coffee', 'concat', 'copy', 'ngmin', 'uglify','cssmin','htmlmin']); #'exec',
+	#build to dist 
+	grunt.registerTask('build', ['less', 'coffee', 'concat', 'copy', 'uglify','cssmin','htmlmin']); #'exec',
 
 	# Default task(s).
 	grunt.registerTask('default', ['compile', 'watch']);
