@@ -152,14 +152,14 @@ erpControllers.controller '404Ctrl', ['$scope', '$http', ($scope, $http) ->
 ]
 
 erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload','erpSettings','$http', ($scope, $modalInstance,$upload,erpSettings,$http) ->
-	$scope.avator =""
+	$scope.avatar =""
 	$scope.step = "Please Choose a Picture"
 	files = null
 	$scope.onFileSelect= ($files)->
 		console.log $files
 		reader = new FileReader()
 		reader.onload = (event) ->
-			$scope.avator = event.target.result
+			$scope.avatar = event.target.result
 			$scope.$apply()
 		reader.readAsDataURL($files[0])
 		$scope.step = "Please Resize the Picture and Save"
@@ -200,9 +200,9 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 					console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 				.success (data) ->
 					# file is uploaded successfully
-					$scope.avator = erpSettings.qiniuBucketDoman + '/' + data.key + '?' + $scope.processingUrl
+					$scope.avatar = erpSettings.qiniuBucketDoman + '/' + data.key + '?' + $scope.processingUrl
 					$scope.thumbnail = erpSettings.qiniuBucketDoman + '/' + data.key + '?' + $scope.processingUrl + '/imageView2/1/w/64/h/64'
-					$modalInstance.close([$scope.avator,$scope.thumbnail])
+					$modalInstance.close([$scope.avatar,$scope.thumbnail])
 				.error (response)->
 					console.log response
 					$scope.step = response

@@ -125,13 +125,13 @@ angular.module 'contactModule'
 			.success (data, status) ->
 				$scope.contact.links = data
 
-		$scope.onAvatorClick = ->
+		$scope.onAvatarClick = ->
 			modalInstance = $modal.open({
 				templateUrl: '../views/imageprocess.html',
 				controller: "ImgProcessCtrl"})
 
 			modalInstance.result.then (result) ->
-				$scope.contact.avator = result[0]
+				$scope.contact.avatar = result[0]
 				$scope.contact.thumbnail = result[1]
 			, () ->
 				$log.info('Modal dismissed')
@@ -143,7 +143,7 @@ angular.module 'contactModule'
 		$scope.backUrl = "#/contact"
 		$scope.contact =
 			info: {}
-			avator: "./img/default_avatar.png"
+			avatar: "./img/default_avatar.png"
 			links: []
 			comments: []
 		$scope.title = "新建联系人"
@@ -165,13 +165,13 @@ angular.module 'contactModule'
 				type: "Supplier"
 				name: ""
 
-		$scope.onAvatorClick = ->
+		$scope.onAvatarClick = ->
 			modalInstance = $modal.open({
 				templateUrl: 'views/imageprocess.html',
 				controller: "ImgProcessCtrl"})
 
 			modalInstance.result.then (result) ->
-				$scope.contact.avator = result[0]
+				$scope.contact.avatar = result[0]
 				$scope.contact.thumbnail = result[1]
 
 			, () ->

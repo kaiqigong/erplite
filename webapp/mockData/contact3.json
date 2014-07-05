@@ -1,7 +1,7 @@
 {
    "id":3,
    "name":"凯奇3",
-   "avator":"./img/128px/bag_128px.png",
+   "avatar":"./img/128px/bag_128px.png",
    "description":"前端开发",
    "lastModifiedTime":"2014/03/11",
    "tags":["hello","world"],
