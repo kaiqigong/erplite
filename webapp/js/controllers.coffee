@@ -172,13 +172,15 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 			scale = parseInt(cropInfo.result.ratio * 200,10) + 'p'
 			cropSize = cropInfo.result.cropSize.width * 2 + 'x' + cropInfo.result.cropSize.height * 2
 			offset = 'a' + cropInfo.result.offset.x * 2 + 'a' + cropInfo.result.offset.y * 2
-			processingUrl = 'imageMogr2/auto-orient/strip/thumbnail/!' + scale + '/crop/!' + cropSize + offset
+			processingUrl = 'imageMogr2/thumbnail/!' + scale + '/crop/!' + cropSize + offset
 			$scope.processingUrl = processingUrl
 			console.log processingUrl
+
 	$scope.save = ()->
 		if not files?
 			return
 		# $files: an array of files selected, each file has name, size, and type.
+		$scope.uploading = true
 		for file in files
 			# get upload token
 			console.log file
@@ -197,7 +199,7 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 					file: file
 					fileFormDataName: 'file'
 				.progress (evt)->
-					console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+					$scope.uploadingP = parseInt(100.0 * evt.loaded / evt.total)
 				.success (data) ->
 					# file is uploaded successfully
 					$scope.avatar = erpSettings.qiniuBucketDoman + '/' + data.key + '?' + $scope.processingUrl

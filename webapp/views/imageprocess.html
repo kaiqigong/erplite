@@ -3,9 +3,12 @@
 </div>
 <div class="modal-body">
   <avatar-crop raw-url="{{avatar}}" img-cropped="imgCropped(cropInfo)"></avatar-crop>
-  <input type="file" ng-file-select="onFileSelect($files)" multiple="multiple" >
+  <input type="file" ng-file-select="onFileSelect($files)" multiple="multiple">
+  <div class="mask" ng-show="uploading">
+    <i class="fa fa-spinner fa-spin"></i>{{uploadingP}}%
+  </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" ng-click="save($files)">OK</button>
+  <button class="btn btn-primary" ng-click="save($files)" ng-hide="uploading">OK</button>
   <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
