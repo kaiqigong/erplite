@@ -102,6 +102,7 @@ MIDDLEWARE_CLASSES = (
 	# Uncomment the next line for simple clickjacking protection:
 	# 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	'corsheaders.middleware.CorsMiddleware',
+	'audit_log.middleware.UserLoggingMiddleware',
 )
 
 ROOT_URLCONF = 'Server.urls'
