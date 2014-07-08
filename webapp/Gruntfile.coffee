@@ -105,7 +105,7 @@ module.exports = (grunt) ->
 		uglify:
 			dist:
 				files:
-					'.tmp/js/main.js': ['dist/js/main.js']
+					'dist/js/main.js': ['.tmp/js/main.js']
 
 		#something wrong!
 		cssmin:
