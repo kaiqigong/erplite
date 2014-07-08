@@ -98,14 +98,14 @@ module.exports = (grunt) ->
 						expand: true,
 						cwd: '.tmp/js',
 						src: '*.js',
-						dest: '.tmp/js/'
+						dest: 'dist/js/'
 					}
 				]
 
 		uglify:
 			dist:
 				files:
-					'dist/js/main.js': ['.tmp/js/main.js']
+					'dist/js/main.js': ['dist/js/main.js']
 
 		#something wrong!
 		cssmin:
@@ -174,6 +174,12 @@ module.exports = (grunt) ->
 						src: ['fonts/*','img/{,*/}*.*','mockData/*.json','css/main.css','select2/*']
 						dest: 'dist'
 					},
+					{
+						expand: true,
+						cwd: 'bower_components/select2',
+						src: ['select2.css','select2-bootstrap.css','select2x2.png','select2.png','select2-spinner.gif'],
+						dest: 'dist/select2'
+					}
 				]
 
 
@@ -195,7 +201,7 @@ module.exports = (grunt) ->
 	grunt.registerTask('compile', ['less', 'coffee', 'concat', 'copy']); #'exec',
 
 	#build to dist
-	grunt.registerTask('build', ['less', 'coffee', 'concat', 'copy', 'uglify','cssmin','htmlmin']); #'exec',
+	grunt.registerTask('build', ['less', 'coffee', 'concat', 'copy','ngmin', 'uglify','cssmin','htmlmin']); #'exec',
 
 	# Default task(s).
 	grunt.registerTask('default', ['compile', 'watch']);
