@@ -56,5 +56,8 @@ return the signed url of private 7niu url
 ####The Qiniu Security info
 TODO: put the `ACCESS_KEY` and `SECRET_KEY` to config file.  
 
+####Audit log
+TODO: https://github.com/SirAnthony/django-audit-log  
+
 
 

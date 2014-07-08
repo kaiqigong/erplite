@@ -1,4 +1,5 @@
 from django.db import models
+from audit_log.models.managers import AuditLog
 
 # Create your models here.
 class Contacts(models.Model):
@@ -10,6 +11,8 @@ class Contacts(models.Model):
 	createdBy = models.CharField(max_length=100)
 	modifiedDate = models.DateTimeField(auto_now=True)
 	modifiedBy = models.CharField(max_length=100)
+
+	audit_log = AuditLog()
 
 	class Meta:
 		ordering = ['name']
@@ -24,6 +27,8 @@ class ContactTag(models.Model):
 	createdBy = models.CharField(max_length=100)
 	modifiedDate = models.DateTimeField(auto_now=True)
 	modifiedBy = models.CharField(max_length=100)
+
+	audit_log = AuditLog()
 
 	def __unicode__(self):
 		return '%s' % (self.tag)
@@ -54,6 +59,8 @@ class ContactData(models.Model):
 	modifiedDate = models.DateTimeField(auto_now=True)
 	modifiedBy = models.CharField(max_length=100)
 
+	audit_log = AuditLog()
+
 class ContactLink(models.Model):
 	contact = models.ForeignKey('Contacts', related_name='links')
 	entityType = models.TextField()
@@ -62,6 +69,8 @@ class ContactLink(models.Model):
 	createdBy = models.CharField(max_length=100)
 	modifiedDate = models.DateTimeField(auto_now=True)
 	modifiedBy = models.CharField(max_length=100)
+
+	audit_log = AuditLog()
 
 	def __unicode__(self):
 		return '%s: %s' % (self.entityType, self.entityId)

@@ -8,3 +8,4 @@ drf-nested-routers
 drf-extensions
 django-oauth2-provider
 qiniu
+SirAnthony/django-audit-log
