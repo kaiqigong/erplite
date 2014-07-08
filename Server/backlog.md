@@ -59,5 +59,8 @@ TODO: put the `ACCESS_KEY` and `SECRET_KEY` to config file.
 ####Audit log
 TODO: https://github.com/SirAnthony/django-audit-log  
 
+####Admin Page  
+TODO: http://django-grappelli.readthedocs.org/en/latest/quickstart.html  
+
 
 
