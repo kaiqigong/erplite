@@ -127,7 +127,7 @@ angular.module 'contactModule'
 
 		$scope.onAvatarClick = ->
 			modalInstance = $modal.open({
-				templateUrl: '../views/imageprocess.html',
+				templateUrl: 'views/imageprocess.html',
 				controller: "ImgProcessCtrl"})
 
 			modalInstance.result.then (result) ->
