@@ -98,14 +98,14 @@ module.exports = (grunt) ->
 						expand: true,
 						cwd: '.tmp/js',
 						src: '*.js',
-						dest: 'dist/js/'
+						dest: '.tmp/js/'
 					}
 				]
 
 		uglify:
 			dist:
 				files:
-					'dist/js/main.js': ['dist/js/main.js']
+					'.tmp/js/main.js': ['dist/js/main.js']
 
 		#something wrong!
 		cssmin:
