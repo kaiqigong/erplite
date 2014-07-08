@@ -65,6 +65,8 @@ module.exports = (grunt) ->
 					  'bower_components/firebase/firebase.js'
 					  'bower_components/angularfire/angularfire.js'
 					  'bower_components/js-base64/base64.min.js'
+					  'bower_components/select2/select2.min.js'
+					  'bower_components/angular-ui-select2/src/select2.js'
 
 					  '.tmp/js/Common/js/init.js'
 					  '.tmp/js/Common/js/factories.js'
@@ -156,6 +158,12 @@ module.exports = (grunt) ->
 						cwd: 'bower_components/font-awesome',
 						src: 'fonts/*',
 						dest: '.tmp'
+					},
+					{
+						expand: true,
+						cwd: 'bower_components/select2',
+						src: ['select2.css','select2-bootstrap.css','select2x2.png','select2.png','select2-spinner.gif'],
+						dest: '.tmp/select2'
 					}
 				]
 			dist:
@@ -163,7 +171,7 @@ module.exports = (grunt) ->
 					{
 						expand: true,
 						cwd: '.tmp',
-						src: ['fonts/*','img/{,*/}*.*','mockData/*.json','css/main.css']
+						src: ['fonts/*','img/{,*/}*.*','mockData/*.json','css/main.css','select2/*']
 						dest: 'dist'
 					},
 				]
@@ -191,5 +199,6 @@ module.exports = (grunt) ->
 
 	# Default task(s).
 	grunt.registerTask('default', ['compile', 'watch']);
+
 
 

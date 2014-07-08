@@ -39,7 +39,6 @@ angular.module 'contactModule'
 				$log.log("Error Code: " + reason.status + ", Message: " + reason.data)
 			$scope.progressBar.end()
 
-
 ]
 .controller 'ContactDetailCtrl', ['$scope', '$http', '$q', '$routeParams', '$location', '$log',
 								  'ModelBase', 'Restangular', '$upload', '$modal', '$rootScope',
@@ -51,19 +50,25 @@ angular.module 'contactModule'
 		$scope.showToolbar = true
 		$scope.showRefresh = true
 		$scope.newLink =
-			type: "Supplier"
+			type: "tasks"
+			$typeDisplay:'任务'
 			name: ""
 
-		$scope.changeType = (type) ->
+		$scope.changeType = (type,display) ->
+			Restangular.all(type).getList().then (data)->
+				$scope.linkOptions = data
 			$scope.newLink.type = type
+			$scope.newLink.$typeDisplay = display
+
 
 		$scope.addLink = () ->
 			$scope.newLink.modifiedDate = new Date()
+			link = angular.fromJson($scope.newLink.link)
+			$scope.newLink.name = link.name
+			console.log $scope.newLink
 			$scope.contact.links.push angular.copy $scope.newLink
 			# $http.post('/someUrl',$scope.newLink).success()
-			$scope.newLink =
-				type: "Supplier"
-				name: ""
+			$scope.newLink.name = ''
 
 		$scope.addData = () ->
 			newData = angular.copy $scope.newData
@@ -135,6 +140,12 @@ angular.module 'contactModule'
 				$scope.contact.thumbnail = result[1]
 			, () ->
 				$log.info('Modal dismissed')
+		$scope.linkOptions = [
+			{
+				id:4
+				name:'task4'
+			}
+		]
 
 		$scope.reload()
 ]
@@ -152,10 +163,13 @@ angular.module 'contactModule'
 		$scope.newLink =
 			type: "Supplier"
 			name: ""
+		$scope.linkTypeDisplay = '供应商'
 
+		$scope.changeType = (type,display) ->
+			$scope.linkTypeDisplay = display
 
-		$scope.changeType = (type) ->
 			$scope.newLink.type = type
+			console.log type
 
 		$scope.addLink = () ->
 			$scope.newLink.modifiedDate = new Date()

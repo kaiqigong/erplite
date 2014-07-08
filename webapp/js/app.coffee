@@ -11,6 +11,7 @@ erpApp = angular.module 'erpApp', [
 	'taskModule'
 	'contactModule'
 	'messageModule'
+	'ui.select2'
 	'ui.bootstrap']
 
 erpApp.constant 'erpSettings', {
@@ -20,8 +21,8 @@ erpApp.constant 'erpSettings', {
 	client_secret: '76ce2a11810c35f742c824d1f1e197ce3f5f21ab'
 	###
 	apiHost: 'http://54.255.168.161'
-	client_id:'d7609ff38fb81d5e6410'
-	client_secret: '6db99c7a73597f1b41e2432ec2529c37948a6f00'
+	client_id:'92a302dcee81f97de5e4'
+	client_secret: '939a9af44b98ab5935bbab68ca780a67822ba424'
 	qiniuApiHost:'http://up.qiniu.com'
 	qiniuBucketDoman:'http://erplite.qiniudn.com'
 }
