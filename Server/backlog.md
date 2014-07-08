@@ -57,7 +57,16 @@ return the signed url of private 7niu url
 TODO: put the `ACCESS_KEY` and `SECRET_KEY` to config file.  
 
 ####Audit log
-TODO: https://github.com/SirAnthony/django-audit-log  
+TODO: https://github.com/SirAnthony/django-audit-log 
+
+###update 2014/07/08 
+####make mysql support Chinese 
+1. /etc/rc.d/init.d/mysqld stop
+2. vi /etc/my.cnf 
+3. add under [mysqld]  
+character-set-server=utf8 
+4. /etc/rc.d/init.d/mysqld start 
+
 
 ####Admin Page  
 TODO: http://django-grappelli.readthedocs.org/en/latest/quickstart.html  
