@@ -203,7 +203,7 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 				.success (data) ->
 					# file is uploaded successfully
 					$scope.avatar = erpSettings.qiniuBucketDoman + '/' + data.key + '?' + $scope.processingUrl
-					$scope.thumbnail = erpSettings.qiniuBucketDoman + '/' + data.key + '?' + $scope.processingUrl + '/imageView2/1/w/64/h/64'
+					$scope.thumbnail = erpSettings.qiniuBucketDoman + '/' + data.key + '?' + $scope.processingUrl + '/thumbnail/64x64!'
 					$modalInstance.close([$scope.avatar,$scope.thumbnail])
 				.error (response)->
 					console.log response
