@@ -169,11 +169,18 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 		console.log cropInfo
 		if cropInfo and cropInfo.result
 			#double
-			scale = parseInt(cropInfo.result.ratio * 200,10) + 'p'
-			cropSize = cropInfo.result.cropSize.width * 2 + 'x' + cropInfo.result.cropSize.height * 2
-			offset = 'a' + cropInfo.result.offset.x * 2 + 'a' + cropInfo.result.offset.y * 2
+			ratioBase = 400 / 200
+			thumbnailRatioBase = 64 / 200
+			scale = parseInt(cropInfo.result.ratio * 100 * ratioBase,10) + 'p'
+			thumbnailScale = parseInt(cropInfo.result.ratio * 100 * thumbnailRatioBase,10) + 'p'
+			cropSize = cropInfo.result.cropSize.width * ratioBase + 'x' + cropInfo.result.cropSize.height * ratioBase
+			thumbnailCropSize = cropInfo.result.cropSize.width * thumbnailRatioBase + 'x' + cropInfo.result.cropSize.height * thumbnailRatioBase
+			offset = 'a' + cropInfo.result.offset.x * ratioBase + 'a' + cropInfo.result.offset.y * ratioBase
+			thumbnailOffset = 'a' + cropInfo.result.offset.x * thumbnailRatioBase + 'a' + cropInfo.result.offset.y * thumbnailRatioBase
 			processingUrl = 'imageMogr2/thumbnail/!' + scale + '/crop/!' + cropSize + offset
+			thumbnailUrl = 'imageMogr2/thumbnail/!' + thumbnailScale + '/crop/!' + thumbnailCropSize + thumbnailOffset
 			$scope.processingUrl = processingUrl
+			$scope.thumbnailUrl = thumbnailUrl
 			console.log processingUrl
 
 	$scope.save = ()->
@@ -203,7 +210,7 @@ erpControllers.controller 'ImgProcessCtrl', ['$scope', '$modalInstance','$upload
 				.success (data) ->
 					# file is uploaded successfully
 					$scope.avatar = erpSettings.qiniuBucketDoman + '/' + data.key + '?' + $scope.processingUrl
-					$scope.thumbnail = erpSettings.qiniuBucketDoman + '/' + data.key + '?' + $scope.processingUrl + '/thumbnail/64x64!'
+					$scope.thumbnail = erpSettings.qiniuBucketDoman + '/' + data.key + '?' + $scope.thumbnailUrl
 					$modalInstance.close([$scope.avatar,$scope.thumbnail])
 				.error (response)->
 					console.log response
