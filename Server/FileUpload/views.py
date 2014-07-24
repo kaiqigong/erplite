@@ -46,6 +46,10 @@ def get_qiniu_dntoken(request):
 @authentication_classes((OAuth2Authentication,))
 @permission_classes((IsAuthenticated,))
 def get_signed_7n_url(request):
+	# result={
+	# 	"url":sign_url(request.REQUEST['base_url'])
+	# }
+	# return HttpResponse(json.dumps(result), content_type="application/json") 
 	return HttpResponse(sign_url(request.REQUEST['base_url']), content_type="application/json") 
 
 def sign_url(url):
