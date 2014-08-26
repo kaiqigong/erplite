@@ -44,4 +44,5 @@ urlpatterns = patterns('',
     url(r'^login/', include('provider.oauth2.urls', namespace = 'oauth2')),
     # url(r'^login/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r'^account/', include('Account.urls')),
+    url(r'^ios-notifications/', include('ios_notifications.urls')),
   )

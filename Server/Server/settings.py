@@ -141,6 +141,7 @@ INSTALLED_APPS = (
 	# 'oauth2_provider',
 	'Tasks',
 	'Account',
+	'ios_notifications',
 )
 
 REST_FRAMEWORK = {
@@ -200,6 +201,8 @@ QINIU_SECRET_KEY = 'DsWayvJtPhFyg-NzJNKFnOuEO5I67ZCZyG8NOyYJ'
 QINIU_NAME = 'erplite'
 QINIU_BASE_URL = 'erplite.qiniudn.com'
 #----------------------------------------------------------------------------------------------
+
+IOS_NOTIFICATIONS_AUTHENTICATION = 'AuthNone'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
